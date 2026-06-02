@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://neuravisionlab.github.io/neuravision/</loc></url>
-  <url><loc>https://neuravisionlab.github.io/neuravision/team.html</loc></url>
-  <url><loc>https://neuravisionlab.github.io/neuravision/research.html</loc></url>
-  <url><loc>https://neuravisionlab.github.io/neuravision/publications.html</loc></url>
-  <url><loc>https://neuravisionlab.github.io/neuravision/join.html</loc></url>
-  <url><loc>https://neuravisionlab.github.io/neuravision/contact.html</loc></url>
+  <url><loc>https://neuravisionlab.github.io/</loc></url>
+  <url><loc>https://neuravisionlab.github.io/team.html</loc></url>
+  <url><loc>https://neuravisionlab.github.io/research.html</loc></url>
+  <url><loc>https://neuravisionlab.github.io/publications.html</loc></url>
+  <url><loc>https://neuravisionlab.github.io/join.html</loc></url>
+  <url><loc>https://neuravisionlab.github.io/contact.html</loc></url>
 </urlset>
