@@ -1,0 +1,148 @@
+{% include "_head.html" %}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero is-dark" aria-label="Introduction">
+  {% include "_constellation.html" %}
+  <div class="hero-frame" aria-hidden="true"></div>
+  <span class="hero-corner tl">FIG.00 / NEURAVISION</span>
+  <span class="hero-corner br">39.8693°N · 32.7497°E</span>
+  <div class="container">
+    <div class="grid">
+      <div class="hero-content">
+        <p class="fig-eyebrow hero-eyebrow">NeuraVision · Computer Vision &amp; Deep Learning · Bilkent</p>
+        <h1 class="hero-title">We study the <span class="accent">topology</span> of what neural networks see.</h1>
+        <p class="hero-lead">{{ site.hero_subhead }}</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="research.html">Explore research</a>
+          <a class="btn btn-ghost" href="team.html">Meet the team <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="num tnum" data-count="{{ site.stat_publications }}">{{ site.stat_publications }}</span><span class="cap">Publications</span></div>
+          <div class="stat"><span class="num tnum" data-count="{{ site.stat_citations }}">{{ site.stat_citations }}</span><span class="cap">Citations</span></div>
+          <div class="stat"><span class="num tnum" data-count="{{ site.stat_members }}">{{ site.stat_members }}</span><span class="cap">Researchers</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <img class="hero-mark" src="assets/img/brand/mark-gradient.png" alt="">
+      </div>
+    </div>
+  </div>
+  <span class="scroll-cue" aria-hidden="true">SCROLL</span>
+</section>
+
+<!-- ===================== FIG.01 — THE LAB ===================== -->
+<section class="section" aria-labelledby="about-h">
+  <div class="container">
+    <div class="grid about-grid">
+      <div class="about-copy" data-reveal>
+        <div class="fig-head">
+          <p class="fig-eyebrow">FIG.01 / The Lab</p>
+          <h2 id="about-h">{{ site.intro_heading }}</h2>
+        </div>
+        <p>{{ site.intro_body }}</p>
+        <p style="margin-top:var(--s5)"><a class="btn-link" href="team.html">Led by Dr. {{ members.pi.name }} <span class="arr">→</span></a></p>
+      </div>
+      <aside class="about-panel" data-reveal style="--i:1">
+        <div class="data-table">
+          <div class="row"><span class="k">Principal Investigator</span><span class="v">Dr. {{ members.pi.name }}</span></div>
+          <div class="row"><span class="k">Field</span><span class="v">Computer Vision · Deep Learning</span></div>
+          <div class="row"><span class="k">Department</span><span class="v">{{ site.department }}</span></div>
+          <div class="row"><span class="k">University</span><span class="v">{{ site.university }}</span></div>
+          <div class="row"><span class="k">Founded</span><span class="v">{{ site.founded_year }}</span></div>
+          <div class="row"><span class="k">Location</span><span class="v">{{ site.office }}, {{ site.city }}</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FIG.02 — RESEARCH ===================== -->
+<section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="research-h">
+  <div class="container">
+    <div class="fig-head" data-reveal>
+      <p class="fig-eyebrow">FIG.02 / Research</p>
+      <h2 id="research-h">What we work on</h2>
+      <p class="lead">Six threads, one question: how can deep networks respect the structure, geometry and uncertainty of the visual world?</p>
+    </div>
+    <div class="area-grid">
+      {% for r in research %}
+      <a class="area-card" href="research.html#{{ r.slug }}" data-reveal style="--i:{{ loop.index0 }}">
+        <span class="idx">{{ r.num }} · {{ r.tag }}</span>
+        <h3>{{ r.title }}</h3>
+        <p class="tag">{{ r.summary }}</p>
+        <span class="btn-link more">Explore <span class="arr">→</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FIG.03 — SELECTED WORK ===================== -->
+{% if publications.featured_one %}
+<section class="section featured" aria-labelledby="featured-h">
+  <div class="container">
+    <div class="fig-head" data-reveal>
+      <p class="fig-eyebrow">FIG.03 / Selected Work</p>
+      <h2 id="featured-h">Featured publication</h2>
+    </div>
+    <div class="inner" data-reveal>
+      <div class="featured-mark" aria-hidden="true">
+        {% include "_constellation.html" %}
+        <img src="assets/img/brand/mark-gradient.png" alt="">
+      </div>
+      <div class="featured-meta">
+        <div class="kicker">
+          <span class="venue-badge{% if publications.featured_one.is_top %} is-top{% endif %}">{{ publications.featured_one.venue_short }} · {{ publications.featured_one.year }}</span>
+          <span class="status-badge">Featured</span>
+        </div>
+        <h3>{% if publications.featured_one.url %}<a href="{{ publications.featured_one.url }}" target="_blank" rel="noopener">{{ publications.featured_one.title }}</a>{% else %}{{ publications.featured_one.title }}{% endif %}</h3>
+        <p class="authors">{{ publications.featured_one.authors_html|raw }}</p>
+        <div class="pub-links">
+          {% for link in publications.featured_one.links %}<a class="chip" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+          <a class="chip" href="publications.html">All publications</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===================== FIG.04 — LATEST ===================== -->
+<section class="section" aria-labelledby="news-h">
+  <div class="container container-prose" style="max-width:880px">
+    <div class="fig-head" data-reveal>
+      <p class="fig-eyebrow">FIG.04 / Latest</p>
+      <h2 id="news-h">Lab news</h2>
+    </div>
+    <ul class="news-list" data-reveal>
+      {% for item in news_recent %}
+      <li class="news-item{% if loop.first %} is-new{% endif %}">
+        <span class="news-date tnum">{{ item.date_display }}</span>
+        <span class="news-glyph" aria-hidden="true" title="{{ item.tag }}">{{ item.glyph }}</span>
+        <span class="news-body">
+          <span class="nh">{% if item.link %}<a href="{{ item.link }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</span>{% if loop.first %}<span class="status-badge">New</span>{% endif %}
+          <span class="ns">{{ item.body }}</span>
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== JOIN CTA ===================== -->
+<section class="section--tight cta-band" aria-label="Join the lab">
+  <div class="section" style="padding-block:var(--s8)">
+    <div class="container">
+      <div class="rule"><span>Open positions</span></div>
+      <div class="inner">
+        <div>
+          <h2>Join the lab.</h2>
+          <p>We are looking for curious students who like hard, beautiful problems in vision and learning.</p>
+        </div>
+        <a class="btn btn-primary" href="join.html">See open positions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "_footer.html" %}

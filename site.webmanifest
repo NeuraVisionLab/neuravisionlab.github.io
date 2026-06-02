@@ -1,0 +1,13 @@
+{
+  "name": "NeuraVision Research Lab",
+  "short_name": "NeuraVision",
+  "description": "Computer vision and deep learning research lab at Bilkent University.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1C1C1C",
+  "theme_color": "#1C1C1C",
+  "icons": [
+    { "src": "assets/img/brand/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "assets/img/brand/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

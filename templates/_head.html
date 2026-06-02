@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ page_desc }}">
+  <link rel="canonical" href="{{ page_url }}">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NeuraVision Research Lab">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ site_url }}assets/img/brand/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_desc }}">
+  <meta name="twitter:image" content="{{ site_url }}assets/img/brand/og-image.png">
+  <meta name="theme-color" content="#1C1C1C">
+
+  <!-- Icons -->
+  <link rel="icon" href="assets/img/brand/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/brand/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Fonts (self-hosted) -->
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-variable.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-variable.woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script type="application/ld+json">{{ jsonld|raw }}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header on-dark">
+    <div class="container">
+      <a class="brand" href="index.html" aria-label="NeuraVision Research Lab — home">
+        <img class="mark-light" src="assets/img/brand/mark-gradient.png" alt="" width="30" height="30">
+        <img class="mark-dark" src="assets/img/brand/mark-white.png" alt="" width="30" height="30">
+        <span class="brand-text">
+          <span class="brand-name">NeuraVision</span>
+          <span class="brand-sub">Research Lab</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        {% for n in nav %}<a class="nav-link" href="{{ n.url }}"{% if n.active %} aria-current="page"{% endif %}>{{ n.label }}</a>{% endfor %}
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay"></div>
+  <aside class="nav-drawer" id="nav-drawer" aria-label="Menu">
+    <button class="drawer-close" aria-label="Close menu">&times;</button>
+    {% for n in nav %}<a href="{{ n.url }}"{% if n.active %} aria-current="page"{% endif %}><span class="idx">{{ loop.index }}—</span>{{ n.label }}</a>{% endfor %}
+  </aside>
+
+  <main id="main">

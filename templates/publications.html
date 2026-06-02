@@ -1,0 +1,55 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">FIG.09 / Publications</p>
+    <h1>Publications</h1>
+    <div class="stats subhero-stats">
+      <div class="stat"><span class="num tnum">{{ publications.count }}</span><span class="cap">Papers</span></div>
+      <div class="stat"><span class="num tnum">{{ site.stat_citations }}</span><span class="cap">Citations</span></div>
+      <div class="stat"><span class="num tnum">{{ site.stat_hindex }}</span><span class="cap">h-index</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-label="Publications">
+  <div class="container container-wide">
+    <div class="pub-toolbar">
+      <div class="filter-pills" role="group" aria-label="Filter publications">
+        <button class="filter-pill" data-filter="all" aria-pressed="true">All</button>
+        {% for t in publications.types %}<button class="filter-pill" data-filter="type" data-value="{{ t }}" aria-pressed="false">{{ t|title }}</button>{% endfor %}
+        {% for y in publications.years %}<button class="filter-pill" data-filter="year" data-value="{{ y }}" aria-pressed="false">{{ y }}</button>{% endfor %}
+      </div>
+      <p class="pub-count" aria-live="polite">Showing <b data-pub-count>{{ publications.count }}</b> / <span data-pub-total>{{ publications.count }}</span></p>
+    </div>
+
+    <div data-pub-list>
+      {% for group in publications.by_year %}
+      <div data-year-group>
+        <h2 class="pub-year tnum">{{ group.year }}</h2>
+        {% for p in group.items %}
+        <article class="pub-row" data-type="{{ p.venue_type }}" data-year="{{ p.year }}">
+          <div class="pub-rail tnum">{{ p.year }}</div>
+          <div class="pub-main">
+            {% if p.url %}<a class="pub-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
+            <p class="pub-authors">{{ p.authors_html|raw }}</p>
+          </div>
+          <div class="pub-extra">
+            <span class="venue-badge{% if p.is_top %} is-top{% endif %}">{{ p.badge_label }} · {{ p.year }}</span>
+            <div class="pub-links">
+              {% for link in p.links %}<a class="chip" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+              {% if p.citations_n %}<span class="pub-cite">Cited by <b>{{ p.citations }}</b></span>{% endif %}
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="lead" style="margin-top:var(--s7)">Full and up-to-date list on <a href="{{ site.scholar_url }}" target="_blank" rel="noopener">Google Scholar</a>.</p>
+  </div>
+</section>
+
+{% include "_footer.html" %}

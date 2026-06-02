@@ -1,0 +1,61 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">FIG.05 / People</p>
+    <h1>People</h1>
+    <p class="lead">A small, focused group: one principal investigator and {{ members.student_count }} graduate researchers working across computer vision, deep learning and topology.</p>
+  </div>
+</section>
+
+<!-- Principal Investigator -->
+<section class="section" aria-labelledby="pi-h">
+  <div class="container">
+    {% for m in members.pi_list %}
+    <article class="pi-card" data-reveal>
+      <div class="pi-photo">
+        {% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="640">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}
+      </div>
+      <div class="pi-info">
+        <p class="fig-eyebrow" style="margin-bottom:var(--s3)">Principal Investigator</p>
+        <h2 id="pi-h">{{ m.name }}</h2>
+        <p class="role">{{ m.degree }} · {{ site.department }}</p>
+        <p>{{ m.bio }}</p>
+        <div class="pi-facts">
+          <div class="row"><span class="k">Role</span><span class="v">{{ m.role }}</span></div>
+          <div class="row"><span class="k">Areas</span><span class="v">{{ m.interests_str }}</span></div>
+          <div class="row"><span class="k">Office</span><span class="v">{{ site.office }}</span></div>
+          <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:{{ m.email }}">{{ m.email }}</a></span></div>
+        </div>
+        <div class="social-row">{% include "_socials.html" %}</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Graduate researchers -->
+<section class="section" style="padding-top:0" aria-labelledby="grad-h">
+  <div class="container container-wide">
+    <div class="rule"><h2 class="rule-label" id="grad-h">Graduate Researchers — M.Sc.</h2></div>
+    <div class="member-grid">
+      {% for m in members.students %}
+      <article class="member-card" data-reveal style="--i:{{ loop.index0 }}">
+        <div class="member-photo">
+          <span class="member-idx">M{{ loop.index }}</span>
+          {% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="600" loading="lazy">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}
+        </div>
+        <div class="member-info">
+          <h3 class="name">{{ m.name }}</h3>
+          <span class="role">{{ m.role }}</span>
+          {% if m.tag %}<span class="mtag">{{ m.tag }}</span>{% endif %}
+          <span class="member-links">{% include "_socials.html" %}</span>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "_footer.html" %}

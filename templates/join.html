@@ -1,0 +1,75 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">FIG.07 / Join</p>
+    <h1>Join the lab</h1>
+    <p class="lead">We are always glad to hear from talented, motivated people who want to do serious research in computer vision and deep learning.</p>
+  </div>
+</section>
+
+<section class="section" aria-label="Join the lab">
+  <div class="container">
+    <div class="join-layout">
+      <div class="join-main">
+        <div class="fig-head" data-reveal>
+          <h2>Work on hard, beautiful problems.</h2>
+          <p class="lead">NeuraVision is a young, ambitious group. You will work closely with the PI on topology-aware vision, uncertainty estimation and trustworthy AI, with a clear path to publishing at top venues.</p>
+        </div>
+
+        <div class="join-block" data-reveal>
+          <h3><span class="slash">/</span> Open positions</h3>
+          {% for p in positions %}
+          <article class="position">
+            <div class="ptop">
+              <h4>{{ p.title }}</h4>
+              <span class="status-badge">{{ p.status|upper }}</span>
+            </div>
+            <p class="aud">{{ p.audience }}</p>
+            <p style="margin-top:var(--s3)">{{ p.description }}</p>
+          </article>
+          {% endfor %}
+        </div>
+
+        <div class="join-block" data-reveal>
+          <h3><span class="slash">/</span> Who we look for</h3>
+          <ul class="checklist">
+            <li>A strong foundation in mathematics — linear algebra, probability, optimization.</li>
+            <li>Solid programming and hands-on experience with a deep-learning framework (PyTorch).</li>
+            <li>Background or genuine curiosity in computer vision and machine learning.</li>
+            <li>Interest in the structure of problems: geometry, topology, uncertainty.</li>
+            <li>Self-motivation, rigor, and the persistence good research demands.</li>
+          </ul>
+        </div>
+
+        <div class="join-block" data-reveal>
+          <h3><span class="slash">/</span> How to apply</h3>
+          <ol class="steps">
+            <li>Read a few of our <a href="publications.html">recent papers</a> and the <a href="research.html">research areas</a> to see if our work excites you.</li>
+            <li>Prepare a short CV and a brief statement of your research interests.</li>
+            <li>Email the PI with your materials — mention NeuraVision and a paper you found interesting.</li>
+            <li>Prospective graduate students should also apply to the Bilkent CS graduate program.</li>
+          </ol>
+          <p style="margin-top:var(--s5)"><a class="btn btn-primary" href="mailto:{{ site.email }}?subject=NeuraVision%20%E2%80%94%20Prospective%20student">Email the PI</a></p>
+        </div>
+      </div>
+
+      <aside data-reveal>
+        <div class="join-aside">
+          <p class="fig-eyebrow" style="margin-bottom:var(--s4)">Quick facts</p>
+          <div class="pi-facts" style="border-top:none">
+            <div class="row"><span class="k">Advisor</span><span class="v">Dr. {{ members.pi.name }}</span></div>
+            <div class="row"><span class="k">Department</span><span class="v">{{ site.department }}</span></div>
+            <div class="row"><span class="k">University</span><span class="v">{{ site.university }}</span></div>
+            <div class="row"><span class="k">Location</span><span class="v">{{ site.office }}, {{ site.city }}</span></div>
+          </div>
+          <p style="margin-top:var(--s5)"><a class="btn-link" href="research.html">Our research <span class="arr">→</span></a></p>
+          <p><a class="btn-link" href="publications.html">Our publications <span class="arr">→</span></a></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% include "_footer.html" %}

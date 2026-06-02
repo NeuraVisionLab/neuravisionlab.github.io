@@ -1,0 +1,30 @@
+key,value
+lab_name,NeuraVision
+lab_full_name,NeuraVision Research Lab
+tagline,Topology-aware computer vision & trustworthy deep learning.
+hero_headline,Teaching machines to see the structure in everything.
+hero_subhead,We build computer-vision and deep-learning methods that respect the geometry and topology of the visual world — and that know when they might be wrong.
+meta_description,"NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis."
+intro_heading,About the lab
+intro_body,"NeuraVision is a computer-vision and machine-learning research group in the Department of Computer Engineering at Bilkent University. Led by Dr. Doruk Öner, the lab develops deep-learning methods that capture the geometry and topology of images — from delineating thin, connected structures like roads, neurons and blood vessels, to estimating predictive uncertainty for trustworthy AI. Our work spans medical image analysis, remote sensing, 3D shape modeling, and the theory of structured prediction, and has appeared in venues such as TPAMI, ICML, MICCAI and TMLR."
+university,Bilkent University
+department,Department of Computer Engineering
+faculty,Faculty of Engineering
+city,"Ankara, Türkiye"
+office,"EA Building, Room 521"
+phone,+90 (312) 290 1981
+email,doruk.oner@cs.bilkent.edu.tr
+address,"Bilkent University, Department of Computer Engineering, EA Building, Room 521, 06800 Çankaya, Ankara, Türkiye"
+map_query,"Bilkent University Engineering Building EA, Ankara, Turkey"
+map_lat,39.86930
+map_lng,32.74970
+scholar_url,https://scholar.google.com/citations?user=ESA2CsAAAAAJ
+github_url,
+linkedin_url,
+x_url,
+founded_year,2024
+stat_publications,16
+stat_citations,319
+stat_hindex,7
+stat_members,10
+copyright,"NeuraVision Research Lab, Bilkent University"

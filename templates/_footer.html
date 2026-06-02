@@ -1,0 +1,42 @@
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-orn">{% include "_constellation.html" %}</div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/img/brand/mark-white.png" alt="NeuraVision Research Lab" width="36" height="36">
+          <span class="brand-name">NeuraVision</span>
+          <p>{{ site.tagline }}</p>
+          <p class="addr">{{ site.department }}<br>{{ site.university }}</p>
+          <p class="addr">{{ site.office }} · {{ site.city }}</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>{% for n in nav %}<li><a href="{{ n.url }}">{{ n.label }}</a></li>{% endfor %}</ul>
+        </div>
+        <div class="footer-col">
+          <h4>Research</h4>
+          <ul>{% for r in research %}<li><a href="research.html#{{ r.slug }}">{{ r.title }}</a></li>{% endfor %}</ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+            {% if site.scholar_url %}<li><a href="{{ site.scholar_url }}" target="_blank" rel="noopener">Google Scholar</a></li>{% endif %}
+            {% if site.github_url %}<li><a href="{{ site.github_url }}" target="_blank" rel="noopener">GitHub</a></li>{% endif %}
+          </ul>
+          <p class="footer-coord">{{ site.map_lat }}°N, {{ site.map_lng }}°E</p>
+          <p><a class="btn-link" href="https://www.google.com/maps/search/?api=1&query={{ site.map_query|urlencode }}" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> {{ site.copyright }}</span>
+        <span>Built static · GitHub Pages</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

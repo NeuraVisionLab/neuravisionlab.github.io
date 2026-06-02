@@ -1,0 +1,39 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">FIG.06 / Research</p>
+    <h1>Research</h1>
+    <p class="lead">We build computer-vision and deep-learning methods that respect the geometry, topology and uncertainty of the visual world — and put them to work in medicine, remote sensing and beyond.</p>
+  </div>
+</section>
+
+<section class="section" aria-label="Research areas">
+  <div class="container">
+    {% for r in research %}
+    <article class="research-block" id="{{ r.slug }}" data-reveal>
+      <div class="rb-text">
+        <span class="plate" aria-hidden="true">{{ r.num }}</span>
+        <p class="num">Area {{ r.num }} / {{ r.tag }}</p>
+        <h2>{{ r.title }}</h2>
+        <p class="lead">{{ r.summary }}</p>
+        <p>{{ r.description }}</p>
+        <p style="margin-top:var(--s5)"><a class="btn-link" href="publications.html">Related publications <span class="arr">→</span></a></p>
+      </div>
+      <div class="rb-visual" aria-hidden="true">{% include "_constellation.html" %}</div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- methods / ethos interstitial -->
+<section class="section interstitial is-dark seam-top" aria-labelledby="ethos-h">
+  <div class="container container-prose" style="max-width:840px">
+    <p class="fig-eyebrow" style="color:var(--d-accent)">Methods &amp; ethos</p>
+    <h2 id="ethos-h" style="color:#fff">Structure first, then certainty.</h2>
+    <p class="lead">Across every project we ask the same two questions: does the model capture the <em>structure</em> of the problem — the connectivity, the geometry, the topology — and does it know <em>when it might be wrong</em>? We favour methods that are principled, reproducible and honest about their limits, because the applications we care about leave little room for confident mistakes.</p>
+  </div>
+</section>
+
+{% include "_footer.html" %}

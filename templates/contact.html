@@ -1,0 +1,59 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">FIG.08 / Contact</p>
+    <h1>Contact</h1>
+    <p class="lead">Find us in the Department of Computer Engineering at Bilkent University. The fastest way to reach the lab is email.</p>
+  </div>
+</section>
+
+<section class="section" aria-label="Contact details">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info" data-reveal>
+        <div class="fig-head"><h2>Where to find us</h2></div>
+        <div class="data-table">
+          <div class="row"><span class="k">Lab</span><span class="v">{{ site.lab_full_name }}</span></div>
+          <div class="row"><span class="k">Principal Investigator</span><span class="v">Dr. {{ members.pi.name }}</span></div>
+          <div class="row"><span class="k">Department</span><span class="v">{{ site.department }}</span></div>
+          <div class="row"><span class="k">University</span><span class="v">{{ site.university }}</span></div>
+          <div class="row"><span class="k">Building</span><span class="v">{{ site.office }}</span></div>
+          <div class="row"><span class="k">City</span><span class="v">{{ site.city }}</span></div>
+          <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:{{ site.email }}">{{ site.email }}</a></span></div>
+          <div class="row"><span class="k">Phone</span><span class="v">{{ site.phone }}</span></div>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:{{ site.email }}">Email the lab</a>
+          {% if site.scholar_url %}<a class="btn btn-ghost" href="{{ site.scholar_url }}" target="_blank" rel="noopener">Google Scholar</a>{% endif %}
+        </div>
+      </div>
+
+      <div class="contact-map" data-reveal style="--i:1">
+        <div class="map-frame">
+          {% if site.map_embed %}<iframe src="{{ site.map_embed }}" title="Map showing {{ site.lab_full_name }} at {{ site.university }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>{% endif %}
+          <span class="coord">{{ site.map_lat }}°N · {{ site.map_lng }}°E</span>
+        </div>
+        <p style="margin-top:var(--s4)"><a class="btn-link" href="{{ site.map_link }}" target="_blank" rel="noopener">Open in map <span class="arr">→</span></a> &nbsp; <a class="btn-link" href="https://www.google.com/maps/search/?api=1&query={{ site.map_query|urlencode }}" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight cta-band" aria-label="Join the lab">
+  <div class="section" style="padding-block:var(--s8)">
+    <div class="container">
+      <div class="rule"><span>Prospective students</span></div>
+      <div class="inner">
+        <div>
+          <h2>Interested in joining?</h2>
+          <p>We welcome strong MSc and PhD applicants, undergraduate researchers and visitors.</p>
+        </div>
+        <a class="btn btn-primary" href="join.html">See open positions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "_footer.html" %}
