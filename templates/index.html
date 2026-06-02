@@ -23,6 +23,8 @@
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
+        <div class="hero-halo"></div>
+        <div class="hero-ring"></div>
         <img class="hero-mark" src="assets/img/brand/mark-gradient.png" alt="">
       </div>
     </div>
@@ -67,6 +69,7 @@
     <div class="area-grid">
       {% for r in research %}
       <a class="area-card" href="research.html#{{ r.slug }}" data-reveal style="--i:{{ loop.index0 }}">
+        {% include "_area_icon.html" %}
         <span class="idx">{{ r.num }} · {{ r.tag }}</span>
         <h3>{{ r.title }}</h3>
         <p class="tag">{{ r.summary }}</p>
