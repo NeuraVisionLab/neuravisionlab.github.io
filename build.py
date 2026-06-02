@@ -51,7 +51,7 @@ PAGES = [
      "Contact — NeuraVision Research Lab",
      "Contact the NeuraVision Research Lab, Department of Computer Engineering, EA Building Room 521, Bilkent University, Ankara, Türkiye."),
 ]
-SITE_URL = "https://neuravision-lab.github.io/"  # edit for a custom domain
+SITE_URL = "https://neuravisionlab.github.io/neuravision/"  # edit for a custom domain
 
 NAV = [
     ("home", "Home", "index.html"),

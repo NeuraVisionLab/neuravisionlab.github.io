@@ -3,6 +3,8 @@
 The website for the **NeuraVision Research Lab** (Computer Vision & Deep Learning,
 Department of Computer Engineering, Bilkent University — PI Dr. Doruk Öner).
 
+**Live at: https://neuravisionlab.github.io/neuravision/**
+
 A clean, modern, **static** site generated from CSV files by a tiny zero-dependency
 Python script. **Every piece of content lives in `data/*.csv`** — you never have to
 touch HTML or CSS to update the site. It has a light/dark theme toggle, an animated
