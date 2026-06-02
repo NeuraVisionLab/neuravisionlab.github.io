@@ -113,18 +113,33 @@ all self-hosted (no external font requests).
 
 ## Deploying to GitHub Pages
 
-`.github/workflows/deploy.yml` rebuilds and deploys on every push to `main`/`master`:
+This site is published as the **organization site** of `NeuraVisionLab` — the repo is
+named **`neuravisionlab.github.io`**, so GitHub serves it at the domain **root**:
 
-1. Create a GitHub repo and push this folder.
-2. **Settings → Pages → Source = GitHub Actions**.
-3. Push — the Action runs `python3 build.py` and publishes the result.
+> **https://neuravisionlab.github.io/**
 
-Pre-built HTML is also committed, so the site works even without the Action.
+### Updating the live site
+The built HTML is committed, so any push to `main` updates the site:
+```bash
+# edit data/*.csv (or templates/assets), then:
+python3 build.py
+git add -A
+git commit -m "Update content"
+git push
+```
+Pages redeploys automatically (usually within a minute).
 
-For a **custom domain** or a different repo name, edit `SITE_URL` near the top of
-`build.py` (used for canonical URLs, the sitemap and share cards) and add a `CNAME`
-file. All links are relative, so the site works at a domain root *and* under
-`username.github.io/repo/`.
+### How it's wired
+- Pre-built HTML is committed, so Pages can simply **Deploy from a branch** (`main` / root)
+  — `.nojekyll` makes it serve the files as-is.
+- A `.github/workflows/deploy.yml` is also included: if you set **Settings → Pages →
+  Source = GitHub Actions**, it runs `python3 build.py` on each push and deploys the
+  result (handy so you don't have to commit the generated HTML yourself).
+
+### Custom domain / different repo
+Edit `SITE_URL` near the top of `build.py` (used for canonical URLs, the sitemap and
+share cards), rebuild, and — for a custom domain — add a `CNAME` file. All links are
+relative, so the site also works under a project path like `username.github.io/repo/`.
 
 ## Project structure
 
