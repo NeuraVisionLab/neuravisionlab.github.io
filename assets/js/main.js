@@ -179,4 +179,87 @@
       hero.addEventListener("pointerleave", function () { tx = 0; ty = 0; kick(); });
     });
   }
+
+  /* ---------- hero canvas: interactive node graph that follows the mouse */
+  var heroCanvas = document.querySelector(".hero-canvas");
+  if (heroCanvas && heroCanvas.getContext && !reduceMotion) {
+    var hctx = heroCanvas.getContext("2d");
+    var heroEl = heroCanvas.closest(".hero");
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var cw = 0, ch = 0, count = 0, maxDist = 150, infl = 220;
+    var pts = [], mx = -9999, my = -9999, hover = false, hraf = null;
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+
+    function seed() {
+      pts = [];
+      for (var i = 0; i < count; i++) {
+        pts.push({ x: rnd(0, cw), y: rnd(0, ch), vx: rnd(-0.25, 0.25), vy: rnd(-0.25, 0.25), r: rnd(1.1, 3.2) });
+      }
+    }
+    function sizeCanvas() {
+      var r = heroEl.getBoundingClientRect();
+      cw = Math.max(1, r.width); ch = Math.max(1, r.height);
+      heroCanvas.width = Math.round(cw * DPR); heroCanvas.height = Math.round(ch * DPR);
+      hctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      count = Math.round(Math.min(70, Math.max(24, cw * ch / 18000)));
+      maxDist = Math.min(165, Math.max(108, cw / 9));
+      infl = Math.min(260, Math.max(150, cw / 5));
+      if (pts.length !== count) seed();
+    }
+    function frame() {
+      hctx.clearRect(0, 0, cw, ch);
+      var i, j, p, q, dx, dy, d, sp;
+      for (i = 0; i < pts.length; i++) {
+        p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (hover) {
+          dx = mx - p.x; dy = my - p.y; d = Math.hypot(dx, dy);
+          if (d < infl && d > 0.5) { var f = (1 - d / infl) * 0.045; p.vx += (dx / d) * f; p.vy += (dy / d) * f; }
+        }
+        p.vx *= 0.985; p.vy *= 0.985;
+        p.vx += rnd(-0.01, 0.01); p.vy += rnd(-0.01, 0.01);
+        sp = Math.hypot(p.vx, p.vy);
+        if (sp > 1.4) { p.vx = p.vx / sp * 1.4; p.vy = p.vy / sp * 1.4; }
+        if (p.x < 0) { p.x = 0; p.vx = Math.abs(p.vx); } else if (p.x > cw) { p.x = cw; p.vx = -Math.abs(p.vx); }
+        if (p.y < 0) { p.y = 0; p.vy = Math.abs(p.vy); } else if (p.y > ch) { p.y = ch; p.vy = -Math.abs(p.vy); }
+      }
+      for (i = 0; i < pts.length; i++) {
+        p = pts[i];
+        for (j = i + 1; j < pts.length; j++) {
+          q = pts[j]; dx = p.x - q.x; dy = p.y - q.y; d = Math.hypot(dx, dy);
+          if (d < maxDist) {
+            hctx.strokeStyle = "rgba(40,181,96," + (0.42 * (1 - d / maxDist)).toFixed(3) + ")";
+            hctx.lineWidth = 1;
+            hctx.beginPath(); hctx.moveTo(p.x, p.y); hctx.lineTo(q.x, q.y); hctx.stroke();
+          }
+        }
+      }
+      for (i = 0; i < pts.length; i++) {
+        p = pts[i]; var near = false;
+        if (hover) {
+          dx = mx - p.x; dy = my - p.y; d = Math.hypot(dx, dy);
+          if (d < infl) {
+            near = true;
+            hctx.strokeStyle = "rgba(52,196,108," + (0.5 * (1 - d / infl)).toFixed(3) + ")";
+            hctx.lineWidth = 1;
+            hctx.beginPath(); hctx.moveTo(p.x, p.y); hctx.lineTo(mx, my); hctx.stroke();
+          }
+        }
+        hctx.beginPath(); hctx.arc(p.x, p.y, p.r * (near ? 1.6 : 1), 0, 6.2832);
+        hctx.fillStyle = near ? "rgba(107,240,173,0.95)" : "rgba(52,196,108,0.72)";
+        hctx.fill();
+      }
+      hraf = requestAnimationFrame(frame);
+    }
+    heroEl.addEventListener("pointermove", function (e) {
+      var r = heroEl.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; hover = true;
+    });
+    heroEl.addEventListener("pointerleave", function () { hover = false; mx = my = -9999; });
+    var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(sizeCanvas, 150); });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) { if (hraf) { cancelAnimationFrame(hraf); hraf = null; } }
+      else if (!hraf) { hraf = requestAnimationFrame(frame); }
+    });
+    sizeCanvas(); hraf = requestAnimationFrame(frame);
+  }
 })();

@@ -44,6 +44,7 @@
   --brand-grad: linear-gradient(100deg, #20A159 0%, #28B560 55%, #096445 100%);
   --header-bg: rgba(255,255,255,.86);
   --toolbar-bg: rgba(251,251,250,.92);
+  --hero-accent: #6BF0AD;      /* highlight word on the dark hero — light, high-contrast */
   color-scheme: light;
 
   /* dark anchor palette (hero / footer / sub-heroes) */
@@ -359,24 +360,17 @@ p { max-width: 68ch; }
   background: radial-gradient(circle at 70% 30%, rgba(40,181,96,.18), transparent 60%);
   filter: blur(8px);
 }
-.hero-frame { position: absolute; inset: var(--gutter); border: 1px solid rgba(255,255,255,.08); border-radius: 2px; z-index: -1; pointer-events: none; }
-.hero-corner { position: absolute; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em; color: rgba(157,176,164,.65); }
-.hero-corner.tl { top: calc(var(--gutter) + 10px); left: calc(var(--gutter) + 12px); }
-.hero-corner.br { bottom: calc(var(--gutter) + 10px); right: calc(var(--gutter) + 12px); }
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero .container { position: relative; z-index: 1; }
 .hero .grid { align-items: center; width: 100%; }
 .hero-content { grid-column: 1 / 8; }
 .hero-eyebrow { color: var(--d-accent); margin-bottom: var(--s5); }
 .hero-eyebrow::before { background: var(--d-accent); }
 .hero-eyebrow::after { background: var(--d-border); }
 .hero-title { font-family: var(--font-display); font-weight: 600; font-size: var(--step-hero); line-height: 1.02; letter-spacing: -0.02em; color: #fff; }
-.hero-title .accent { color: var(--d-accent); font-weight: 700; }
+.hero-title .accent { color: var(--hero-accent); font-weight: 700; text-shadow: 0 2px 22px rgba(4,18,12,.55); }
 .hero-lead { font-size: var(--step-1); line-height: 1.5; color: var(--d-lead); max-width: 52ch; margin-top: var(--s6); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--s4); margin-top: var(--s7); }
-.hero-stats { display: flex; flex-wrap: wrap; gap: 0; margin-top: var(--s8); border-top: 1px solid rgba(255,255,255,.1); padding-top: var(--s5); }
-.hero-stats .stat { padding-right: var(--s7); margin-right: var(--s7); border-right: 1px solid rgba(255,255,255,.1); }
-.hero-stats .stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-.hero-stats .stat .num { color: #fff; }
-.hero-stats .stat .cap { color: var(--d-muted); }
 .hero-visual { grid-column: 8 / 13; position: relative; display: flex; align-items: center; justify-content: center; min-height: 360px; }
 .hero-mark { width: clamp(200px, 25vw, 340px); filter: drop-shadow(0 8px 34px rgba(40,181,96,.50)); position: relative; z-index: 3; }
 .hero-halo { position: absolute; width: min(130%, 460px); aspect-ratio: 1; border-radius: 50%; z-index: 1;
@@ -401,8 +395,6 @@ p { max-width: 68ch; }
 .constellation .link { stroke: rgba(40,181,96,.35); stroke-width: 1; fill: none; }
 .constellation .signal { stroke: #34C46C; stroke-width: 2; fill: none; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(52,196,108,.8)); }
 
-.scroll-cue { position: absolute; left: 50%; bottom: var(--s6); transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.2em; color: var(--d-muted); display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.scroll-cue::before { content: ""; width: 1px; height: 28px; background: linear-gradient(var(--d-accent), transparent); }
 
 /* compact dark sub-hero for inner pages */
 .subhero {
@@ -677,6 +669,7 @@ p { max-width: 68ch; }
   .hero-content { grid-column: 1 / -1; order: 2; }
   .hero-visual { grid-column: 1 / -1; order: 1; margin-bottom: var(--s6); }
   .hero-mark { width: 160px; }
+  .hero-visual { min-height: 220px; }
   .about-copy, .about-panel { grid-column: 1 / -1; }
   .area-grid { grid-template-columns: 1fr 1fr; }
   .pi-card { grid-template-columns: 1fr; gap: var(--s5); }
@@ -687,8 +680,6 @@ p { max-width: 68ch; }
 }
 @media (max-width: 560px) {
   .area-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: var(--s4); }
-  .hero-stats .stat { padding-right: var(--s4); margin-right: var(--s4); }
   .pub-row { grid-template-columns: 1fr; gap: var(--s3); }
   .pub-extra { align-items: flex-start; }
   .pub-links { justify-content: flex-start; }

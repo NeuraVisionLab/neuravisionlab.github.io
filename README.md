@@ -47,9 +47,9 @@ theme. Notable keys:
 | `scholar_url`, `github_url`, `linkedin_url`, `x_url` | Footer / profile links (leave blank to hide). |
 | `default_theme` | `auto` (follow the visitor's system), `light`, or `dark`. |
 
-> The headline stats (Publications · Researchers · Research areas) are **counted
-> automatically** from the other CSVs, so they're always correct — there are no
-> citation counts anywhere on the site.
+> Stats shown on the site (e.g. the Publications page's Papers · Venues · Years)
+> are **counted automatically** from the CSVs, so they're always correct — and
+> there are no citation counts anywhere on the site.
 
 ### `members.csv` — the team
 One row per person. `group=pi` is the principal investigator; everyone else is a
