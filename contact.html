@@ -3,7 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>
+    /* Set theme before first paint (no flash). Default from site.csv: auto */
+    (function () {
+      var d = document.documentElement; d.classList.add('js');
+      try {
+        var saved = localStorage.getItem('nv-theme');
+        var def = 'auto';
+        var t = saved || ((def === 'auto' || !def)
+          ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : def);
+        d.setAttribute('data-theme', t);
+      } catch (e) { d.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
   <title>Contact — NeuraVision Research Lab</title>
   <meta name="description" content="Contact the NeuraVision Research Lab, Department of Computer Engineering, EA Building Room 521, Bilkent University, Ankara, Türkiye.">
   <link rel="canonical" href="https://neuravision-lab.github.io/contact.html">
@@ -29,7 +42,7 @@
   <link rel="manifest" href="site.webmanifest">
 
   <!-- Fonts (self-hosted) -->
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-variable.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-brand.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-variable.woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ResearchOrganization","name":"NeuraVision Research Lab","alternateName":"NeuraVision","url":"https://neuravision-lab.github.io/","logo":"https://neuravision-lab.github.io/assets/img/brand/icon-512.png","image":"https://neuravision-lab.github.io/assets/img/brand/og-image.png","description":"NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis.","email":"doruk.oner@cs.bilkent.edu.tr","parentOrganization":{"@type":"CollegeOrUniversity","name":"Bilkent University"},"address":{"@type":"PostalAddress","streetAddress":"EA Building, Room 521","addressLocality":"Ankara","addressCountry":"TR"},"founder":{"@type":"Person","name":"Doruk Öner","jobTitle":"Assistant Professor","url":"https://scholar.google.com/citations?user=ESA2CsAAAAAJ"}}</script>
@@ -47,12 +60,18 @@
           <span class="brand-sub">Research Lab</span>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a class="nav-link" href="index.html">Home</a><a class="nav-link" href="research.html">Research</a><a class="nav-link" href="publications.html">Publications</a><a class="nav-link" href="team.html">Team</a><a class="nav-link" href="join.html">Join</a><a class="nav-link" href="contact.html" aria-current="page">Contact</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="Primary">
+          <a class="nav-link" href="index.html">Home</a><a class="nav-link" href="research.html">Research</a><a class="nav-link" href="publications.html">Publications</a><a class="nav-link" href="team.html">Team</a><a class="nav-link" href="join.html">Join</a><a class="nav-link" href="contact.html" aria-current="page">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch between light and dark theme" title="Toggle theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+        </button>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -302,13 +321,15 @@
             <li><a href="mailto:doruk.oner@cs.bilkent.edu.tr">doruk.oner@cs.bilkent.edu.tr</a></li>
             <li><a href="https://scholar.google.com/citations?user=ESA2CsAAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
             
+            
+            
           </ul>
           <p class="footer-coord">39.86930°N, 32.74970°E</p>
           <p><a class="btn-link" href="https://www.google.com/maps/search/?api=1&query=Bilkent%20University%20Engineering%20Building%20EA%2C%20Ankara%2C%20Turkey" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a></p>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span data-year>2026</span> NeuraVision Research Lab, Bilkent University</span>
+        <span>© 2026 NeuraVision Research Lab, Bilkent University</span>
         <span>Built static · GitHub Pages</span>
       </div>
     </div>

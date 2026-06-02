@@ -2,7 +2,8 @@ key,value
 lab_name,NeuraVision
 lab_full_name,NeuraVision Research Lab
 tagline,Topology-aware computer vision & trustworthy deep learning.
-hero_headline,Teaching machines to see the structure in everything.
+hero_headline,We study the topology of what neural networks see.
+hero_accent,topology
 hero_subhead,We build computer-vision and deep-learning methods that respect the geometry and topology of the visual world — and that know when they might be wrong.
 meta_description,"NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis."
 intro_heading,About the lab
@@ -23,8 +24,5 @@ github_url,
 linkedin_url,
 x_url,
 founded_year,2024
-stat_publications,16
-stat_citations,319
-stat_hindex,7
-stat_members,10
+default_theme,auto
 copyright,"NeuraVision Research Lab, Bilkent University"

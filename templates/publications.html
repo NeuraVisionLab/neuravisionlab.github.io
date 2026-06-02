@@ -7,8 +7,8 @@
     <h1>Publications</h1>
     <div class="stats subhero-stats">
       <div class="stat"><span class="num tnum">{{ publications.count }}</span><span class="cap">Papers</span></div>
-      <div class="stat"><span class="num tnum">{{ site.stat_citations }}</span><span class="cap">Citations</span></div>
-      <div class="stat"><span class="num tnum">{{ site.stat_hindex }}</span><span class="cap">h-index</span></div>
+      <div class="stat"><span class="num tnum">{{ publications.venue_count }}</span><span class="cap">Venues</span></div>
+      <div class="stat"><span class="num">{{ publications.year_span }}</span><span class="cap">Years active</span></div>
     </div>
   </div>
 </section>
@@ -39,7 +39,6 @@
             <span class="venue-badge{% if p.is_top %} is-top{% endif %}">{{ p.badge_label }} · {{ p.year }}</span>
             <div class="pub-links">
               {% for link in p.links %}<a class="chip" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
-              {% if p.citations_n %}<span class="pub-cite">Cited by <b>{{ p.citations }}</b></span>{% endif %}
             </div>
           </div>
         </article>

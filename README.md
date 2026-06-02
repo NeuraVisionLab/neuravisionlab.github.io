@@ -3,11 +3,11 @@
 The website for the **NeuraVision Research Lab** (Computer Vision & Deep Learning,
 Department of Computer Engineering, Bilkent University — PI Dr. Doruk Öner).
 
-A clean, fast, **static** site generated from CSV files by a tiny zero-dependency
-Python build script. All content lives in `data/*.csv`, so updating the site never
-requires touching HTML or CSS. The template layer is a small Jinja-like subset, so
-moving to a dynamic backend later (Flask/Jinja2, Eleventy, Next.js, a CMS…) is
-straightforward.
+A clean, modern, **static** site generated from CSV files by a tiny zero-dependency
+Python script. **Every piece of content lives in `data/*.csv`** — you never have to
+touch HTML or CSS to update the site. It has a light/dark theme toggle, an animated
+node-graph that follows your mouse, and publication link buttons that appear only
+when you provide a link.
 
 ```
 Edit data/*.csv   →   python3 build.py   →   static *.html   →   GitHub Pages
@@ -16,53 +16,113 @@ Edit data/*.csv   →   python3 build.py   →   static *.html   →   GitHub Pa
 ## Quick start
 
 ```bash
-# build the site (no dependencies beyond Python 3.8+)
-python3 build.py
-
-# build and preview locally at http://localhost:8000
-python3 build.py --serve
+python3 build.py            # build the site (needs only Python 3.8+)
+python3 build.py --serve    # build, then preview at http://localhost:8000
+python3 build.py --check    # build into a temp dir to verify, without writing
 ```
 
-Then open `index.html` (or the local server URL).
+Open `index.html` (or the preview URL). After editing any CSV, run `python3 build.py`
+again (or just push — the GitHub Action rebuilds for you, see *Deploying*).
 
-## Editing content
+---
 
-Everything is data-driven. Edit a CSV in `data/`, run `python3 build.py`, and the
-pages regenerate. No CSV requires HTML knowledge.
+## Editing content — everything is a CSV
 
-| File | What it controls |
-|------|------------------|
-| `data/site.csv` | Lab name, tagline, hero copy, contact details, map, social links, headline stats. Simple `key,value` rows. |
-| `data/members.csv` | The team. One row per person. `group=pi` is the principal investigator; everyone else is a researcher. Photos live in `assets/img/people/` and are referenced by the `photo` column. Leave `bio`/`scholar`/`github`/`website` blank if unknown — the templates handle empty fields. |
-| `data/publications.csv` | Publication list. Set `featured=yes` to surface a paper on the home page. Fill `pdf` / `code` / `project` / `arxiv` / `doi` to add link buttons (bare arXiv IDs and DOIs are turned into full URLs automatically). |
-| `data/research.csv` | Research areas shown on the home page and the Research page (zig-zag blocks). |
-| `data/news.csv` | The "Lab news" log. Newest first; the most recent entry is flagged **NEW**. |
-| `data/positions.csv` | Open positions on the Join page. |
+All files live in **`data/`**. Commas inside a field are fine if you wrap the field
+in `"double quotes"` (any spreadsheet — Excel, Numbers, Google Sheets — does this for
+you when you export as CSV).
 
-**Adding a team member:** drop a portrait in `assets/img/people/` (a 3:4 portrait
-JPEG looks best), add a row to `members.csv` with `photo` pointing at it, rebuild.
-Photos are shown in greyscale and bloom to colour on hover.
+### `site.csv` — global text & settings (`key,value`)
+Lab name, tagline, **hero headline**, contact details, map, social links, default
+theme. Notable keys:
 
-**Lab-author highlighting** in publication lists is automatic: surnames listed in
-`build.py` (`_PI_SURNAMES` / `_LAB_SURNAMES`) are bolded, with the PI in green. Add a
-new student's surname there if you want their name emphasised in author lists.
+| key | what it does |
+|-----|--------------|
+| `hero_headline` | The big headline on the home page. |
+| `hero_accent` | One word from the headline to highlight in green (e.g. `topology`). |
+| `hero_subhead` | The sentence under the headline. |
+| `tagline`, `meta_description`, `intro_heading`, `intro_body` | Home/about + SEO text. |
+| `email`, `phone`, `office`, `address`, `department`, `university`, `city` | Contact block + footer. |
+| `map_query`, `map_lat`, `map_lng` | Contact map (an OpenStreetMap embed + "directions" link are generated from these). |
+| `scholar_url`, `github_url`, `linkedin_url`, `x_url` | Footer / profile links (leave blank to hide). |
+| `default_theme` | `auto` (follow the visitor's system), `light`, or `dark`. |
+
+> The headline stats (Publications · Researchers · Research areas) are **counted
+> automatically** from the other CSVs, so they're always correct — there are no
+> citation counts anywhere on the site.
+
+### `members.csv` — the team
+One row per person. `group=pi` is the principal investigator; everyone else is a
+researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
+
+- `photo` points at a file in `assets/img/people/` (a 3:4 portrait JPEG looks best).
+- `interests` is a `;`-separated list; the first one shows as the card's tag.
+- Leave `bio` / `scholar` / `github` / `website` blank if unknown — empty fields are
+  simply not rendered. If `photo` is blank, an initials tile is shown instead.
+
+**Add a member:** drop a portrait in `assets/img/people/`, add a row pointing `photo`
+at it, rebuild.
+
+### `publications.csv` — papers & link buttons
+Columns: `id, year, title, authors, venue, venue_type, venue_short, featured,
+paper, arxiv, code`.
+
+The three link columns become buttons **only when filled** — leave one blank and that
+button simply doesn't appear:
+
+| column | button | put here |
+|--------|--------|----------|
+| `paper` | **Paper** | the conference/journal page (proceedings, DOI, publisher). |
+| `arxiv` | **arXiv** | the arXiv abstract URL — or just the bare id like `1803.04039`. |
+| `code` | **Code** | the GitHub (or other) repository URL. |
+
+Other fields: set `featured=yes` to surface a paper on the home page; `venue_type`
+(`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
+pills are generated from whichever values appear; `venue_short` (e.g. `TPAMI`, `MICCAI`) is the badge label, and
+the top venues get a green dot. Lab members are **bold** in the author list and the PI
+is shown in green automatically (surnames are configured in `build.py`).
+
+### `research.csv` — research areas
+`order, slug, title, tag, summary, description`. Shown as cards on the home page and
+as the zig-zag blocks on the Research page. Add/remove rows freely.
+
+### `news.csv` — the "Lab news" log
+`date, title, body, tag, link`. Newest first; the most recent entry is flagged **NEW**.
+`tag` (e.g. `Publication`, `Lab`, `Award`, `Talk`) shows as a small glyph. `link` can be
+another page (`publications.html`) or any URL; blank = no link.
+
+### `positions.csv` — open positions (Join page)
+`title, audience, status, description`.
+
+---
+
+## Theme (light / dark)
+
+There's a toggle (sun/moon) in the header. The choice is remembered in the browser.
+The site's **default** is set by `default_theme` in `site.csv` (`auto` follows the
+visitor's OS setting). Both themes are fully styled and contrast-checked.
+
+## Fonts
+
+The wordmark/headings use **Jura**, served directly from the brand file you provided
+(`NeuravisionBRAND/FONT/Jura-VariableFont_wght.ttf`, compressed to
+`assets/fonts/jura-brand.woff2`). Body text uses Inter and labels use IBM Plex Mono,
+all self-hosted (no external font requests).
 
 ## Deploying to GitHub Pages
 
-A workflow at `.github/workflows/deploy.yml` rebuilds and deploys on every push to
-`main`/`master`:
+`.github/workflows/deploy.yml` rebuilds and deploys on every push to `main`/`master`:
 
 1. Create a GitHub repo and push this folder.
-2. In **Settings → Pages**, set **Source = GitHub Actions**.
-3. Push. The Action runs `python3 build.py` and publishes the result.
+2. **Settings → Pages → Source = GitHub Actions**.
+3. Push — the Action runs `python3 build.py` and publishes the result.
 
-Pre-built HTML is also committed, so the site works even without the Action (e.g. if
-you set Pages to "Deploy from a branch").
+Pre-built HTML is also committed, so the site works even without the Action.
 
-Using a **custom domain** or a different repo name? Update `SITE_URL` near the top of
-`build.py` (used for canonical URLs, the sitemap and social-share tags), put your
-domain in a `CNAME` file, and rebuild. All asset/page links are relative, so the site
-works both at a domain root and under `username.github.io/repo/`.
+For a **custom domain** or a different repo name, edit `SITE_URL` near the top of
+`build.py` (used for canonical URLs, the sitemap and share cards) and add a `CNAME`
+file. All links are relative, so the site works at a domain root *and* under
+`username.github.io/repo/`.
 
 ## Project structure
 
@@ -72,30 +132,19 @@ works both at a domain root and under `username.github.io/repo/`.
 ├── templates/       # HTML templates (Jinja-like: {{ var }}, {% for %}, {% if %}, {% include %})
 ├── assets/
 │   ├── css/styles.css
-│   ├── js/main.js   # nav, mobile drawer, scroll reveal, count-up, publication filter
-│   ├── fonts/       # self-hosted Jura, Inter, IBM Plex Mono (woff2)
-│   └── img/
-│       ├── brand/   # logo, marks, favicons, og-image
-│       └── people/  # member portraits
-├── build.py         # the generator (stdlib only)
-├── index.html …     # generated pages (do not edit by hand — edit CSV + templates)
+│   ├── js/main.js   # theme toggle, mouse parallax, nav, mobile drawer, reveal, filter
+│   ├── fonts/       # self-hosted Jura (your brand file), Inter, IBM Plex Mono
+│   └── img/{brand,people}/
+├── build.py         # the generator (Python standard library only)
+├── index.html …     # generated pages (don't edit by hand — edit CSV + templates)
 └── .github/workflows/deploy.yml
 ```
 
-## Design
-
-A light, editorial "paper" reading surface with two dark anchors (the home hero and
-the footer) and compact dark sub-heroes on inner pages. Brand green `#28B560` is used
-sparingly as accent "data-ink" (links, rules, the node-constellation motif, the
-primary button). Typography pairs **Jura** (display/wordmark/labels) with **Inter**
-(body) and **IBM Plex Mono** (indices, venue tags, coordinates). Fully responsive,
-keyboard-accessible, and respects `prefers-reduced-motion`.
-
 ## Extending to a dynamic site
 
-The data model (`load_*` functions in `build.py`) and the Jinja-like templates port
-almost directly to Jinja2/Flask or Eleventy. Swap the CSV loaders for database/API
-calls, keep the templates, and the same markup renders server-side or client-side.
+The data loaders in `build.py` and the Jinja-like templates port almost directly to
+Jinja2/Flask or Eleventy: swap the CSV loaders for database/API calls, keep the
+templates. The same markup then renders server-side or client-side.
 
 ---
 

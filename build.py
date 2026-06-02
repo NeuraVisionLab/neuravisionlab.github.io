@@ -145,36 +145,32 @@ def _format_authors(authors: str) -> str:
 def load_publications() -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
-        try:
-            r["citations_n"] = int(r.get("citations") or 0)
-        except ValueError:
-            r["citations_n"] = 0
         r["is_featured"] = (r.get("featured", "").lower() in ("yes", "true", "1"))
         r["authors_html"] = _format_authors(r.get("authors", ""))
         r["is_top"] = r.get("venue_short", "") in {"TPAMI", "ICML", "MICCAI", "TMLR", "AISTATS", "IEEE TMI"}
         r["badge_label"] = r.get("venue_short") or r.get("venue_type", "").title()
+        # Link buttons — only those filled in the CSV are emitted.
+        # paper -> conference/journal page, arxiv -> arXiv, code -> GitHub.
         links = []
-        for key, label in (("pdf", "PDF"), ("code", "Code"), ("project", "Project"),
-                           ("arxiv", "arXiv"), ("doi", "DOI")):
+        for key, label in (("paper", "Paper"), ("arxiv", "arXiv"), ("code", "Code")):
             val = r.get(key)
             if not val:
                 continue
-            if label == "arXiv" and not val.startswith("http"):
+            if key == "arxiv" and not val.startswith("http"):
                 val = f"https://arxiv.org/abs/{val}"
-            if label == "DOI" and not val.startswith("http"):
-                val = f"https://doi.org/{val}"
             links.append({"label": label, "url": val})
         r["links"] = links
-        # primary url for the title link: prefer pdf > project > arxiv > doi
+        # title links to the first available link (paper > arxiv > code)
         r["url"] = next((l["url"] for l in links), "")
-    rows.sort(key=lambda r: (-(int(r["year"]) if r["year"].isdigit() else 0), -r["citations_n"]))
+    rows.sort(key=lambda r: -(int(r["year"]) if r["year"].isdigit() else 0))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
     by_year = [{"year": y, "items": [r for r in rows if r["year"] == y]} for y in years]
     featured = [r for r in rows if r["is_featured"]]
     types = sorted({r["venue_type"] for r in rows if r.get("venue_type")})
+    span = (f"{years[-1]}–{years[0]}" if len(years) > 1 else (years[0] if years else ""))
     return {"all": rows, "by_year": by_year, "years": years, "types": types,
             "featured": featured, "featured_one": (featured[0] if featured else (rows[0] if rows else None)),
-            "count": len(rows)}
+            "count": len(rows), "year_span": span, "venue_count": len({r["venue_short"] for r in rows if r.get("venue_short")})}
 
 
 def load_research() -> list[dict]:
@@ -423,6 +419,15 @@ def _build_jsonld(site: dict, pi: dict) -> str:
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
+def _accent_headline(headline: str, accent: str) -> str:
+    """HTML for the hero headline with one word wrapped in .accent (both from CSV)."""
+    esc = html.escape(headline)
+    if accent:
+        a = html.escape(accent)
+        esc = esc.replace(a, f'<span class="accent">{a}</span>', 1)
+    return esc
+
+
 def base_context() -> dict:
     site = load_site()
     members = load_members()
@@ -430,6 +435,16 @@ def base_context() -> dict:
     research = load_research()
     news = load_news()
     positions = load_positions()
+    # Headline stats are derived from the data so they are always correct
+    # (and citation-free). Edit the underlying CSVs to change them.
+    site["stat_publications"] = str(publications["count"])
+    site["stat_members"] = str(len(members["all"]))
+    site["stat_researchers"] = str(members["student_count"] + (1 if members["pi"] else 0))
+    site["stat_areas"] = str(len(research))
+    site.setdefault("default_theme", "auto")
+    # Hero headline with one accent word highlighted (both from site.csv)
+    site["hero_headline_html"] = _accent_headline(site.get("hero_headline", ""),
+                                                  site.get("hero_accent", ""))
     return {
         "jsonld": _build_jsonld(site, members.get("pi")),
         "site": site,

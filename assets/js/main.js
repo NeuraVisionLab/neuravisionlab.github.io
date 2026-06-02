@@ -3,23 +3,28 @@
   "use strict";
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- adaptive sticky header --------------------------------- */
+  /* ---------- adaptive header (transparent over the dark band, solid after) */
   var header = document.querySelector(".site-header");
   var topDark = document.querySelector(".hero, .subhero");
-  function onScroll() {
-    if (!header) return;
-    var y = window.scrollY || window.pageYOffset;
-    if (topDark) {
-      var threshold = topDark.offsetHeight - header.offsetHeight - 20;
-      var past = y > threshold;
-      header.classList.toggle("on-dark", !past);
-      header.classList.toggle("is-stuck", past);
+  if (header) {
+    if (topDark && "IntersectionObserver" in window) {
+      // header is "on-dark" while any of the dark hero/sub-hero sits behind it;
+      // it becomes the solid "is-stuck" bar once that band scrolls past the header.
+      var hio = new IntersectionObserver(function (entries) {
+        var over = entries[0].isIntersecting;
+        header.classList.toggle("on-dark", over);
+        header.classList.toggle("is-stuck", !over);
+      }, { rootMargin: "-72px 0px 0px 0px", threshold: 0 });
+      hio.observe(topDark);
     } else {
-      header.classList.toggle("is-stuck", y > 8);
+      var fb = function () {
+        header.classList.remove("on-dark");
+        header.classList.toggle("is-stuck", (window.scrollY || 0) > 8);
+      };
+      window.addEventListener("scroll", fb, { passive: true });
+      fb();
     }
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
   /* ---------- mobile drawer (focus-trapped dialog) ------------------- */
   var toggle = document.querySelector(".nav-toggle");
@@ -135,20 +140,43 @@
     });
   }
 
-  /* ---------- hero pointer parallax (subtle, motion-safe) ------------ */
-  var motif = document.querySelector(".hero .constellation");
-  if (motif && !reduceMotion && window.matchMedia("(pointer:fine)").matches) {
-    var hero = motif.closest(".hero");
-    hero.addEventListener("pointermove", function (e) {
-      var rect = hero.getBoundingClientRect();
-      var dx = (e.clientX - rect.left) / rect.width - 0.5;
-      var dy = (e.clientY - rect.top) / rect.height - 0.5;
-      motif.style.transform = "translate(" + (dx * 14).toFixed(1) + "px," + (dy * 14).toFixed(1) + "px)";
+  /* ---------- theme toggle ------------------------------------------- */
+  var themeBtn = document.querySelector(".theme-toggle");
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
+  if (themeBtn) {
+    themeBtn.setAttribute("aria-pressed", String(currentTheme() === "dark"));
+    themeBtn.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("nv-theme", next); } catch (e) {}
+      themeBtn.setAttribute("aria-pressed", String(next === "dark"));
     });
-    hero.addEventListener("pointerleave", function () { motif.style.transform = ""; });
   }
 
-  /* ---------- footer year -------------------------------------------- */
-  var yr = document.querySelector("[data-year]");
-  if (yr) yr.textContent = new Date().getFullYear();
+  /* ---------- mouse-driven graph parallax (the constellation follows) - */
+  if (!reduceMotion && window.matchMedia("(pointer:fine)").matches) {
+    document.querySelectorAll(".hero, .subhero").forEach(function (hero) {
+      var motif = hero.querySelector(".constellation");
+      var visual = hero.querySelector(".hero-visual");
+      if (!motif && !visual) return;
+      var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+      function loop() {
+        cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+        if (motif) motif.style.transform = "translate(" + (cx * 36).toFixed(1) + "px," + (cy * 36).toFixed(1) + "px)";
+        if (visual) visual.style.transform = "translate(" + (cx * -16).toFixed(1) + "px," + (cy * -16).toFixed(1) + "px)";
+        if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005) { raf = requestAnimationFrame(loop); }
+        else { raf = null; }
+      }
+      function kick() { if (!raf) raf = requestAnimationFrame(loop); }
+      hero.addEventListener("pointermove", function (e) {
+        var r = hero.getBoundingClientRect();
+        tx = (e.clientX - r.left) / r.width - 0.5;
+        ty = (e.clientY - r.top) / r.height - 0.5;
+        kick();
+      });
+      hero.addEventListener("pointerleave", function () { tx = 0; ty = 0; kick(); });
+    });
+  }
 })();

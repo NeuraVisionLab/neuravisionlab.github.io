@@ -6,8 +6,11 @@
 
 /* ----------------------------------------------------------------- Fonts -- */
 @font-face {
+  /* NeuraVision brand font — compressed from the provided
+     NeuravisionBRAND/FONT/Jura-VariableFont_wght.ttf */
   font-family: "Jura";
-  src: url("../fonts/jura-variable.woff2") format("woff2");
+  src: url("../fonts/jura-brand.woff2") format("woff2"),
+       url("../fonts/Jura-VariableFont_wght.ttf") format("truetype");
   font-weight: 300 700; font-display: swap; font-style: normal;
 }
 @font-face {
@@ -39,6 +42,9 @@
   --accent-strong: #096445;   /* small/dense green text */
   --brand: #28B560;           /* marks/rules/dots only on light */
   --brand-grad: linear-gradient(100deg, #20A159 0%, #28B560 55%, #096445 100%);
+  --header-bg: rgba(255,255,255,.86);
+  --toolbar-bg: rgba(251,251,250,.92);
+  color-scheme: light;
 
   /* dark anchor palette (hero / footer / sub-heroes) */
   --d-bg: #10231A;
@@ -84,6 +90,23 @@
   --container-prose: 720px;
   --gutter: clamp(20px, 5vw, 48px);
   --nav-h: 72px;
+}
+
+/* ------------------------------------------------- Dark theme (togglable) */
+[data-theme="dark"] {
+  --bg: #0E1714;
+  --surface: #14201B;
+  --surface-alt: #18241E;
+  --text: #EDF1EE;
+  --muted: #9FB2A7;
+  --border: #273A30;
+  --accent: #3FCB76;          /* readable green text on dark */
+  --accent-strong: #45D17E;
+  --header-bg: rgba(13,22,18,.82);
+  --toolbar-bg: rgba(13,22,18,.9);
+  --shadow-1: 0 1px 2px rgba(0,0,0,.45);
+  --shadow-2: 0 12px 32px -14px rgba(0,0,0,.65), 0 2px 8px rgba(0,0,0,.4);
+  color-scheme: dark;
 }
 
 /* ------------------------------------------------------------- Reset/base */
@@ -251,9 +274,24 @@ p { max-width: 68ch; }
 }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: var(--s5); width: 100%; }
 .site-header.is-stuck {
-  height: 60px; background: rgba(255,255,255,.86); backdrop-filter: blur(10px);
+  height: 60px; background: var(--header-bg); backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
 }
+.nav-right { display: flex; align-items: center; gap: var(--s5); }
+/* dark theme: always use the white mark in the header bar */
+[data-theme="dark"] .brand .mark-light { display: none; }
+[data-theme="dark"] .brand .mark-dark { display: block; }
+/* theme toggle */
+.theme-toggle { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--r-md); color: var(--text); border: 1px solid transparent; flex: none;
+  transition: background .15s, border-color .15s, color .15s; }
+.theme-toggle:hover { background: var(--surface-alt); border-color: var(--border); }
+.theme-toggle svg { width: 19px; height: 19px; }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+.site-header.on-dark:not(.is-stuck) .theme-toggle { color: #fff; }
+.site-header.on-dark:not(.is-stuck) .theme-toggle:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); }
 /* over dark hero (home top, before stuck) */
 .site-header.on-dark:not(.is-stuck) { color: var(--d-text); }
 .site-header.on-dark:not(.is-stuck) .nav-link { color: rgba(243,245,242,.82); }
@@ -505,11 +543,11 @@ p { max-width: 68ch; }
 /* =====================================================================
    PUBLICATIONS (dataset rows)
    ===================================================================== */
-.pub-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); position: sticky; top: 60px; z-index: 40; background: rgba(251,251,250,.92); backdrop-filter: blur(8px); padding-block: var(--s4); margin-bottom: var(--s5); border-bottom: 1px solid var(--border); }
+.pub-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); position: sticky; top: 60px; z-index: 40; background: var(--toolbar-bg); backdrop-filter: blur(8px); padding-block: var(--s4); margin-bottom: var(--s5); border-bottom: 1px solid var(--border); }
 .filter-pills { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .filter-pill { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 13px; border: 1px solid var(--border); border-radius: var(--r-full); color: var(--muted); background: var(--surface); transition: all .15s; }
 .filter-pill:hover { border-color: var(--brand); color: var(--accent-strong); }
-.filter-pill[aria-pressed="true"] { background: var(--text); color: #fff; border-color: var(--text); }
+.filter-pill[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
 .pub-count { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .pub-count b { color: var(--accent-strong); font-weight: 500; }
 
@@ -522,6 +560,7 @@ p { max-width: 68ch; }
 .pub-row:hover::before { transform: scaleY(1); }
 .pub-row:last-child { border-bottom: 1px solid var(--border); }
 .pub-rail { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 2px; }
+.pub-main { min-width: 0; }
 .pub-main .pub-title { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); line-height: 1.3; color: var(--text); }
 .pub-main a.pub-title:hover { color: var(--accent-strong); }
 .pub-authors { font-size: var(--step--1); color: var(--muted); margin-top: var(--s2); }
@@ -573,7 +612,8 @@ p { max-width: 68ch; }
 .contact-actions { display: flex; flex-wrap: wrap; gap: var(--s4); margin-top: var(--s6); align-items: center; }
 .map-frame { position: relative; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4/3; background: var(--surface-alt); }
 .map-frame iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.3) contrast(1.05); }
-.map-frame .coord { position: absolute; bottom: 10px; left: 12px; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em; color: var(--accent-strong); background: rgba(255,255,255,.85); padding: 3px 8px; border-radius: var(--r-sm); }
+/* sits over the (always-light) map tiles, so fixed colours independent of theme */
+.map-frame .coord { position: absolute; bottom: 10px; left: 12px; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em; color: #096445; background: rgba(255,255,255,.92); padding: 3px 8px; border-radius: var(--r-sm); }
 
 /* =====================================================================
    JOIN CTA band

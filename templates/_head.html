@@ -3,7 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>
+    /* Set theme before first paint (no flash). Default from site.csv: {{ site.default_theme }} */
+    (function () {
+      var d = document.documentElement; d.classList.add('js');
+      try {
+        var saved = localStorage.getItem('nv-theme');
+        var def = '{{ site.default_theme }}';
+        var t = saved || ((def === 'auto' || !def)
+          ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : def);
+        d.setAttribute('data-theme', t);
+      } catch (e) { d.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
   <title>{{ page_title }}</title>
   <meta name="description" content="{{ page_desc }}">
   <link rel="canonical" href="{{ page_url }}">
@@ -29,7 +42,7 @@
   <link rel="manifest" href="site.webmanifest">
 
   <!-- Fonts (self-hosted) -->
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-variable.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-brand.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-variable.woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script type="application/ld+json">{{ jsonld|raw }}</script>
@@ -47,12 +60,18 @@
           <span class="brand-sub">Research Lab</span>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
-        {% for n in nav %}<a class="nav-link" href="{{ n.url }}"{% if n.active %} aria-current="page"{% endif %}>{{ n.label }}</a>{% endfor %}
-      </nav>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="Primary">
+          {% for n in nav %}<a class="nav-link" href="{{ n.url }}"{% if n.active %} aria-current="page"{% endif %}>{{ n.label }}</a>{% endfor %}
+        </nav>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch between light and dark theme" title="Toggle theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+        </button>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
