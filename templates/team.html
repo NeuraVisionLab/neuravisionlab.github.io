@@ -42,7 +42,6 @@
       {% for m in members.students %}
       <article class="member-card" data-reveal style="--i:{{ loop.index0 }}">
         <div class="member-photo">
-          <span class="member-idx">M{{ loop.index }}</span>
           {% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="600" loading="lazy">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}
         </div>
         <div class="member-info">
