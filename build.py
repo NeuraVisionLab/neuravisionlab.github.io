@@ -116,6 +116,9 @@ def load_members() -> dict:
 
 def _fold(s: str) -> str:
     import unicodedata
+    # NFKD strips combining accents, but Turkish dotless i has no
+    # decomposition, so map it explicitly (Ozaydin).
+    s = s.replace("ı", "i")
     return "".join(c for c in unicodedata.normalize("NFKD", s)
                    if not unicodedata.combining(c)).lower()
 
@@ -123,7 +126,7 @@ def _fold(s: str) -> str:
 # surnames of lab members for author highlighting in publication lists
 _PI_SURNAMES = {"oner"}
 _LAB_SURNAMES = {"esmaeilzadeh", "garaaghaji", "azad", "akar", "fallah",
-                 "maleki", "mohammadnezhad", "ozaydin", "sarhangzadeh"}
+                 "maleki", "shebly", "ozaydin", "sarhangzadeh"}
 
 
 def _format_authors(authors: str) -> str:
