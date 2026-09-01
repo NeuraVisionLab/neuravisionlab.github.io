@@ -289,6 +289,7 @@ button.chip { cursor: pointer; }
 .site-header.on-dark:not(.is-stuck) { color: var(--d-text); }
 .site-header.on-dark:not(.is-stuck) .nav-link { color: rgba(243,245,242,.82); }
 .site-header.on-dark:not(.is-stuck) .brand-name { color: #fff; }
+.site-header.on-dark:not(.is-stuck) .affil::before { background: #fff; opacity: .34; }
 .site-header.on-dark:not(.is-stuck) .brand-sub { color: var(--d-muted); }
 .site-header.on-dark:not(.is-stuck) .nav-toggle span { background: #fff; }
 .site-header.on-dark:not(.is-stuck) .mark-light { display: none; }
@@ -296,8 +297,10 @@ button.chip { cursor: pointer; }
 
 .brand { display: inline-flex; align-items: center; gap: var(--s3); }
 /* the lab brand and the university crest travel together on the left */
-.brand-row { display: flex; align-items: center; gap: var(--s5); }
-.affil { display: inline-flex; align-items: center; transition: opacity .15s ease; }
+.brand-row { display: flex; align-items: center; gap: var(--s4); }
+.affil { display: inline-flex; align-items: center; gap: var(--s4); transition: opacity .15s ease; }
+/* divider between the two marks; white over the hero, ink once the header sticks */
+.affil::before { content: ""; width: 1px; height: 26px; flex: none; background: var(--text); opacity: .22; }
 .affil img { width: 30px; height: 30px; }
 .affil:hover { opacity: .8; text-decoration: none; }
 @media (max-width: 560px) { .affil { display: none; } }
