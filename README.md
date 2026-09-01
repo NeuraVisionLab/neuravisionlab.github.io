@@ -1,213 +1,106 @@
 # NeuraVision Research Lab — website
 
-The website for the **NeuraVision Research Lab** (Computer Vision & Deep Learning,
-Department of Computer Engineering, Bilkent University — PI Dr. Doruk Öner).
+**Live at <https://neuravisionlab.com>**
 
-**Live at: https://neuravisionlab.github.io/**
+Everything on the site comes from the CSV files in **`data/`**.
+Edit a CSV, commit — the site rebuilds and republishes itself in a minute or two.
+You never need to touch HTML, CSS, or run anything.
 
-A clean, modern, **static** site generated from CSV files by a tiny zero-dependency
-Python script. **Every piece of content lives in `data/*.csv`** — you never have to
-touch HTML or CSS to update the site. It has a light/dark theme toggle, an animated
-node-graph that follows your mouse, and publication link buttons that appear only
-when you provide a link.
+> The `.html` files in the root are **generated**. Don't edit them; edit the CSV.
 
-```
-Edit data/*.csv   →   python3 build.py   →   static *.html   →   GitHub Pages
-```
+---
 
-## Quick start
+## What do I edit?
+
+| I want to… | Edit |
+|---|---|
+| Add a paper | `data/publications.csv` |
+| Add or update a person | `data/members.csv` |
+| Post lab news | `data/news.csv` |
+| Change a research area | `data/research.csv` |
+| Open or close a position | `data/positions.csv` |
+| Change any heading, button or paragraph | `data/site.csv` |
+| Change page titles, nav or SEO text | `data/pages.csv` |
+
+**How:** open the file on GitHub → pencil icon → edit → *Commit changes*. That's it.
+
+A field you leave blank is simply not shown — a member with no GitHub link
+just doesn't get one. Commas inside a value are fine if you wrap it in
+`"double quotes"`; every spreadsheet does this automatically.
+
+---
+
+## Adding a paper
+
+Add one row to `data/publications.csv`:
+
+| Column | What to put |
+|---|---|
+| `order` | Position **within its year**, lower first. Also decides what appears on the home page. |
+| `year` | Groups the list. Use the year it was *published*, not the preprint year. |
+| `title`, `authors` | As printed. Lab members are bolded automatically. |
+| `venue`, `venue_short` | Full venue, and the short badge label (`MICCAI`, `TPAMI`). |
+| `venue_type` | `journal`, `conference`, `preprint`, `dataset` or `thesis` — this makes the filter pills. |
+| `venue_url` | **Where it's published** (proceedings / journal / DOI page). The title links here. |
+| `project page`, `arxiv`, `code` | The three icon buttons. Each appears only if you fill it. |
+| `bibtex` | What the **Cite** button copies. |
+
+For `bibtex`, paste the publisher's own BibTeX (the "Cite" or "Export citation"
+link on the paper's page). Keep the whole entry in the one cell — multi-line is
+fine. Wrap acronyms in the title in an extra `{ }` so they survive, e.g.
+`title = {{CAPE: Connectivity-Aware …}}`, otherwise some styles print "Cape".
+
+---
+
+## Adding a person
+
+Drop a portrait in `assets/img/people/` (portrait crop — cards show 4:5, the PI
+ photo 3:4 — name it `first-last.jpg`),
+then add a row to `data/members.csv`:
+
+- `photo` — the filename you just added. Blank shows initials instead.
+- `surname` — how papers credit them. This is what bolds their name in the
+  publication list, so it must match the author string (`Fallah`, not `Ardalani`).
+- `interests` — `;`-separated; the first one becomes the card's tag.
+- `orcid` — bare iD (`0000-0002-…`). Currently shown for the PI.
+- `group` — `pi` for the principal investigator, anything else for researchers.
+- `order` — position in the grid.
+
+---
+
+## The other files
+
+- **`research.csv`** — one row per area. `image` names a file in
+  `assets/img/research/` (square; the card crops it). Blank falls back to the
+  node graphic. `summary` shows on the home page, `description` on the research page.
+- **`news.csv`** — `date, title, body, tag, link`. Sorted newest first
+  automatically; the newest gets a **New** badge. `tag` is e.g. `Publication` or `Lab`.
+- **`positions.csv`** and **`join_criteria.csv` / `join_steps.csv`** — the Join page.
+- **`site.csv`** — `key,value`. Every heading, eyebrow, lead paragraph and button
+  label, keyed by page (`home_*`, `team_*`, `contact_*`, `join_*`, `footer_*`).
+- **`pages.csv`** — one row per page: its nav label and order, `<title>` and
+  meta description.
+
+---
+
+## Running it locally (optional)
+
+Only needed if you want to preview before pushing. Python 3.8+, nothing to install.
 
 ```bash
-python3 build.py            # build the site (needs only Python 3.8+)
-python3 build.py --serve    # build, then preview at http://localhost:8000
-python3 build.py --check    # build into a temp dir to verify, without writing
+python3 build.py            # rebuild the pages
+python3 build.py --serve    # preview at http://localhost:8000
 ```
 
-Open `index.html` (or the preview URL). After editing any CSV, run `python3 build.py`
-again (or just push — the GitHub Action rebuilds for you, see *Deploying*).
-
----
-
-## Editing content — everything is a CSV
-
-All files live in **`data/`**. Commas inside a field are fine if you wrap the field
-in `"double quotes"` (any spreadsheet — Excel, Numbers, Google Sheets — does this for
-you when you export as CSV).
-
-### `site.csv` — global text & settings (`key,value`)
-
-Every heading, eyebrow, lead paragraph and button label on the site lives here too,
-keyed by page (`home_*`, `research_page_*`, `team_*`, `contact_*`, `join_*`, `footer_*`),
-so wording changes never mean editing a template.
-Lab name, tagline, **hero headline**, contact details, map, social links, default
-theme. Notable keys:
-
-| key | what it does |
-|-----|--------------|
-| `hero_headline` | First line of the hero wordmark, set in Jura Light to match the brand mark. |
-| `home_publications_count` | How many of the newest papers the home page strip shows. |
-| `home_publications_eyebrow`, `home_publications_heading`, `home_publications_link_label` | That section’s wording. |
-| `hero_headline_sub` | Second line of the hero wordmark (the brand lockup’s “Research lab”). |
-| `hero_subhead` | The sentence under the headline. |
-| `tagline`, `meta_description` | Footer tagline + SEO text. |
-| `email`, `phone`, `office`, `address`, `department`, `university`, `city` | Contact block + footer. |
-| `map_query`, `map_lat`, `map_lng` | Contact map (an OpenStreetMap embed + "directions" link are generated from these). |
-| `scholar_url`, `github_url`, `linkedin_url`, `x_url` | Footer / profile links (leave blank to hide). |
-| `default_theme` | `auto` (follow the visitor's system), `light`, or `dark`. |
-
-> Stats shown on the site (e.g. the Publications page's Papers · Venues · Years)
-> are **counted automatically** from the CSVs, so they're always correct — and
-> there are no citation counts anywhere on the site.
-
-### `members.csv` — the team
-One row per person. `group=pi` is the principal investigator; everyone else is a
-researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
-
-- `photo` points at a file in `assets/img/people/` (a 3:4 portrait JPEG looks best).
-- `orcid` is the bare iD (`0000-0002-...`); filled, it adds an ORCID row to the PI
-  facts and the identifier to the page's structured data. Leave blank to omit.
-- `surname` is the name papers credit the member under — it is what makes lab
-  authors bold in publication lists, so it must match the author string.
-- `interests` is a `;`-separated list; the first one shows as the card's tag.
-- Leave `bio` / `scholar` / `github` / `website` blank if unknown — empty fields are
-  simply not rendered. If `photo` is blank, an initials tile is shown instead.
-
-**Add a member:** drop a portrait in `assets/img/people/`, add a row pointing `photo`
-at it, rebuild.
-
-### `publications.csv` — papers & link buttons
-Columns: `order, year, title, authors, venue, venue_type, venue_short, venue_url,
-project page, arxiv, code, bibtex`.
-
-Papers are listed newest year first, and **`order` decides the sequence within a year** —
-lower comes first. It is the only thing that controls position: row order in the file is
-irrelevant, so you can append a new paper at the bottom and place it with `order`. The
-same sequence feeds the home page strip, so `order` also decides which recent papers
-appear there.
-
-`venue_url` is where the paper is **published** — the proceedings, journal or DOI page.
-The paper title links there, so it never points at arXiv when a publisher record exists.
-Leave it blank and the title is plain text rather than a link.
-
-The three link columns become icon buttons **only when filled** — leave one blank and
-that button simply doesn't appear:
-
-| column | icon | put here |
-|--------|------|----------|
-| `project page` | globe | the paper’s project page (or the publisher/proceedings page). |
-| `arxiv` | arXiv wordmark | the arXiv abstract URL — or just the bare id like `1803.04039`. |
-| `code` | GitHub mark | the GitHub (or other) repository URL. |
-
-### The `bibtex` column — the Cite button
-
-A paper with a `bibtex` value gets a **Cite** button that opens a dialog showing exactly
-that text, with a copy button. The entries currently in the CSV came from the
-publishers themselves (Crossref/DataCite via each DOI, or the proceedings site), so the
-author lists, volume, pages and publisher are the record of version. Leave the column blank and the paper simply has no Cite
-button. What you write is what visitors copy — nothing is reformatted.
-
-The entry spans several lines, so wrap the field in `"double quotes"`; every spreadsheet
-does this for you, and `build.py` reads multi-line fields correctly.
-
-Other fields: `venue_type`
-(`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
-pills are generated from whichever values appear; `venue_short` (e.g. `TPAMI`, `MICCAI`) is the badge label.
-Lab members are **bold** in the author list and the PI
-is shown in green automatically, matched on the `surname` column in `members.csv`.
-
-### `research.csv` — research areas
-`order, slug, title, tag, summary, description, image`.
-
-`image` names a file in `assets/img/research/` (square, subject centred — the plate is 5:4
-and crops top and bottom). Leave it blank and that area falls back to the node graphic. Shown as cards on the home page and
-as the zig-zag blocks on the Research page. Add/remove rows freely.
-
-### `news.csv` — the "Lab news" log
-`date, title, body, tag, link`. Newest first; the most recent entry is flagged **NEW**.
-`tag` (e.g. `Publication`, `Lab`, `Award`, `Talk`) shows as a small glyph. `link` can be
-another page (`publications.html`) or any URL; blank = no link.
-
-### `positions.csv` — open positions (Join page)
-`title, audience, status, description`.
-
-### `join_criteria.csv` / `join_steps.csv` — the Join page lists
-`order, text` for “Who we look for”, and `order, html` for “How to apply”. The steps
-column is named `html` because those items carry inline links, and join.html renders it
-as-is; the criteria are plain text.
-
-### `pages.csv` — the pages themselves
-`nav_order, id, template, output, nav_label, title, meta_description`. One row per page:
-which template renders to which file, what the header nav calls it and in what order, and
-the `<title>` and meta description used for SEO and share cards. Page titles and
-descriptions used to live in `build.py`; they are data now.
-
----
-
-## Theme (light / dark)
-
-There's a toggle (sun/moon) in the header. The choice is remembered in the browser.
-The site's **default** is set by `default_theme` in `site.csv` (`auto` follows the
-visitor's OS setting). Both themes are fully styled and contrast-checked.
-
-## Fonts
-
-The wordmark/headings use **Jura**, served directly from the brand file you provided
-(`NeuravisionBRAND/FONT/Jura-VariableFont_wght.ttf`, compressed to
-`assets/fonts/jura-brand.woff2`). Body text uses Inter and labels use IBM Plex Mono,
-all self-hosted (no external font requests).
-
-## Deploying to GitHub Pages
-
-This site is published as the **organization site** of `NeuraVisionLab` — the repo is
-named **`neuravisionlab.github.io`**, so GitHub serves it at the domain **root**:
-
-> **https://neuravisionlab.github.io/**
-
-### Updating the live site
-The built HTML is committed, so any push to `main` updates the site:
-```bash
-# edit data/*.csv (or templates/assets), then:
-python3 build.py
-git add -A
-git commit -m "Update content"
-git push
-```
-Pages redeploys automatically (usually within a minute).
-
-### How it's wired
-- Pre-built HTML is committed, so Pages can simply **Deploy from a branch** (`main` / root)
-  — `.nojekyll` makes it serve the files as-is.
-- A `.github/workflows/deploy.yml` is also included: if you set **Settings → Pages →
-  Source = GitHub Actions**, it runs `python3 build.py` on each push and deploys the
-  result (handy so you don't have to commit the generated HTML yourself).
-
-### Custom domain / different repo
-Edit `site_url` in `site.csv` (used for canonical URLs, the sitemap and
-share cards), rebuild, and — for a custom domain — add a `CNAME` file. All links are
-relative, so the site also works under a project path like `username.github.io/repo/`.
-
-## Project structure
+If you work locally, run `python3 build.py` before committing so the generated
+pages match your CSV edits.
 
 ```
-.
-├── data/            # ← single source of truth (CSV)
-├── templates/       # HTML templates (Jinja-like: {{ var }}, {% for %}, {% if %}, {% include %})
-├── assets/
-│   ├── css/styles.css
-│   ├── js/main.js   # theme toggle, mouse parallax, nav, mobile drawer, reveal, filter
-│   ├── fonts/       # self-hosted Jura (your brand file), Inter, IBM Plex Mono
-│   └── img/{brand,people}/
-├── build.py         # the generator (Python standard library only)
-├── index.html …     # generated pages (don't edit by hand — edit CSV + templates)
-└── .github/workflows/deploy.yml
+data/         ← the only thing you normally edit
+templates/    page templates
+assets/       css, js, fonts, images
+build.py      the generator (Python standard library only)
 ```
 
-## Extending to a dynamic site
-
-The data loaders in `build.py` and the Jinja-like templates port almost directly to
-Jinja2/Flask or Eleventy: swap the CSV loaders for database/API calls, keep the
-templates. The same markup then renders server-side or client-side.
-
----
-
-Built static · served on GitHub Pages.
+Light/dark theme follows the visitor's system by default; change `default_theme`
+in `site.csv` to `light` or `dark` to force one.
