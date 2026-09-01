@@ -76,8 +76,14 @@ researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
 at it, rebuild.
 
 ### `publications.csv` — papers & link buttons
-Columns: `id, year, title, authors, venue, venue_type, venue_short, venue_url,
+Columns: `order, year, title, authors, venue, venue_type, venue_short, venue_url,
 project page, arxiv, code, bibtex`.
+
+Papers are listed newest year first, and **`order` decides the sequence within a year** —
+lower comes first. It is the only thing that controls position: row order in the file is
+irrelevant, so you can append a new paper at the bottom and place it with `order`. The
+same sequence feeds the home page strip, so `order` also decides which recent papers
+appear there.
 
 `venue_url` is where the paper is **published** — the proceedings, journal or DOI page.
 The paper title links there, so it never points at arXiv when a publisher record exists.

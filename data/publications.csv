@@ -1,4 +1,4 @@
-id,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,code,bibtex
+order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,code,bibtex
 1,2025,Vision-based power line cables and pylons detection for low flying aircraft,"J Gwizdała, D Oner, SK Roy, MA Shah, A Eberhard, I Egorov, P Krüsi, ...","Machine Vision and Applications 36 (2), 46, 2025",journal,MVA,https://link.springer.com/article/10.1007/s00138-025-01664-1,,https://arxiv.org/abs/2407.14352,,"@article{gwizdala2025vision,
   title     = {{Vision-based power line cables and pylons detection for low flying aircraft}},
   author    = {Gwizda{\l}a, Jakub and {\""{O}}ner, Doruk and Roy, Soumava Kumar and Shah, Mian Akbar and Eberhard, Ad and Egorov, Ivan and Kr{\""{u}}si, Philipp and Yakushev, Grigory and Fua, Pascal},

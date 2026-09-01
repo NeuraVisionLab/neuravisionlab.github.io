@@ -143,7 +143,10 @@ def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) ->
         # happens to come first, so it never lands on arXiv for a paper that
         # has a publisher record. Blank means the title is not a link.
         r["url"] = r["venue_url"]
-    rows.sort(key=lambda r: -(int(r["year"]) if r["year"].isdigit() else 0))
+    # Newest year first, then the order column within each year — so the
+    # sequence is stated in the CSV rather than inherited from row order.
+    rows.sort(key=lambda r: (-(int(r["year"]) if r["year"].isdigit() else 0),
+                             int(r["order"])))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
     by_year = [{"year": y, "items": [r for r in rows if r["year"] == y]} for y in years]
     types = sorted({r["venue_type"] for r in rows if r.get("venue_type")})
