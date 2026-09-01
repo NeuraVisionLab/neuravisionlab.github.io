@@ -1,0 +1,7 @@
+nav_order,id,template,output,nav_label,title,meta_description
+1,home,index.html,index.html,Home,"NeuraVision Research Lab — Computer Vision & Deep Learning, Bilkent University","NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis."
+2,research,research.html,research.html,Research,Research — NeuraVision Research Lab,"Research at NeuraVision: topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, medical image analysis and sequential decision making."
+3,publications,publications.html,publications.html,Publications,Publications — NeuraVision Research Lab,"Publications from the NeuraVision Research Lab, including work at TPAMI, ICML, MICCAI, TMLR and AISTATS."
+4,team,team.html,team.html,Team,Team — NeuraVision Research Lab,Meet the NeuraVision Research Lab: principal investigator Dr. Doruk Öner and the graduate researchers working on computer vision and deep learning at Bilkent University.
+5,join,join.html,join.html,Join,Join — NeuraVision Research Lab,"Join the NeuraVision Research Lab at Bilkent University. Open positions for MSc and PhD applicants, undergraduate researchers, interns and visitors."
+6,contact,contact.html,contact.html,Contact,Contact — NeuraVision Research Lab,"Contact the NeuraVision Research Lab, Department of Computer Engineering, EA Building Room 521, Bilkent University, Ankara, Türkiye."

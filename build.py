@@ -31,36 +31,6 @@ DATA = ROOT / "data"
 TPL = ROOT / "templates"
 OUT = ROOT  # pages are emitted into the repository root for GitHub Pages
 
-PAGES = [
-    # (template, output, page-id, title, description-key-or-text)
-    ("index.html", "index.html", "home",
-     "NeuraVision Research Lab — Computer Vision & Deep Learning, Bilkent University", None),
-    ("team.html", "team.html", "team",
-     "Team — NeuraVision Research Lab",
-     "Meet the NeuraVision Research Lab: principal investigator Dr. Doruk Öner and the graduate researchers working on computer vision and deep learning at Bilkent University."),
-    ("research.html", "research.html", "research",
-     "Research — NeuraVision Research Lab",
-     "Research at NeuraVision: topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, medical image analysis and sequential decision making."),
-    ("publications.html", "publications.html", "publications",
-     "Publications — NeuraVision Research Lab",
-     "Publications from the NeuraVision Research Lab, including work at TPAMI, ICML, MICCAI, TMLR and AISTATS."),
-    ("join.html", "join.html", "join",
-     "Join — NeuraVision Research Lab",
-     "Join the NeuraVision Research Lab at Bilkent University. Open positions for MSc and PhD applicants, undergraduate researchers, interns and visitors."),
-    ("contact.html", "contact.html", "contact",
-     "Contact — NeuraVision Research Lab",
-     "Contact the NeuraVision Research Lab, Department of Computer Engineering, EA Building Room 521, Bilkent University, Ankara, Türkiye."),
-]
-SITE_URL = "https://neuravisionlab.github.io/"  # edit for a custom domain
-
-NAV = [
-    ("home", "Home", "index.html"),
-    ("research", "Research", "research.html"),
-    ("publications", "Publications", "publications.html"),
-    ("team", "Team", "team.html"),
-    ("join", "Join", "join.html"),
-    ("contact", "Contact", "contact.html"),
-]
 
 # --------------------------------------------------------------------------- #
 #  Data loading                                                               #
@@ -69,6 +39,14 @@ def _read_rows(name: str) -> list[dict]:
     path = DATA / name
     with path.open(encoding="utf-8-sig", newline="") as f:
         return [ {k: (v or "").strip() for k, v in row.items()} for row in csv.DictReader(f) ]
+
+
+def load_pages() -> list[dict]:
+    rows = _read_rows("pages.csv")
+    for r in rows:
+        r["nav_order"] = int(r["nav_order"])
+    rows.sort(key=lambda r: r["nav_order"])
+    return rows
 
 
 def load_site() -> dict:
@@ -127,32 +105,26 @@ def _fold(s: str) -> str:
                    if not unicodedata.combining(c)).lower()
 
 
-# surnames of lab members for author highlighting in publication lists
-_PI_SURNAMES = {"oner"}
-_LAB_SURNAMES = {"esmaeilzadeh", "garaaghaji", "azad", "akar", "fallah",
-                 "maleki", "shebly", "ozaydin", "sarhangzadeh"}
-
-
-def _format_authors(authors: str) -> str:
+def _format_authors(authors: str, pi_surnames: set, lab_surnames: set) -> str:
     out = []
     for tok in [t.strip() for t in authors.split(",")]:
         if not tok:
             continue
         folded = _fold(tok)
         cls = None
-        if any(s in folded for s in _PI_SURNAMES):
+        if any(s in folded for s in pi_surnames):
             cls = "pi"
-        elif any(s in folded for s in _LAB_SURNAMES):
+        elif any(s in folded for s in lab_surnames):
             cls = "lab"
         esc = html.escape(tok)
         out.append(f'<span class="{cls}">{esc}</span>' if cls else esc)
     return ", ".join(out)
 
 
-def load_publications(recent_count: int) -> dict:
+def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
-        r["authors_html"] = _format_authors(r.get("authors", ""))
+        r["authors_html"] = _format_authors(r.get("authors", ""), pi_surnames, lab_surnames)
         r["badge_label"] = r.get("venue_short") or r.get("venue_type", "").title()
         # Link buttons — only those filled in the CSV are emitted.
         # project page -> project/publisher page, arxiv -> arXiv, code -> GitHub.
@@ -407,10 +379,10 @@ def _build_jsonld(site: dict, pi: dict) -> str:
         "@type": "ResearchOrganization",
         "name": site.get("lab_full_name", "NeuraVision Research Lab"),
         "alternateName": site.get("lab_name", "NeuraVision"),
-        "url": SITE_URL,
-        "logo": SITE_URL + "assets/img/brand/icon-512.png",
-        "image": SITE_URL + "assets/img/brand/og-image.png",
-        "description": site.get("meta_description", ""),
+        "url": site["site_url"],
+        "logo": site["site_url"] + "assets/img/brand/icon-512.png",
+        "image": site["site_url"] + "assets/img/brand/og-image.png",
+        "description": site["meta_description"],
         "email": site.get("email", ""),
         "parentOrganization": {"@type": "CollegeOrUniversity",
                                "name": site.get("university", "Bilkent University")},
@@ -421,7 +393,7 @@ def _build_jsonld(site: dict, pi: dict) -> str:
     if pi:
         data["founder"] = {"@type": "Person", "name": pi.get("name", ""),
                            "jobTitle": "Assistant Professor",
-                           "url": pi.get("scholar") or SITE_URL + "team.html"}
+                           "url": pi.get("scholar") or site["site_url"] + "team.html"}
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -436,8 +408,15 @@ def _accent_headline(headline: str, accent: str) -> str:
 
 def base_context() -> dict:
     site = load_site()
+    pages = load_pages()
     members = load_members()
-    publications = load_publications(int(site["home_publications_count"]))
+    # Author highlighting reads its surnames from members.csv, so a rename
+    # there can never leave a stale name behind in this file.
+    pi_surnames = {_fold(members["pi"]["surname"])} if members["pi"] else set()
+    lab_surnames = {_fold(m["surname"]) for m in members["all"]
+                    if m["surname"] and m is not members["pi"]}
+    publications = load_publications(int(site["home_publications_count"]),
+                                     pi_surnames, lab_surnames)
     research = load_research()
     news = load_news()
     positions = load_positions()
@@ -447,11 +426,11 @@ def base_context() -> dict:
     site["stat_members"] = str(len(members["all"]))
     site["stat_researchers"] = str(members["student_count"] + (1 if members["pi"] else 0))
     site["stat_areas"] = str(len(research))
-    site.setdefault("default_theme", "auto")
     # Hero headline with one accent word highlighted (both from site.csv)
     site["hero_headline_html"] = _accent_headline(site.get("hero_headline", ""),
                                                   site.get("hero_accent", ""))
     return {
+        "pages": pages,
         "jsonld": _build_jsonld(site, members.get("pi")),
         "site": site,
         "members": members,
@@ -460,7 +439,7 @@ def base_context() -> dict:
         "news": news,
         "news_recent": news[:5],
         "positions": positions,
-        "nav": [{"id": i, "label": l, "url": u} for i, l, u in NAV],
+        "nav": [{"id": p["id"], "label": p["nav_label"], "url": p["output"]} for p in pages],
         "year_now": str(datetime.now().year),
     }
 
@@ -468,15 +447,17 @@ def base_context() -> dict:
 def build(out_dir: Path = OUT) -> list[Path]:
     ctx = base_context()
     written = []
-    for template, output, page_id, title, desc in PAGES:
+    site_url = ctx["site"]["site_url"]
+    for page in ctx["pages"]:
+        output = page["output"]
         page_ctx = dict(ctx)
-        page_ctx["page"] = page_id
-        page_ctx["page_title"] = title
-        page_ctx["page_desc"] = desc or ctx["site"].get("meta_description", "")
-        page_ctx["page_url"] = SITE_URL + ("" if output == "index.html" else output)
-        page_ctx["site_url"] = SITE_URL
-        page_ctx["nav"] = [dict(n, active=(n["id"] == page_id)) for n in ctx["nav"]]
-        html_out = render(template, page_ctx)
+        page_ctx["page"] = page["id"]
+        page_ctx["page_title"] = page["title"]
+        page_ctx["page_desc"] = page["meta_description"]
+        page_ctx["page_url"] = site_url + ("" if output == "index.html" else output)
+        page_ctx["site_url"] = site_url
+        page_ctx["nav"] = [dict(n, active=(n["id"] == page["id"])) for n in ctx["nav"]]
+        html_out = render(page["template"], page_ctx)
         target = out_dir / output
         target.write_text(html_out, encoding="utf-8")
         written.append(target)
@@ -486,10 +467,10 @@ def build(out_dir: Path = OUT) -> list[Path]:
 
 
 def _write_sitemap(ctx, out_dir):
-    base = SITE_URL
+    base = ctx["site"]["site_url"]
     urls = "".join(
-        f"  <url><loc>{base}{'' if out == 'index.html' else out}</loc></url>\n"
-        for _, out, *_ in PAGES
+        f"  <url><loc>{base}{'' if p['output'] == 'index.html' else p['output']}</loc></url>\n"
+        for p in ctx["pages"]
     )
     (out_dir / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'

@@ -60,6 +60,8 @@ One row per person. `group=pi` is the principal investigator; everyone else is a
 researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
 
 - `photo` points at a file in `assets/img/people/` (a 3:4 portrait JPEG looks best).
+- `surname` is the name papers credit the member under — it is what makes lab
+  authors bold in publication lists, so it must match the author string.
 - `interests` is a `;`-separated list; the first one shows as the card's tag.
 - Leave `bio` / `scholar` / `github` / `website` blank if unknown — empty fields are
   simply not rendered. If `photo` is blank, an initials tile is shown instead.
@@ -93,7 +95,7 @@ Other fields: `venue_type`
 (`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
 pills are generated from whichever values appear; `venue_short` (e.g. `TPAMI`, `MICCAI`) is the badge label.
 Lab members are **bold** in the author list and the PI
-is shown in green automatically (surnames are configured in `build.py`).
+is shown in green automatically, matched on the `surname` column in `members.csv`.
 
 ### `research.csv` — research areas
 `order, slug, title, tag, summary, description`. Shown as cards on the home page and
@@ -106,6 +108,12 @@ another page (`publications.html`) or any URL; blank = no link.
 
 ### `positions.csv` — open positions (Join page)
 `title, audience, status, description`.
+
+### `pages.csv` — the pages themselves
+`nav_order, id, template, output, nav_label, title, meta_description`. One row per page:
+which template renders to which file, what the header nav calls it and in what order, and
+the `<title>` and meta description used for SEO and share cards. Page titles and
+descriptions used to live in `build.py`; they are data now.
 
 ---
 
@@ -148,7 +156,7 @@ Pages redeploys automatically (usually within a minute).
   result (handy so you don't have to commit the generated HTML yourself).
 
 ### Custom domain / different repo
-Edit `SITE_URL` near the top of `build.py` (used for canonical URLs, the sitemap and
+Edit `site_url` in `site.csv` (used for canonical URLs, the sitemap and
 share cards), rebuild, and — for a custom domain — add a `CNAME` file. All links are
 relative, so the site also works under a project path like `username.github.io/repo/`.
 
