@@ -24,7 +24,6 @@
         <h2 class="pub-year tnum">{{ group.year }}</h2>
         {% for p in group.items %}
         <article class="pub-row" data-type="{{ p.venue_type }}" data-year="{{ p.year }}">
-          <div class="pub-rail tnum">{{ p.year }}</div>
           <div class="pub-main">
             {% if p.url %}<a class="pub-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
             <p class="pub-authors">{{ p.authors_html|raw }}</p>

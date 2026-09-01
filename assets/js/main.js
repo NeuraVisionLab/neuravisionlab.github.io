@@ -330,4 +330,15 @@
     window.addEventListener("resize", syncStrip);
     syncStrip();
   }
+
+  /* ---------- sticky year headings clear the publications toolbar ------ */
+  var pubToolbar = document.querySelector(".pub-toolbar");
+  if (pubToolbar) {
+    function measureToolbar() {
+      document.documentElement.style.setProperty(
+        "--pub-toolbar-h", pubToolbar.offsetHeight + "px");
+    }
+    measureToolbar();
+    window.addEventListener("resize", measureToolbar);
+  }
 })();
