@@ -74,8 +74,12 @@ researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
 at it, rebuild.
 
 ### `publications.csv` — papers & link buttons
-Columns: `id, year, title, authors, venue, venue_type, venue_short,
+Columns: `id, year, title, authors, venue, venue_type, venue_short, venue_url,
 project page, arxiv, code, bibtex`.
+
+`venue_url` is where the paper is **published** — the proceedings, journal or DOI page.
+The paper title links there, so it never points at arXiv when a publisher record exists.
+Leave it blank and the title is plain text rather than a link.
 
 The three link columns become icon buttons **only when filled** — leave one blank and
 that button simply doesn't appear:

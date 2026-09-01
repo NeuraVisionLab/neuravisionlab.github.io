@@ -139,8 +139,10 @@ def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) ->
                 val = f"https://arxiv.org/abs/{val}"
             links.append({"label": label, "url": val, "icon": icon})
         r["links"] = links
-        # title links to the first available link (project page > arxiv > code)
-        r["url"] = next((l["url"] for l in links), "")
+        # The title points at the published version, not whichever button
+        # happens to come first, so it never lands on arXiv for a paper that
+        # has a publisher record. Blank means the title is not a link.
+        r["url"] = r["venue_url"]
     rows.sort(key=lambda r: -(int(r["year"]) if r["year"].isdigit() else 0))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
     by_year = [{"year": y, "items": [r for r in rows if r["year"] == y]} for y in years]
