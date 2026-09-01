@@ -67,14 +67,14 @@ at it, rebuild.
 
 ### `publications.csv` — papers & link buttons
 Columns: `id, year, title, authors, venue, venue_type, venue_short, featured,
-paper, arxiv, code`.
+project page, arxiv, code`.
 
 The three link columns become buttons **only when filled** — leave one blank and that
 button simply doesn't appear:
 
 | column | button | put here |
 |--------|--------|----------|
-| `paper` | **Paper** | the conference/journal page (proceedings, DOI, publisher). |
+| `project page` | **Project Page** | the paper’s project page (or the publisher/proceedings page). |
 | `arxiv` | **arXiv** | the arXiv abstract URL — or just the bare id like `1803.04039`. |
 | `code` | **Code** | the GitHub (or other) repository URL. |
 

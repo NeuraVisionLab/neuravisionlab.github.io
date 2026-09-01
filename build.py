@@ -150,7 +150,7 @@ def load_publications() -> dict:
         r["is_top"] = r.get("venue_short", "") in {"TPAMI", "ICML", "MICCAI", "TMLR", "AISTATS", "IEEE TMI"}
         r["badge_label"] = r.get("venue_short") or r.get("venue_type", "").title()
         # Link buttons — only those filled in the CSV are emitted.
-        # paper -> conference/journal page, arxiv -> arXiv, code -> GitHub.
+        # project page -> project/publisher page, arxiv -> arXiv, code -> GitHub.
         links = []
         for key, label in (("project page", "Project Page"), ("arxiv", "arXiv"), ("code", "Code")):
             val = r.get(key)
@@ -160,7 +160,7 @@ def load_publications() -> dict:
                 val = f"https://arxiv.org/abs/{val}"
             links.append({"label": label, "url": val})
         r["links"] = links
-        # title links to the first available link (paper > arxiv > code)
+        # title links to the first available link (project page > arxiv > code)
         r["url"] = next((l["url"] for l in links), "")
     rows.sort(key=lambda r: -(int(r["year"]) if r["year"].isdigit() else 0))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
