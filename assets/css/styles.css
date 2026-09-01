@@ -238,7 +238,8 @@ button.chip { cursor: pointer; }
 .chip-icon { padding: 6px 9px; gap: 0; }
 .chip-icon svg { width: 16px; height: 16px; }
 .chip-icon .icon-wordmark { width: 32px; height: 16px; }
-.icon-wordmark text { font-family: var(--font-mono); }
+/* .chip uppercases and letter-spaces its text; the wordmark must not inherit that */
+.icon-wordmark text { font-family: var(--font-mono); text-transform: none; letter-spacing: normal; }
 
 /* on-dark button variants */
 .is-dark .btn-ghost { background: transparent; border-color: var(--d-border); color: var(--d-text); }
@@ -572,7 +573,9 @@ button.chip { cursor: pointer; }
 
 /* ------------------------------------------------------ citation dialog -- */
 .cite-dialog {
-  width: min(680px, calc(100vw - 2rem)); padding: 0; color: var(--text);
+  /* the reset's `* { margin: 0 }` beats the UA `dialog { margin: auto }`,
+     which is what centres a modal dialog — put it back */
+  margin: auto; width: min(680px, calc(100vw - 2rem)); padding: 0; color: var(--text);
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--r-lg); box-shadow: 0 24px 60px rgba(0,0,0,.22);
 }
@@ -594,7 +597,7 @@ button.chip { cursor: pointer; }
 .cite-dialog-out {
   margin: 0; padding: var(--s5); background: var(--surface-alt); color: var(--text);
   font-family: var(--font-mono); font-size: 0.76rem; line-height: 1.65;
-  white-space: pre; overflow: auto; max-height: 52vh;
+  white-space: pre-wrap; overflow-wrap: anywhere; overflow-y: auto; max-height: 52vh;
 }
 .cite-dialog-actions {
   display: flex; align-items: center; gap: var(--s4);
