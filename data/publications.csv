@@ -24,7 +24,7 @@ id,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,
   year    = {2025},
   url     = {https://www.nature.com/articles/s43856-025-00732-x}
 }"
-4,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Oner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
+4,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Oner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
   title         = {{CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation}},
   author        = {Esmaeilzadeh, E. and Garaaghaji, E. and Azad, F. H. and Oner, D.},
   booktitle     = {International Conference on Medical Image Computing and Computer-Assisted Intervention},
