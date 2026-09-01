@@ -67,7 +67,7 @@ at it, rebuild.
 
 ### `publications.csv` — papers & link buttons
 Columns: `id, year, title, authors, venue, venue_type, venue_short, featured,
-project page, arxiv, code`.
+project page, arxiv, code, bibtex`.
 
 The three link columns become icon buttons **only when filled** — leave one blank and
 that button simply doesn't appear:
@@ -78,8 +78,14 @@ that button simply doesn't appear:
 | `arxiv` | arXiv wordmark | the arXiv abstract URL — or just the bare id like `1803.04039`. |
 | `code` | GitHub mark | the GitHub (or other) repository URL. |
 
-Every paper also gets a **Cite** button that opens a BibTeX dialog with a copy button.
-The entry is generated from the columns above — there is no BibTeX column to maintain.
+### The `bibtex` column — the Cite button
+
+A paper with a `bibtex` value gets a **Cite** button that opens a dialog showing exactly
+that text, with a copy button. Leave the column blank and the paper simply has no Cite
+button. What you write is what visitors copy — nothing is reformatted.
+
+The entry spans several lines, so wrap the field in `"double quotes"`; every spreadsheet
+does this for you, and `build.py` reads multi-line fields correctly.
 
 Other fields: set `featured=yes` to surface a paper on the home page; `venue_type`
 (`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
