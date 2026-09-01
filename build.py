@@ -55,16 +55,10 @@ def load_site() -> dict:
         for row in csv.reader(f):
             if len(row) >= 2 and row[0] != "key":
                 kv[row[0].strip()] = row[1].strip()
-    # derive an OpenStreetMap (no-cookie) embed url + directions link from coords
-    try:
-        lat, lng = float(kv.get("map_lat", "")), float(kv.get("map_lng", ""))
-        bbox = f"{lng-0.010:.4f},{lat-0.006:.4f},{lng+0.010:.4f},{lat+0.006:.4f}"
-        kv["map_embed"] = ("https://www.openstreetmap.org/export/embed.html?"
-                           f"bbox={bbox}&layer=mapnik&marker={lat:.5f},{lng:.5f}")
-        kv["map_link"] = f"https://www.openstreetmap.org/?mlat={lat:.5f}&mlon={lng:.5f}#map=16/{lat:.5f}/{lng:.5f}"
-    except (ValueError, TypeError):
-        kv["map_embed"] = ""
-        kv["map_link"] = ""
+    # map_embed is whatever embed url site.csv holds, so the provider is a data
+    # choice; the "open in map" link is derived from the same coordinates.
+    lat, lng = kv["map_lat"], kv["map_lng"]
+    kv["map_link"] = f"https://www.google.com/maps/search/?api=1&query={lat},{lng}"
     return kv
 
 

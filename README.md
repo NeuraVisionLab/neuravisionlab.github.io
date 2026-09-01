@@ -78,6 +78,9 @@ then add a row to `data/members.csv`:
 - **`positions.csv`** and **`join_criteria.csv` / `join_steps.csv`** — the Join page.
 - **`site.csv`** — `key,value`. Every heading, eyebrow, lead paragraph and button
   label, keyed by page (`home_*`, `team_*`, `contact_*`, `join_*`, `footer_*`).
+  `map_embed` holds the contact-page map: paste the `src` from any map embed.
+  `map_lat` / `map_lng` drive the coordinate readout and the directions link, so
+  keep them pointing at the same place as the embed.
 - **`pages.csv`** — one row per page: its nav label and order, `<title>` and
   meta description.
 
