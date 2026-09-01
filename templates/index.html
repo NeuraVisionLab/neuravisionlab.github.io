@@ -62,34 +62,35 @@
 </section>
 
 <!-- ===================== FIG.03 — SELECTED WORK ===================== -->
-{% if publications.featured_one %}
 <section class="section featured" aria-labelledby="featured-h">
   <div class="container">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">Selected Work</p>
-      <h2 id="featured-h">Featured publication</h2>
+      <p class="fig-eyebrow">{{ site.home_publications_eyebrow }}</p>
+      <h2 id="featured-h">{{ site.home_publications_heading }}</h2>
     </div>
-    <div class="inner" data-reveal>
-      <div class="featured-mark" aria-hidden="true">
-        {% include "_constellation.html" %}
-        <img src="assets/img/brand/mark-gradient.png" alt="">
-      </div>
-      <div class="featured-meta">
-        <div class="kicker">
-          <span class="venue-badge">{{ publications.featured_one.venue_short }} · {{ publications.featured_one.year }}</span>
-          <span class="status-badge">Featured</span>
-        </div>
-        <h3>{% if publications.featured_one.url %}<a href="{{ publications.featured_one.url }}" target="_blank" rel="noopener">{{ publications.featured_one.title }}</a>{% else %}{{ publications.featured_one.title }}{% endif %}</h3>
-        <p class="authors">{{ publications.featured_one.authors_html|raw }}</p>
-        <div class="pub-links">
-          {% for link in publications.featured_one.links %}<a class="chip chip-icon" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{% include "_link_icon.html" %}</a>{% endfor %}{% if publications.featured_one.bibtex %}<button class="chip chip-icon" type="button" data-cite aria-label="Cite {{ publications.featured_one.title }}" title="Cite (BibTeX)">{% include "_icon_cite.html" %}</button><template data-bibtex>{{ publications.featured_one.bibtex }}</template>{% endif %}
-          <a class="chip" href="publications.html">All publications</a>
-        </div>
-      </div>
+    <div class="strip-wrap" data-reveal>
+      <button class="strip-nav strip-prev" type="button" data-strip-prev aria-label="Scroll to earlier papers" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+      </button>
+      <ul class="pub-strip" data-pub-strip tabindex="0" role="region" aria-labelledby="featured-h">
+        {% for p in publications.recent %}
+        <li class="pub-card">
+          <span class="venue-badge">{{ p.badge_label }} · {{ p.year }}</span>
+          <h3>{% if p.url %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</h3>
+          <p class="authors">{{ p.authors_html|raw }}</p>
+          <div class="pub-links">
+            {% for link in p.links %}<a class="chip chip-icon" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{% include "_link_icon.html" %}</a>{% endfor %}{% if p.bibtex %}<button class="chip chip-icon" type="button" data-cite aria-label="Cite {{ p.title }}" title="Cite (BibTeX)">{% include "_icon_cite.html" %}</button><template data-bibtex>{{ p.bibtex }}</template>{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <button class="strip-nav strip-next" type="button" data-strip-next aria-label="Scroll to more papers" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
     </div>
+    <p style="margin-top:var(--s5)"><a class="btn-link" href="publications.html">{{ site.home_publications_link_label }} <span class="arr">→</span></a></p>
   </div>
 </section>
-{% endif %}
 
 <!-- ===================== FIG.04 — LATEST ===================== -->
 <section class="section" aria-labelledby="news-h">

@@ -25,3 +25,7 @@ linkedin_url,
 x_url,
 default_theme,auto
 copyright,"NeuraVision Research Lab, Bilkent University"
+home_publications_eyebrow,Selected Work
+home_publications_heading,Latest publications
+home_publications_count,6
+home_publications_link_label,All publications

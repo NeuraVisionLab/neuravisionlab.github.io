@@ -303,4 +303,31 @@
       } else { citeSelect(); citeSay("Press Ctrl+C"); }
     });
   }
+
+  /* ---------- latest publications strip ------------------------------- */
+  var strip = document.querySelector("[data-pub-strip]");
+  if (strip) {
+    var sPrev = document.querySelector("[data-strip-prev]");
+    var sNext = document.querySelector("[data-strip-next]");
+    var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function stepWidth() {
+      var card = strip.querySelector(".pub-card");
+      return card ? card.getBoundingClientRect().width + 24 : strip.clientWidth;
+    }
+    function syncStrip() {
+      var overflows = strip.scrollWidth > strip.clientWidth + 1;
+      sPrev.hidden = sNext.hidden = !overflows;
+      sPrev.disabled = strip.scrollLeft <= 1;
+      sNext.disabled = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 1;
+    }
+    function nudge(dir) {
+      strip.scrollBy(smooth ? { left: dir * stepWidth(), behavior: "smooth" }
+                            : { left: dir * stepWidth() });
+    }
+    sPrev.addEventListener("click", function () { nudge(-1); });
+    sNext.addEventListener("click", function () { nudge(1); });
+    strip.addEventListener("scroll", syncStrip, { passive: true });
+    window.addEventListener("resize", syncStrip);
+    syncStrip();
+  }
 })();

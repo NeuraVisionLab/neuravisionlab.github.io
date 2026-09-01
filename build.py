@@ -149,10 +149,9 @@ def _format_authors(authors: str) -> str:
     return ", ".join(out)
 
 
-def load_publications() -> dict:
+def load_publications(recent_count: int) -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
-        r["is_featured"] = (r.get("featured", "").lower() in ("yes", "true", "1"))
         r["authors_html"] = _format_authors(r.get("authors", ""))
         r["badge_label"] = r.get("venue_short") or r.get("venue_type", "").title()
         # Link buttons — only those filled in the CSV are emitted.
@@ -173,11 +172,10 @@ def load_publications() -> dict:
     rows.sort(key=lambda r: -(int(r["year"]) if r["year"].isdigit() else 0))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
     by_year = [{"year": y, "items": [r for r in rows if r["year"] == y]} for y in years]
-    featured = [r for r in rows if r["is_featured"]]
     types = sorted({r["venue_type"] for r in rows if r.get("venue_type")})
     span = (f"{years[-1]}–{years[0]}" if len(years) > 1 else (years[0] if years else ""))
     return {"all": rows, "by_year": by_year, "years": years, "types": types,
-            "featured": featured, "featured_one": (featured[0] if featured else (rows[0] if rows else None)),
+            "recent": rows[:recent_count],
             "count": len(rows), "year_span": span, "venue_count": len({r["venue_short"] for r in rows if r.get("venue_short")})}
 
 
@@ -439,7 +437,7 @@ def _accent_headline(headline: str, accent: str) -> str:
 def base_context() -> dict:
     site = load_site()
     members = load_members()
-    publications = load_publications()
+    publications = load_publications(int(site["home_publications_count"]))
     research = load_research()
     news = load_news()
     positions = load_positions()

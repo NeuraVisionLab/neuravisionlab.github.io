@@ -41,6 +41,8 @@ theme. Notable keys:
 | key | what it does |
 |-----|--------------|
 | `hero_headline` | The big headline on the home page. |
+| `home_publications_count` | How many of the newest papers the home page strip shows. |
+| `home_publications_eyebrow`, `home_publications_heading`, `home_publications_link_label` | That section’s wording. |
 | `hero_accent` | One word from the headline to highlight in green (e.g. `topology`). |
 | `hero_subhead` | The sentence under the headline. |
 | `tagline`, `meta_description`, `intro_heading`, `intro_body` | Home/about + SEO text. |
@@ -66,7 +68,7 @@ researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
 at it, rebuild.
 
 ### `publications.csv` — papers & link buttons
-Columns: `id, year, title, authors, venue, venue_type, venue_short, featured,
+Columns: `id, year, title, authors, venue, venue_type, venue_short,
 project page, arxiv, code, bibtex`.
 
 The three link columns become icon buttons **only when filled** — leave one blank and
@@ -87,7 +89,7 @@ button. What you write is what visitors copy — nothing is reformatted.
 The entry spans several lines, so wrap the field in `"double quotes"`; every spreadsheet
 does this for you, and `build.py` reads multi-line fields correctly.
 
-Other fields: set `featured=yes` to surface a paper on the home page; `venue_type`
+Other fields: `venue_type`
 (`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
 pills are generated from whichever values appear; `venue_short` (e.g. `TPAMI`, `MICCAI`) is the badge label.
 Lab members are **bold** in the author list and the PI
