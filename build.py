@@ -420,12 +420,6 @@ def base_context() -> dict:
     research = load_research()
     news = load_news()
     positions = load_positions()
-    # Headline stats are derived from the data so they are always correct
-    # (and citation-free). Edit the underlying CSVs to change them.
-    site["stat_publications"] = str(publications["count"])
-    site["stat_members"] = str(len(members["all"]))
-    site["stat_researchers"] = str(members["student_count"] + (1 if members["pi"] else 0))
-    site["stat_areas"] = str(len(research))
     # Hero headline with one accent word highlighted (both from site.csv)
     site["hero_headline_html"] = _accent_headline(site.get("hero_headline", ""),
                                                   site.get("hero_accent", ""))
