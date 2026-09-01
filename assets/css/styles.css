@@ -190,12 +190,6 @@ p { max-width: 68ch; }
 .fig-eyebrow::after { content: ""; height: 1px; background: var(--border); flex: 1 1 auto; }
 .fig-head h2 { max-width: 22ch; }
 .fig-head .lead { margin-top: var(--s4); }
-.plate-numeral {
-  position: absolute; right: 0; top: -0.35em; font-family: var(--font-display);
-  font-weight: 700; font-size: clamp(4rem, 10vw, 9rem); line-height: 1;
-  color: var(--surface-alt); z-index: -1; letter-spacing: -0.04em; user-select: none;
-}
-
 /* generic ruled divider with green tick */
 .rule { display: flex; align-items: center; gap: var(--s3); margin-block: var(--s7); }
 .rule::before { content: ""; width: 24px; height: 2px; background: var(--brand); flex: none; }
@@ -540,7 +534,6 @@ button.chip { cursor: pointer; }
    ===================================================================== */
 .research-block { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: center; padding-block: clamp(48px, 6vw, 88px); }
 .research-block:nth-child(even) .rb-visual { order: -1; }
-.rb-text .plate { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 5vw, 4rem); color: #CBD0CA; line-height: 1; letter-spacing: -0.04em; }
 .rb-text .num { font-family: var(--font-mono); color: var(--accent-strong); font-size: 0.8rem; letter-spacing: 0.1em; }
 .rb-text h2 { font-size: var(--step-2); font-weight: 600; margin: var(--s2) 0 var(--s4); }
 .rb-text p { color: var(--text); }
@@ -737,7 +730,6 @@ button.chip { cursor: pointer; }
   .pi-photo { max-width: 280px; }
   .research-block { grid-template-columns: 1fr; gap: var(--s5); }
   .research-block:nth-child(even) .rb-visual { order: 0; }
-  .plate-numeral { display: none; }
 }
 @media (max-width: 560px) {
   .area-grid { grid-template-columns: 1fr; }
