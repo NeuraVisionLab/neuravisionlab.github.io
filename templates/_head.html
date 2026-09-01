@@ -48,7 +48,6 @@
   <script type="application/ld+json">{{ jsonld|raw }}</script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header on-dark">
     <div class="container">
@@ -81,4 +80,4 @@
     {% for n in nav %}<a href="{{ n.url }}"{% if n.active %} aria-current="page"{% endif %}><span class="idx">{{ loop.index }}—</span>{{ n.label }}</a>{% endfor %}
   </aside>
 
-  <main id="main">
+  <main>
