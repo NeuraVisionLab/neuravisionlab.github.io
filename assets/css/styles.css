@@ -295,6 +295,12 @@ button.chip { cursor: pointer; }
 .site-header.on-dark:not(.is-stuck) .mark-dark { display: block; }
 
 .brand { display: inline-flex; align-items: center; gap: var(--s3); }
+/* the lab brand and the university crest travel together on the left */
+.brand-row { display: flex; align-items: center; gap: var(--s5); }
+.affil { display: inline-flex; align-items: center; transition: opacity .15s ease; }
+.affil img { width: 30px; height: 30px; }
+.affil:hover { opacity: .8; text-decoration: none; }
+@media (max-width: 560px) { .affil { display: none; } }
 .brand:hover { text-decoration: none; }
 .brand img { width: 30px; height: 30px; }
 .brand .mark-dark { display: none; }
