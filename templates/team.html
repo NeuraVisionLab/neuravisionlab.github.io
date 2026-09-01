@@ -3,7 +3,7 @@
 <section class="subhero is-dark">
   <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
   <div class="container">
-    <h1>People</h1>
+    <h1>{{ site.team_page_heading }}</h1>
     <p class="lead">A small, focused group: one principal investigator and {{ members.student_count }} graduate researchers working across computer vision, deep learning and topology.</p>
   </div>
 </section>
@@ -37,7 +37,7 @@
 <!-- Graduate researchers -->
 <section class="section" style="padding-top:0" aria-labelledby="grad-h">
   <div class="container container-wide">
-    <div class="rule"><h2 class="rule-label" id="grad-h">Graduate Researchers — M.Sc.</h2></div>
+    <div class="rule"><h2 class="rule-label" id="grad-h">{{ site.team_grad_heading }}</h2></div>
     <div class="member-grid">
       {% for m in members.students %}
       <article class="member-card" data-reveal style="--i:{{ loop.index0 }}">

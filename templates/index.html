@@ -6,12 +6,12 @@
   <div class="container">
     <div class="grid">
       <div class="hero-content">
-        <p class="fig-eyebrow hero-eyebrow">NeuraVision · Computer Vision &amp; Deep Learning · Bilkent</p>
+        <p class="fig-eyebrow hero-eyebrow">{{ site.home_hero_eyebrow }}</p>
         <h1 class="hero-title">{{ site.hero_headline_html|raw }}</h1>
         <p class="hero-lead">{{ site.hero_subhead }}</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="research.html">Explore research</a>
-          <a class="btn btn-ghost" href="team.html">Meet the team <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary" href="research.html">{{ site.home_hero_cta_primary }}</a>
+          <a class="btn btn-ghost" href="team.html">{{ site.home_hero_cta_secondary }} <span aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -29,11 +29,11 @@
     <div class="grid about-grid">
       <div class="about-copy" data-reveal>
         <div class="fig-head">
-          <p class="fig-eyebrow">The Lab</p>
+          <p class="fig-eyebrow">{{ site.home_about_eyebrow }}</p>
           <h2 id="about-h">{{ site.intro_heading }}</h2>
         </div>
         <p>{{ site.intro_body }}</p>
-        <p style="margin-top:var(--s5)"><a class="btn-link" href="team.html">Led by Dr. {{ members.pi.name }} <span class="arr">→</span></a></p>
+        <p style="margin-top:var(--s5)"><a class="btn-link" href="team.html">{{ site.home_about_link_prefix }} {{ members.pi.name }} <span class="arr">→</span></a></p>
       </div>
     </div>
   </div>
@@ -43,9 +43,9 @@
 <section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="research-h">
   <div class="container">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">Research</p>
-      <h2 id="research-h">What we work on</h2>
-      <p class="lead">Several threads, one question: how can deep networks respect the structure, geometry and uncertainty of the visual world?</p>
+      <p class="fig-eyebrow">{{ site.home_research_eyebrow }}</p>
+      <h2 id="research-h">{{ site.home_research_heading }}</h2>
+      <p class="lead">{{ site.home_research_lead }}</p>
     </div>
     <div class="area-grid">
       {% for r in research %}
@@ -54,7 +54,7 @@
         <span class="idx">{{ r.num }} · {{ r.tag }}</span>
         <h3>{{ r.title }}</h3>
         <p class="tag">{{ r.summary }}</p>
-        <span class="btn-link more">Explore <span class="arr">→</span></span>
+        <span class="btn-link more">{{ site.home_research_card_link_label }} <span class="arr">→</span></span>
       </a>
       {% endfor %}
     </div>
@@ -96,8 +96,8 @@
 <section class="section" aria-labelledby="news-h">
   <div class="container container-prose" style="max-width:880px">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">Latest</p>
-      <h2 id="news-h">Lab news</h2>
+      <p class="fig-eyebrow">{{ site.home_news_eyebrow }}</p>
+      <h2 id="news-h">{{ site.home_news_heading }}</h2>
     </div>
     <ul class="news-list" data-reveal>
       {% for item in news_recent %}
@@ -118,13 +118,13 @@
 <section class="section--tight cta-band" aria-label="Join the lab">
   <div class="section" style="padding-block:var(--s8)">
     <div class="container">
-      <div class="rule"><span>Open positions</span></div>
+      <div class="rule"><span>{{ site.home_cta_eyebrow }}</span></div>
       <div class="inner">
         <div>
-          <h2>Join the lab.</h2>
-          <p>We are looking for curious students who like hard, beautiful problems in vision and learning.</p>
+          <h2>{{ site.home_cta_heading }}</h2>
+          <p>{{ site.home_cta_body }}</p>
         </div>
-        <a class="btn btn-primary" href="join.html">See open positions</a>
+        <a class="btn btn-primary" href="join.html">{{ site.home_cta_link_label }}</a>
       </div>
     </div>
   </div>

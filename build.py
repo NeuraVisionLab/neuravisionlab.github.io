@@ -165,6 +165,19 @@ def load_research() -> list[dict]:
     return rows
 
 
+def load_join_criteria() -> list[dict]:
+    rows = _read_rows("join_criteria.csv")
+    rows.sort(key=lambda r: int(r["order"]))
+    return rows
+
+
+def load_join_steps() -> list[dict]:
+    """`html` may carry inline links, so join.html renders it raw."""
+    rows = _read_rows("join_steps.csv")
+    rows.sort(key=lambda r: int(r["order"]))
+    return rows
+
+
 def load_news() -> list[dict]:
     rows = _read_rows("news.csv")
     def parse(d):
@@ -420,11 +433,15 @@ def base_context() -> dict:
     research = load_research()
     news = load_news()
     positions = load_positions()
+    join_criteria = load_join_criteria()
+    join_steps = load_join_steps()
     # Hero headline with one accent word highlighted (both from site.csv)
     site["hero_headline_html"] = _accent_headline(site.get("hero_headline", ""),
                                                   site.get("hero_accent", ""))
     return {
         "pages": pages,
+        "join_criteria": join_criteria,
+        "join_steps": join_steps,
         "jsonld": _build_jsonld(site, members.get("pi")),
         "site": site,
         "members": members,

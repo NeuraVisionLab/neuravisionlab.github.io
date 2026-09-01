@@ -3,7 +3,7 @@
 <section class="subhero is-dark">
   <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
   <div class="container">
-    <h1>Contact</h1>
+    <h1>{{ site.contact_page_heading }}</h1>
     <p class="lead">Find us in the Department of Computer Engineering at Bilkent University. The fastest way to reach the lab is email.</p>
   </div>
 </section>
@@ -12,7 +12,7 @@
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info" data-reveal>
-        <div class="fig-head"><h2>Where to find us</h2></div>
+        <div class="fig-head"><h2>{{ site.contact_where_heading }}</h2></div>
         <div class="data-table">
           <div class="row"><span class="k">Lab</span><span class="v">{{ site.lab_full_name }}</span></div>
           <div class="row"><span class="k">Principal Investigator</span><span class="v">Dr. {{ members.pi.name }}</span></div>
@@ -46,8 +46,8 @@
       <div class="rule"><span>Prospective students</span></div>
       <div class="inner">
         <div>
-          <h2>Interested in joining?</h2>
-          <p>We welcome strong MSc and PhD applicants, undergraduate researchers and visitors.</p>
+          <h2>{{ site.contact_join_heading }}</h2>
+          <p>{{ site.contact_join_body }}</p>
         </div>
         <a class="btn btn-primary" href="join.html">See open positions</a>
       </div>

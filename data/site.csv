@@ -30,3 +30,34 @@ home_publications_heading,Latest publications
 home_publications_count,6
 home_publications_link_label,All publications
 site_url,https://neuravisionlab.github.io/
+home_hero_eyebrow,NeuraVision · Computer Vision & Deep Learning · Bilkent
+home_hero_cta_primary,Explore research
+home_hero_cta_secondary,Meet the team
+home_about_eyebrow,The Lab
+home_about_link_prefix,Led by Dr.
+home_research_eyebrow,Research
+home_research_heading,What we work on
+home_research_lead,"Several threads, one question: how can deep networks respect the structure, geometry and uncertainty of the visual world?"
+home_research_card_link_label,Explore
+home_news_eyebrow,Latest
+home_news_heading,Lab news
+home_cta_eyebrow,Open positions
+home_cta_heading,Join the lab.
+home_cta_body,"We are looking for curious students who like hard, beautiful problems in vision and learning."
+home_cta_link_label,See open positions
+research_page_heading,Research
+research_ethos_eyebrow,Methods & ethos
+research_ethos_heading,"Structure first, then certainty."
+team_page_heading,People
+team_grad_heading,Graduate Researchers — M.Sc.
+contact_page_heading,Contact
+contact_where_heading,Where to find us
+contact_join_heading,Interested in joining?
+contact_join_body,"We welcome strong MSc and PhD applicants, undergraduate researchers and visitors."
+publications_page_heading,Publications
+footer_nav_heading,Navigate
+footer_research_heading,Research
+footer_connect_heading,Connect
+footer_colophon,Built static · GitHub Pages
+join_page_heading,Join the lab
+join_opportunities_heading,Research opportunities

@@ -3,7 +3,7 @@
 <section class="subhero is-dark">
   <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
   <div class="container">
-    <h1>Join the lab</h1>
+    <h1>{{ site.join_page_heading }}</h1>
     <p class="lead">We are always glad to hear from talented, motivated people who want to do serious research in computer vision and deep learning.</p>
   </div>
 </section>
@@ -13,7 +13,7 @@
     <div class="join-layout">
       <div class="join-main">
         <div class="fig-head" data-reveal>
-          <h2>Research opportunities</h2>
+          <h2>{{ site.join_opportunities_heading }}</h2>
           <p class="lead">NeuraVision welcomes prospective graduate students and researchers. Members work closely with the principal investigator on topology-aware vision, uncertainty estimation and trustworthy AI, and are supported in publishing at leading venues.</p>
         </div>
 
@@ -34,21 +34,14 @@
         <div class="join-block" data-reveal>
           <h3>Who we look for</h3>
           <ul class="checklist">
-            <li>A strong foundation in mathematics — linear algebra, probability, optimization.</li>
-            <li>Solid programming and hands-on experience with a deep-learning framework (PyTorch).</li>
-            <li>Background or genuine curiosity in computer vision and machine learning.</li>
-            <li>Interest in the structure of problems: geometry, topology, uncertainty.</li>
-            <li>Self-motivation, rigor, and the persistence good research demands.</li>
+            {% for c in join_criteria %}<li>{{ c.text }}</li>{% endfor %}
           </ul>
         </div>
 
         <div class="join-block" data-reveal>
           <h3>How to apply</h3>
           <ol class="steps">
-            <li>Read a few of our <a href="publications.html">recent papers</a> and the <a href="research.html">research areas</a> to see if our work excites you.</li>
-            <li>Prepare a short CV and a brief statement of your research interests.</li>
-            <li>Email the PI with your materials — mention NeuraVision and a paper you found interesting.</li>
-            <li>Prospective graduate students should also apply to the Bilkent CS graduate program.</li>
+            {% for st in join_steps %}<li>{{ st.html|raw }}</li>{% endfor %}
           </ol>
           <p style="margin-top:var(--s5)"><a class="btn btn-primary" href="mailto:{{ site.email }}?subject=NeuraVision%20%E2%80%94%20Prospective%20student">Email the PI</a></p>
         </div>

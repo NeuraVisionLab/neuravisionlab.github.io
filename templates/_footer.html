@@ -12,15 +12,15 @@
           <p class="addr">{{ site.office }} · {{ site.city }}</p>
         </div>
         <div class="footer-col">
-          <h4>Navigate</h4>
+          <h4>{{ site.footer_nav_heading }}</h4>
           <ul>{% for n in nav %}<li><a href="{{ n.url }}">{{ n.label }}</a></li>{% endfor %}</ul>
         </div>
         <div class="footer-col">
-          <h4>Research</h4>
+          <h4>{{ site.footer_research_heading }}</h4>
           <ul>{% for r in research %}<li><a href="research.html#{{ r.slug }}">{{ r.title }}</a></li>{% endfor %}</ul>
         </div>
         <div class="footer-col">
-          <h4>Connect</h4>
+          <h4>{{ site.footer_connect_heading }}</h4>
           <ul>
             <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
             {% if site.scholar_url %}<li><a href="{{ site.scholar_url }}" target="_blank" rel="noopener">Google Scholar</a></li>{% endif %}
@@ -34,7 +34,7 @@
       </div>
       <div class="footer-bottom">
         <span>© {{ year_now }} {{ site.copyright }}</span>
-        <span>Built static · GitHub Pages</span>
+        <span>{{ site.footer_colophon }}</span>
       </div>
     </div>
   </footer>

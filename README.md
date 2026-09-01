@@ -35,6 +35,10 @@ in `"double quotes"` (any spreadsheet — Excel, Numbers, Google Sheets — does
 you when you export as CSV).
 
 ### `site.csv` — global text & settings (`key,value`)
+
+Every heading, eyebrow, lead paragraph and button label on the site lives here too,
+keyed by page (`home_*`, `research_page_*`, `team_*`, `contact_*`, `join_*`, `footer_*`),
+so wording changes never mean editing a template.
 Lab name, tagline, **hero headline**, contact details, map, social links, default
 theme. Notable keys:
 
@@ -108,6 +112,11 @@ another page (`publications.html`) or any URL; blank = no link.
 
 ### `positions.csv` — open positions (Join page)
 `title, audience, status, description`.
+
+### `join_criteria.csv` / `join_steps.csv` — the Join page lists
+`order, text` for “Who we look for”, and `order, html` for “How to apply”. The steps
+column is named `html` because those items carry inline links, and join.html renders it
+as-is; the criteria are plain text.
 
 ### `pages.csv` — the pages themselves
 `nav_order, id, template, output, nav_label, title, meta_description`. One row per page:
