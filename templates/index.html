@@ -36,7 +36,7 @@
     <div class="area-grid">
       {% for r in research %}
       <a class="area-card" href="research.html#{{ r.slug }}" data-reveal style="--i:{{ loop.index0 }}">
-        {% include "_area_icon.html" %}
+        {% if r.image %}<span class="area-thumb"><img src="assets/img/research/{{ r.image }}" alt="" loading="lazy" width="627" height="627"></span>{% else %}{% include "_area_icon.html" %}{% endif %}
         <span class="idx">{{ r.num }} · {{ r.tag }}</span>
         <h3>{{ r.title }}</h3>
         <p class="tag">{{ r.summary }}</p>

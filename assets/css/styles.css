@@ -432,7 +432,8 @@ button.chip { cursor: pointer; }
 .data-table .v a { color: var(--accent-strong); }
 
 /* research cards (home) */
-.area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5); }
+/* four areas: a 2x2 reads better than three-plus-one and shows the plates larger */
+.area-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s5); }
 .area-card {
   display: flex; flex-direction: column; gap: var(--s3); padding: var(--s6); background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--r-lg); position: relative; overflow: hidden; transition: box-shadow .2s, transform .2s;
@@ -445,6 +446,12 @@ button.chip { cursor: pointer; }
 .area-card .tag { color: var(--muted); font-size: var(--step--1); }
 .area-card .area-icon { width: 38px; height: 38px; color: var(--accent-strong); transition: color .25s ease, transform .25s ease; }
 .area-card:hover .area-icon { color: var(--brand); transform: translateY(-2px); }
+.area-card .area-thumb {
+  display: block; aspect-ratio: 4/3; border-radius: var(--r-md); overflow: hidden;
+  border: 1px solid var(--border); background: var(--surface-alt);
+}
+.area-card .area-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.area-card:hover .area-thumb img { transform: scale(1.04); }
 .area-card .more { margin-top: auto; }
 
 /* latest publications — a horizontal strip that follows the active theme */
