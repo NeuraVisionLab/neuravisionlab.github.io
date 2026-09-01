@@ -108,7 +108,10 @@ Lab members are **bold** in the author list and the PI
 is shown in green automatically, matched on the `surname` column in `members.csv`.
 
 ### `research.csv` — research areas
-`order, slug, title, tag, summary, description`. Shown as cards on the home page and
+`order, slug, title, tag, summary, description, image`.
+
+`image` names a file in `assets/img/research/` (square, subject centred — the plate is 5:4
+and crops top and bottom). Leave it blank and that area falls back to the node graphic. Shown as cards on the home page and
 as the zig-zag blocks on the Research page. Add/remove rows freely.
 
 ### `news.csv` — the "Lab news" log
