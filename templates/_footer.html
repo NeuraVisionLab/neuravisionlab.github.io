@@ -29,7 +29,7 @@
             {% if site.x_url %}<li><a href="{{ site.x_url }}" target="_blank" rel="noopener">X / Twitter</a></li>{% endif %}
           </ul>
           <p class="footer-coord">{{ site.map_lat }}°N, {{ site.map_lng }}°E</p>
-          <p><a class="btn-link" href="https://www.google.com/maps/search/?api=1&query={{ site.map_query|urlencode }}" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a></p>
+          <p><a class="btn-link" href="https://www.google.com/maps/search/?api=1&query={{ site.map_query|urlencode }}" target="_blank" rel="noopener">{{ site.footer_directions_link_label }} <span class="arr">→</span></a></p>
         </div>
       </div>
       <div class="footer-bottom">

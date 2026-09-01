@@ -4,7 +4,7 @@
   <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
   <div class="container">
     <h1>{{ site.research_page_heading }}</h1>
-    <p class="lead">We build computer-vision and deep-learning methods that respect the geometry, topology and uncertainty of the visual world — and put them to work in medicine, remote sensing and beyond.</p>
+    <p class="lead">{{ site.research_page_lead }}</p>
   </div>
 </section>
 
@@ -17,7 +17,7 @@
         <h2>{{ r.title }}</h2>
         <p class="lead">{{ r.summary }}</p>
         <p>{{ r.description }}</p>
-        <p style="margin-top:var(--s5)"><a class="btn-link" href="publications.html">Related publications <span class="arr">→</span></a></p>
+        <p style="margin-top:var(--s5)"><a class="btn-link" href="publications.html">{{ site.research_related_link_label }} <span class="arr">→</span></a></p>
       </div>
       <div class="rb-visual" aria-hidden="true">{% include "_constellation.html" %}</div>
     </article>

@@ -61,3 +61,19 @@ footer_connect_heading,Connect
 footer_colophon,Built static · GitHub Pages
 join_page_heading,Join the lab
 join_opportunities_heading,Research opportunities
+contact_page_lead,Find us in the Department of Computer Engineering at Bilkent University. The fastest way to reach the lab is email.
+contact_email_button,Email the lab
+contact_map_link_label,Open in map
+contact_prospective_eyebrow,Prospective students
+join_page_lead,"We are always glad to hear from talented, motivated people who want to do serious research in computer vision and deep learning."
+join_opportunities_lead,"NeuraVision welcomes prospective graduate students and researchers. Members work closely with the principal investigator on topology-aware vision, uncertainty estimation and trustworthy AI, and are supported in publishing at leading venues."
+join_positions_heading,Open positions
+join_criteria_heading,Who we look for
+join_steps_heading,How to apply
+join_facts_heading,Quick facts
+join_research_link_label,Our research
+join_publications_link_label,Our publications
+research_page_lead,"We build computer-vision and deep-learning methods that respect the geometry, topology and uncertainty of the visual world — and put them to work in medicine, remote sensing and beyond."
+research_related_link_label,Related publications
+footer_directions_link_label,Get directions
+contact_directions_link_label,Get directions
