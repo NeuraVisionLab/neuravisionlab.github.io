@@ -44,10 +44,10 @@ theme. Notable keys:
 
 | key | what it does |
 |-----|--------------|
-| `hero_headline` | The big headline on the home page. |
+| `hero_headline` | First line of the hero wordmark, set in Jura Light to match the brand mark. |
 | `home_publications_count` | How many of the newest papers the home page strip shows. |
 | `home_publications_eyebrow`, `home_publications_heading`, `home_publications_link_label` | That section’s wording. |
-| `hero_accent` | One word from the headline to highlight in green (e.g. `topology`). |
+| `hero_headline_sub` | Second line of the hero wordmark (the brand lockup’s “Research lab”). |
 | `hero_subhead` | The sentence under the headline. |
 | `tagline`, `meta_description`, `intro_heading`, `intro_body` | Home/about + SEO text. |
 | `email`, `phone`, `office`, `address`, `department`, `university`, `city` | Contact block + footer. |

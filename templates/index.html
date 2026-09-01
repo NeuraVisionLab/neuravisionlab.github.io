@@ -7,7 +7,10 @@
     <div class="grid">
       <div class="hero-content">
         <p class="fig-eyebrow hero-eyebrow">{{ site.home_hero_eyebrow }}</p>
-        <h1 class="hero-title">{{ site.hero_headline_html|raw }}</h1>
+        <h1 class="hero-title hero-wordmark">
+          <span class="wordmark-name">{{ site.hero_headline }}</span>
+          <span class="wordmark-sub">{{ site.hero_headline_sub }}</span>
+        </h1>
         <p class="hero-lead">{{ site.hero_subhead }}</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="research.html">{{ site.home_hero_cta_primary }}</a>

@@ -412,15 +412,6 @@ def _build_jsonld(site: dict, pi: dict) -> str:
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
-def _accent_headline(headline: str, accent: str) -> str:
-    """HTML for the hero headline with one word wrapped in .accent (both from CSV)."""
-    esc = html.escape(headline)
-    if accent:
-        a = html.escape(accent)
-        esc = esc.replace(a, f'<span class="accent">{a}</span>', 1)
-    return esc
-
-
 def base_context() -> dict:
     site = load_site()
     pages = load_pages()
@@ -437,9 +428,6 @@ def base_context() -> dict:
     positions = load_positions()
     join_criteria = load_join_criteria()
     join_steps = load_join_steps()
-    # Hero headline with one accent word highlighted (both from site.csv)
-    site["hero_headline_html"] = _accent_headline(site.get("hero_headline", ""),
-                                                  site.get("hero_accent", ""))
     return {
         "pages": pages,
         "join_criteria": join_criteria,

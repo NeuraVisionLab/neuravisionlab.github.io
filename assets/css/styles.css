@@ -379,7 +379,11 @@ button.chip { cursor: pointer; }
 .hero-eyebrow::before { background: var(--d-accent); }
 .hero-eyebrow::after { background: var(--d-border); }
 .hero-title { font-family: var(--font-display); font-weight: 600; font-size: var(--step-hero); line-height: 1.02; letter-spacing: -0.02em; color: #fff; }
-.hero-title .accent { color: var(--hero-accent); font-weight: 700; text-shadow: 0 2px 22px rgba(4,18,12,.55); }
+/* The hero sets the brand lockup as live text: Jura Light at the weight and
+   proportions of assets/img/brand/mark-reversed.png. */
+.hero-wordmark { font-weight: 300; letter-spacing: -0.01em; display: flex; flex-direction: column; }
+.wordmark-name { display: block; }
+.wordmark-sub { display: block; font-size: 0.53em; letter-spacing: 0.02em; margin-top: 0.12em; }
 .hero-lead { font-size: var(--step-1); line-height: 1.5; color: var(--d-lead); max-width: 52ch; margin-top: var(--s6); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--s4); margin-top: var(--s7); }
 .hero-visual { grid-column: 8 / 13; position: relative; display: flex; align-items: center; justify-content: center; min-height: 360px; }
