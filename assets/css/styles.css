@@ -375,9 +375,6 @@ button.chip { cursor: pointer; }
 .hero .container { position: relative; z-index: 1; }
 .hero .grid { align-items: center; width: 100%; }
 .hero-content { grid-column: 1 / 8; }
-.hero-eyebrow { color: var(--d-accent); margin-bottom: var(--s5); }
-.hero-eyebrow::before { background: var(--d-accent); }
-.hero-eyebrow::after { background: var(--d-border); }
 .hero-title { font-family: var(--font-display); font-weight: 600; font-size: var(--step-hero); line-height: 1.02; letter-spacing: -0.02em; color: #fff; }
 /* The hero sets the brand lockup as live text: Jura Light at the weight and
    proportions of assets/img/brand/mark-reversed.png. */
@@ -432,9 +429,6 @@ button.chip { cursor: pointer; }
 /* =====================================================================
    HOME sections
    ===================================================================== */
-.about-grid { align-items: start; }
-.about-copy { grid-column: 1 / 8; }
-.about-copy p + p { margin-top: var(--s4); }
 
 .data-table { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; background: var(--surface-alt); }
 .data-table .row { display: grid; grid-template-columns: 38% 1fr; gap: var(--s4); padding: var(--s4) var(--s5); border-bottom: 1px solid var(--border); }
@@ -738,7 +732,6 @@ button.chip { cursor: pointer; }
   .hero-visual { grid-column: 1 / -1; order: 1; margin-bottom: var(--s6); }
   .hero-mark { width: 160px; }
   .hero-visual { min-height: 220px; }
-  .about-copy { grid-column: 1 / -1; }
   .area-grid { grid-template-columns: 1fr 1fr; }
   .pi-card { grid-template-columns: 1fr; gap: var(--s5); }
   .pi-photo { max-width: 280px; }

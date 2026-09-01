@@ -49,7 +49,7 @@ theme. Notable keys:
 | `home_publications_eyebrow`, `home_publications_heading`, `home_publications_link_label` | That section’s wording. |
 | `hero_headline_sub` | Second line of the hero wordmark (the brand lockup’s “Research lab”). |
 | `hero_subhead` | The sentence under the headline. |
-| `tagline`, `meta_description`, `intro_heading`, `intro_body` | Home/about + SEO text. |
+| `tagline`, `meta_description` | Footer tagline + SEO text. |
 | `email`, `phone`, `office`, `address`, `department`, `university`, `city` | Contact block + footer. |
 | `map_query`, `map_lat`, `map_lng` | Contact map (an OpenStreetMap embed + "directions" link are generated from these). |
 | `scholar_url`, `github_url`, `linkedin_url`, `x_url` | Footer / profile links (leave blank to hide). |
@@ -93,7 +93,9 @@ that button simply doesn't appear:
 ### The `bibtex` column — the Cite button
 
 A paper with a `bibtex` value gets a **Cite** button that opens a dialog showing exactly
-that text, with a copy button. Leave the column blank and the paper simply has no Cite
+that text, with a copy button. The entries currently in the CSV came from the
+publishers themselves (Crossref/DataCite via each DOI, or the proceedings site), so the
+author lists, volume, pages and publisher are the record of version. Leave the column blank and the paper simply has no Cite
 button. What you write is what visitors copy — nothing is reformatted.
 
 The entry spans several lines, so wrap the field in `"double quotes"`; every spreadsheet
