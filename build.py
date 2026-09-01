@@ -152,7 +152,7 @@ def load_publications() -> dict:
         # Link buttons — only those filled in the CSV are emitted.
         # paper -> conference/journal page, arxiv -> arXiv, code -> GitHub.
         links = []
-        for key, label in (("paper", "Paper"), ("arxiv", "arXiv"), ("code", "Code")):
+        for key, label in (("project page", "Project Page"), ("arxiv", "arXiv"), ("code", "Code")):
             val = r.get(key)
             if not val:
                 continue
