@@ -86,7 +86,7 @@
       </div>
       <div class="featured-meta">
         <div class="kicker">
-          <span class="venue-badge{% if publications.featured_one.is_top %} is-top{% endif %}">{{ publications.featured_one.venue_short }} · {{ publications.featured_one.year }}</span>
+          <span class="venue-badge">{{ publications.featured_one.venue_short }} · {{ publications.featured_one.year }}</span>
           <span class="status-badge">Featured</span>
         </div>
         <h3>{% if publications.featured_one.url %}<a href="{{ publications.featured_one.url }}" target="_blank" rel="noopener">{{ publications.featured_one.title }}</a>{% else %}{{ publications.featured_one.title }}{% endif %}</h3>

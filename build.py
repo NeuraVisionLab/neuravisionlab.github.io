@@ -228,7 +228,6 @@ def load_publications() -> dict:
     for r in rows:
         r["is_featured"] = (r.get("featured", "").lower() in ("yes", "true", "1"))
         r["authors_html"] = _format_authors(r.get("authors", ""))
-        r["is_top"] = r.get("venue_short", "") in {"TPAMI", "ICML", "MICCAI", "TMLR", "AISTATS", "IEEE TMI"}
         r["badge_label"] = r.get("venue_short") or r.get("venue_type", "").title()
         # Link buttons — only those filled in the CSV are emitted.
         # project page -> project/publisher page, arxiv -> arXiv, code -> GitHub.

@@ -30,7 +30,7 @@
             <p class="pub-authors">{{ p.authors_html|raw }}</p>
           </div>
           <div class="pub-extra">
-            <span class="venue-badge{% if p.is_top %} is-top{% endif %}">{{ p.badge_label }} · {{ p.year }}</span>
+            <span class="venue-badge">{{ p.badge_label }} · {{ p.year }}</span>
             <div class="pub-links">
               {% for link in p.links %}<a class="chip chip-icon" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{% include "_link_icon.html" %}</a>{% endfor %}<button class="chip chip-icon" type="button" data-cite aria-label="Cite {{ p.title }}" title="Cite (BibTeX)">{% include "_icon_cite.html" %}</button><template data-bibtex>{{ p.bibtex }}</template>
             </div>

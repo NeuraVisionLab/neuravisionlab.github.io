@@ -83,8 +83,8 @@ The entry is generated from the columns above — there is no BibTeX column to m
 
 Other fields: set `featured=yes` to surface a paper on the home page; `venue_type`
 (`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
-pills are generated from whichever values appear; `venue_short` (e.g. `TPAMI`, `MICCAI`) is the badge label, and
-the top venues get a green dot. Lab members are **bold** in the author list and the PI
+pills are generated from whichever values appear; `venue_short` (e.g. `TPAMI`, `MICCAI`) is the badge label.
+Lab members are **bold** in the author list and the PI
 is shown in green automatically (surnames are configured in `build.py`).
 
 ### `research.csv` — research areas
