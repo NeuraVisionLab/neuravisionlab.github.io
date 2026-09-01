@@ -64,6 +64,8 @@ One row per person. `group=pi` is the principal investigator; everyone else is a
 researcher (shown in the grid, indexed M1, M2 …). `order` controls the sort.
 
 - `photo` points at a file in `assets/img/people/` (a 3:4 portrait JPEG looks best).
+- `orcid` is the bare iD (`0000-0002-...`); filled, it adds an ORCID row to the PI
+  facts and the identifier to the page's structured data. Leave blank to omit.
 - `surname` is the name papers credit the member under — it is what makes lab
   authors bold in publication lists, so it must match the author string.
 - `interests` is a `;`-separated list; the first one shows as the card's tag.

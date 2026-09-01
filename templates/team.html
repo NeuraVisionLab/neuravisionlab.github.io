@@ -26,6 +26,7 @@
           <div class="row"><span class="k">Areas</span><span class="v">{{ m.interests_str }}</span></div>
           <div class="row"><span class="k">Office</span><span class="v">{{ site.office }}</span></div>
           <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:{{ m.email }}">{{ m.email }}</a></span></div>
+          {% if m.orcid %}<div class="row"><span class="k">ORCID</span><span class="v"><a href="https://orcid.org/{{ m.orcid }}" target="_blank" rel="noopener">https://orcid.org/{{ m.orcid }}</a></span></div>{% endif %}
         </div>
         <div class="social-row">{% include "_socials.html" %}</div>
       </div>

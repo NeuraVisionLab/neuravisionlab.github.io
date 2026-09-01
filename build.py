@@ -406,9 +406,15 @@ def _build_jsonld(site: dict, pi: dict) -> str:
                     "addressLocality": "Ankara", "addressCountry": "TR"},
     }
     if pi:
-        data["founder"] = {"@type": "Person", "name": pi.get("name", ""),
-                           "jobTitle": "Assistant Professor",
-                           "url": pi.get("scholar") or site["site_url"] + "team.html"}
+        founder = {"@type": "Person", "name": pi.get("name", ""),
+                   "jobTitle": "Assistant Professor",
+                   "url": pi.get("scholar") or site["site_url"] + "team.html"}
+        if pi["orcid"]:
+            # ORCID is the canonical identifier for a researcher, so expose it
+            # next to the name rather than only on the page.
+            founder["identifier"] = "https://orcid.org/" + pi["orcid"]
+            founder["sameAs"] = ["https://orcid.org/" + pi["orcid"]]
+        data["founder"] = founder
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
