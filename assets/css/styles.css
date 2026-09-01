@@ -427,7 +427,6 @@ button.chip { cursor: pointer; }
 .about-grid { align-items: start; }
 .about-copy { grid-column: 1 / 8; }
 .about-copy p + p { margin-top: var(--s4); }
-.about-panel { grid-column: 8 / 13; }
 
 .data-table { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; background: var(--surface-alt); }
 .data-table .row { display: grid; grid-template-columns: 38% 1fr; gap: var(--s4); padding: var(--s4) var(--s5); border-bottom: 1px solid var(--border); }
@@ -714,7 +713,7 @@ button.chip { cursor: pointer; }
   .hero-visual { grid-column: 1 / -1; order: 1; margin-bottom: var(--s6); }
   .hero-mark { width: 160px; }
   .hero-visual { min-height: 220px; }
-  .about-copy, .about-panel { grid-column: 1 / -1; }
+  .about-copy { grid-column: 1 / -1; }
   .area-grid { grid-template-columns: 1fr 1fr; }
   .pi-card { grid-template-columns: 1fr; gap: var(--s5); }
   .pi-photo { max-width: 280px; }
