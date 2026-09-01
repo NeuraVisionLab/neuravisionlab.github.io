@@ -32,7 +32,7 @@
           <div class="pub-extra">
             <span class="venue-badge{% if p.is_top %} is-top{% endif %}">{{ p.badge_label }} · {{ p.year }}</span>
             <div class="pub-links">
-              {% for link in p.links %}<a class="chip" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+              {% for link in p.links %}<a class="chip chip-icon" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{% include "_link_icon.html" %}</a>{% endfor %}<button class="chip chip-icon" type="button" data-cite aria-label="Cite {{ p.title }}" title="Cite (BibTeX)">{% include "_icon_cite.html" %}</button><template data-bibtex>{{ p.bibtex }}</template>
             </div>
           </div>
         </article>
@@ -44,5 +44,7 @@
     <p class="lead" style="margin-top:var(--s7)">Full and up-to-date list on <a href="{{ site.scholar_url }}" target="_blank" rel="noopener">Google Scholar</a>.</p>
   </div>
 </section>
+
+{% include "_cite_dialog.html" %}
 
 {% include "_footer.html" %}

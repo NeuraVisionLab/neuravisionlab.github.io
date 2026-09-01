@@ -114,11 +114,15 @@ def load_members() -> dict:
             "students": students, "student_count": len(students)}
 
 
+# Letters that survive NFKD because they are distinct glyphs rather than
+# accented forms. Turkish dotless i (Ozaydin) and Polish l-with-stroke
+# (Gwizdala, Kozinski) both occur in the member and author names.
+_FOLD_MAP = str.maketrans({"ı": "i", "ł": "l", "Ł": "L"})
+
+
 def _fold(s: str) -> str:
     import unicodedata
-    # NFKD strips combining accents, but Turkish dotless i has no
-    # decomposition, so map it explicitly (Ozaydin).
-    s = s.replace("ı", "i")
+    s = s.translate(_FOLD_MAP)
     return "".join(c for c in unicodedata.normalize("NFKD", s)
                    if not unicodedata.combining(c)).lower()
 
@@ -145,6 +149,80 @@ def _format_authors(authors: str) -> str:
     return ", ".join(out)
 
 
+# BibTeX is derived from the CSV columns, so a citation never needs its own
+# hand-maintained field. Scholar-style venue strings carry a trailing year,
+# volume, issue and page fragment that a citation should not repeat.
+_BIB_TYPES = {"journal": "article", "conference": "inproceedings",
+              "preprint": "misc", "dataset": "misc", "thesis": "phdthesis"}
+_BIB_VENUE_FIELD = {"article": "journal", "inproceedings": "booktitle",
+                    "phdthesis": "school", "misc": "howpublished"}
+_BIB_NOISE = (r",\s*(?:19|20)\d{2}\s*$", r",\s*\d+\s*$",
+              r"\s*\(\s*\d+\s*\)\s*$", r"\s*\(\s*\d*\s*$",
+              r"\s+\d+\s*$", r"[\s,;:\-\u2013\u2014]+$")
+
+
+def _bib_author(tok: str) -> str:
+    """'FH Azad' -> 'Azad, F. H.'; a trailing ellipsis becomes 'others'."""
+    tok = tok.strip()
+    if not tok or set(tok) <= {".", "\u2026"}:
+        return "others"
+    parts = tok.split()
+    if len(parts) < 2:
+        return tok
+    given = []
+    for g in parts[:-1]:
+        if len(g) <= 3 and g.isupper():
+            given.extend(f"{c}." for c in g)
+        else:
+            given.append(g)
+    return f"{parts[-1]}, {' '.join(given)}"
+
+
+def _bib_venue(r: dict) -> str:
+    v = r.get("venue", "").replace("\u2026", " ")
+    short = r.get("venue_short", "")
+    if short and v.startswith(short + " - "):
+        v = v[len(short) + 3:]
+    prev = None
+    while prev != v:
+        prev = v
+        for pat in _BIB_NOISE:
+            v = re.sub(pat, "", v)
+    return v.strip()
+
+
+def _bib_key(r: dict) -> str:
+    first = r.get("authors", "").split(",")[0].split()
+    surname = re.sub(r"[^a-z]", "", _fold(first[-1])) if first else ""
+    word = ""
+    for w in r.get("title", "").split():
+        w = re.sub(r"[^a-z0-9]", "", _fold(w))
+        if len(w) > 3:
+            word = w
+            break
+    return f"{surname or 'anon'}{r.get('year', '')}{word}"
+
+
+def _bibtex(r: dict) -> str:
+    etype = _BIB_TYPES.get(r.get("venue_type", ""), "misc")
+    fields = [("title", "{" + r.get("title", "") + "}"),
+              ("author", " and ".join(_bib_author(a)
+                                      for a in r.get("authors", "").split(",") if a.strip()))]
+    venue = _bib_venue(r)
+    if venue:
+        fields.append((_BIB_VENUE_FIELD[etype], venue))
+    if r.get("year"):
+        fields.append(("year", r["year"]))
+    if r.get("arxiv"):
+        eid = r["arxiv"].rstrip("/").rsplit("/", 1)[-1]
+        fields += [("eprint", eid), ("archivePrefix", "arXiv")]
+    if r.get("url"):
+        fields.append(("url", r["url"]))
+    pad = max(len(k) for k, _ in fields)
+    body = ",\n".join(f"  {k.ljust(pad)} = {{{v}}}" for k, v in fields)
+    return f"@{etype}{{{_bib_key(r)},\n{body}\n}}"
+
+
 def load_publications() -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
@@ -155,16 +233,19 @@ def load_publications() -> dict:
         # Link buttons — only those filled in the CSV are emitted.
         # project page -> project/publisher page, arxiv -> arXiv, code -> GitHub.
         links = []
-        for key, label in (("project page", "Project Page"), ("arxiv", "arXiv"), ("code", "Code")):
+        for key, label, icon in (("project page", "Project Page", "globe"),
+                                 ("arxiv", "arXiv", "arxiv"),
+                                 ("code", "Code", "github")):
             val = r.get(key)
             if not val:
                 continue
             if key == "arxiv" and not val.startswith("http"):
                 val = f"https://arxiv.org/abs/{val}"
-            links.append({"label": label, "url": val})
+            links.append({"label": label, "url": val, "icon": icon})
         r["links"] = links
         # title links to the first available link (project page > arxiv > code)
         r["url"] = next((l["url"] for l in links), "")
+        r["bibtex"] = _bibtex(r)
     rows.sort(key=lambda r: -(int(r["year"]) if r["year"].isdigit() else 0))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
     by_year = [{"year": y, "items": [r for r in rows if r["year"] == y]} for y in years]

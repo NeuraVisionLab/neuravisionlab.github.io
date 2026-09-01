@@ -262,4 +262,45 @@
     });
     sizeCanvas(); hraf = requestAnimationFrame(frame);
   }
+
+  /* ---------- citation dialog (BibTeX) -------------------------------- */
+  var citeDialog = document.querySelector("[data-cite-dialog]");
+  if (citeDialog) {
+    var citeOut = citeDialog.querySelector("[data-cite-out]");
+    var citeStatus = citeDialog.querySelector("[data-cite-status]");
+    var citeText = "";
+    function citeSay(msg) {
+      citeStatus.textContent = msg;
+      setTimeout(function () { citeStatus.textContent = ""; }, 2200);
+    }
+    function citeSelect() {
+      var sel = window.getSelection(), rng = document.createRange();
+      rng.selectNodeContents(citeOut); sel.removeAllRanges(); sel.addRange(rng);
+    }
+    document.querySelectorAll("[data-cite]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var tpl = btn.parentNode.querySelector("template[data-bibtex]");
+        citeText = tpl ? tpl.content.textContent : "";
+        citeOut.textContent = citeText;
+        citeStatus.textContent = "";
+        if (typeof citeDialog.showModal === "function") citeDialog.showModal();
+        else citeDialog.setAttribute("open", "");
+      });
+    });
+    citeDialog.querySelector("[data-cite-close]").addEventListener("click", function () {
+      citeDialog.close();
+    });
+    /* clicking the backdrop lands on the dialog element itself */
+    citeDialog.addEventListener("click", function (e) {
+      if (e.target === citeDialog) citeDialog.close();
+    });
+    citeDialog.querySelector("[data-cite-copy]").addEventListener("click", function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(citeText).then(
+          function () { citeSay("Copied"); },
+          function () { citeSelect(); citeSay("Press Ctrl+C"); }
+        );
+      } else { citeSelect(); citeSay("Press Ctrl+C"); }
+    });
+  }
 })();

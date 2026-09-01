@@ -92,7 +92,7 @@
         <h3>{% if publications.featured_one.url %}<a href="{{ publications.featured_one.url }}" target="_blank" rel="noopener">{{ publications.featured_one.title }}</a>{% else %}{{ publications.featured_one.title }}{% endif %}</h3>
         <p class="authors">{{ publications.featured_one.authors_html|raw }}</p>
         <div class="pub-links">
-          {% for link in publications.featured_one.links %}<a class="chip" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+          {% for link in publications.featured_one.links %}<a class="chip chip-icon" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{% include "_link_icon.html" %}</a>{% endfor %}<button class="chip chip-icon" type="button" data-cite aria-label="Cite {{ publications.featured_one.title }}" title="Cite (BibTeX)">{% include "_icon_cite.html" %}</button><template data-bibtex>{{ publications.featured_one.bibtex }}</template>
           <a class="chip" href="publications.html">All publications</a>
         </div>
       </div>
@@ -138,5 +138,7 @@
     </div>
   </div>
 </section>
+
+{% include "_cite_dialog.html" %}
 
 {% include "_footer.html" %}

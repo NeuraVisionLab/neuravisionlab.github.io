@@ -233,6 +233,13 @@ p { max-width: 68ch; }
 }
 .chip:hover { background: var(--surface-alt); border-color: var(--brand); color: var(--accent-strong); text-decoration: none; }
 
+/* icon-only link chips (publication links) */
+button.chip { cursor: pointer; }
+.chip-icon { padding: 6px 9px; gap: 0; }
+.chip-icon svg { width: 16px; height: 16px; }
+.chip-icon .icon-wordmark { width: 32px; height: 16px; }
+.icon-wordmark text { font-family: var(--font-mono); }
+
 /* on-dark button variants */
 .is-dark .btn-ghost { background: transparent; border-color: var(--d-border); color: var(--d-text); }
 .is-dark .btn-ghost:hover { border-color: var(--d-accent); color: var(--d-accent); background: rgba(255,255,255,.04); }
@@ -563,6 +570,41 @@ p { max-width: 68ch; }
 .pub-cite { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .pub-cite b { color: var(--accent-strong); font-weight: 500; }
 .pub-row.is-hidden { display: none; }
+
+/* ------------------------------------------------------ citation dialog -- */
+.cite-dialog {
+  width: min(680px, calc(100vw - 2rem)); padding: 0; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); box-shadow: 0 24px 60px rgba(0,0,0,.22);
+}
+.cite-dialog::backdrop { background: rgba(16,35,26,.55); backdrop-filter: blur(2px); }
+.cite-dialog-head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+  padding: var(--s4) var(--s5); border-bottom: 1px solid var(--border);
+}
+.cite-dialog-head h2 {
+  margin: 0; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.cite-dialog-close {
+  display: inline-flex; padding: 6px; border: 1px solid transparent; border-radius: var(--r-sm);
+  background: none; color: var(--muted); cursor: pointer; transition: all .15s ease;
+}
+.cite-dialog-close:hover { color: var(--accent-strong); border-color: var(--border); background: var(--surface-alt); }
+.cite-dialog-close svg { width: 18px; height: 18px; }
+.cite-dialog-out {
+  margin: 0; padding: var(--s5); background: var(--surface-alt); color: var(--text);
+  font-family: var(--font-mono); font-size: 0.76rem; line-height: 1.65;
+  white-space: pre; overflow: auto; max-height: 52vh;
+}
+.cite-dialog-actions {
+  display: flex; align-items: center; gap: var(--s4);
+  padding: var(--s4) var(--s5); border-top: 1px solid var(--border);
+}
+.cite-dialog-status {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--accent-strong);
+}
 
 /* =====================================================================
    NEWS log

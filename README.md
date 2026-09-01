@@ -69,14 +69,17 @@ at it, rebuild.
 Columns: `id, year, title, authors, venue, venue_type, venue_short, featured,
 project page, arxiv, code`.
 
-The three link columns become buttons **only when filled** — leave one blank and that
-button simply doesn't appear:
+The three link columns become icon buttons **only when filled** — leave one blank and
+that button simply doesn't appear:
 
-| column | button | put here |
-|--------|--------|----------|
-| `project page` | **Project Page** | the paper’s project page (or the publisher/proceedings page). |
-| `arxiv` | **arXiv** | the arXiv abstract URL — or just the bare id like `1803.04039`. |
-| `code` | **Code** | the GitHub (or other) repository URL. |
+| column | icon | put here |
+|--------|------|----------|
+| `project page` | globe | the paper’s project page (or the publisher/proceedings page). |
+| `arxiv` | arXiv wordmark | the arXiv abstract URL — or just the bare id like `1803.04039`. |
+| `code` | GitHub mark | the GitHub (or other) repository URL. |
+
+Every paper also gets a **Cite** button that opens a BibTeX dialog with a copy button.
+The entry is generated from the columns above — there is no BibTeX column to maintain.
 
 Other fields: set `featured=yes` to surface a paper on the home page; `venue_type`
 (`journal`/`conference`/`preprint`/`dataset`/`thesis`) is a column you set — the filter
