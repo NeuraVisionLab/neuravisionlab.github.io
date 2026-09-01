@@ -237,9 +237,11 @@ p { max-width: 68ch; }
 button.chip { cursor: pointer; }
 .chip-icon { padding: 6px 9px; gap: 0; }
 .chip-icon svg { width: 16px; height: 16px; }
-.chip-icon .icon-wordmark { width: 32px; height: 16px; }
-/* .chip uppercases and letter-spaces its text; the wordmark must not inherit that */
-.icon-wordmark text { font-family: var(--font-mono); text-transform: none; letter-spacing: normal; }
+/* the official arXiv mark is drawn in a light warm grey for dark grounds
+   (2.45:1 on white), so its chip keeps a dark ground in both themes */
+.chip-icon .icon-arxiv { width: 31px; height: 14px; }
+.chip-arxiv, .chip-arxiv:hover { background: var(--d-surface); border-color: var(--d-border); }
+.chip-arxiv:hover { border-color: var(--d-accent); }
 
 /* on-dark button variants */
 .is-dark .btn-ghost { background: transparent; border-color: var(--d-border); color: var(--d-text); }
