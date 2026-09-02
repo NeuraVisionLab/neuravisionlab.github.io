@@ -65,6 +65,11 @@ then add a row to `data/members.csv`:
 - `orcid` — bare iD (`0000-0002-…`). Currently shown for the PI.
 - `group` — `pi` for the principal investigator, anything else for researchers.
 - `order` — position in the grid.
+- `bio` — free text; it becomes the opening paragraph of their profile page.
+
+**Every member also gets their own page** at `<slug>.html`, linked from their photo
+and name on the team page. Their papers are listed there automatically — matched on
+`surname`, the same way lab authors are bolded — so nothing extra to maintain.
 
 ---
 

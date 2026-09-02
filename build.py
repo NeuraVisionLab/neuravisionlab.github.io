@@ -78,6 +78,7 @@ def load_members() -> dict:
         r["interests_str"] = " · ".join(r["interests_list"])
         r["has_photo"] = bool(r.get("photo"))
         r["initials"] = "".join(w[0] for w in r["name"].split()[:2]).upper()
+        r["url"] = f"{r['slug']}.html"
     rows.sort(key=lambda r: r["order"])
     pi = [r for r in rows if r.get("group") == "pi"]
     students = [r for r in rows if r.get("group") != "pi"]
@@ -435,6 +436,13 @@ def base_context() -> dict:
                     if m["surname"] and m is not members["pi"]}
     publications = load_publications(int(site["home_publications_count"]),
                                      pi_surnames, lab_surnames)
+    # A member's papers are matched exactly the way author highlighting is, so a
+    # profile can never claim a paper its author list does not support.
+    for m in members["all"]:
+        key = _fold(m["surname"])
+        m["publications"] = [p for p in publications["all"]
+                             if key and any(key in _fold(tok)
+                                            for tok in p["authors"].split(","))] if key else []
     research = load_research()
     news = load_news()
     positions = load_positions()
@@ -489,8 +497,27 @@ def build(out_dir: Path = OUT) -> list[Path]:
         page_ctx["page_url"] = site_url + output
         page_ctx["site_url"] = site_url
         page_ctx["nav"] = [dict(n, active=(n["id"] == "research")) for n in ctx["nav"]]
+        taken.add(output)
         target = out_dir / output
         target.write_text(render("research-area.html", page_ctx), encoding="utf-8")
+        written.append(target)
+    # One page per member, generated from members.csv the same way.
+    for m in ctx["members"]["all"]:
+        output = m["url"]
+        if output in taken:
+            raise ValueError(f"member slug {m['slug']!r} would overwrite {output}")
+        taken.add(output)
+        page_ctx = dict(ctx)
+        page_ctx["page"] = "team"
+        page_ctx["m"] = m
+        page_ctx["page_title"] = f"{m['name']} \u2014 {ctx['site']['lab_full_name']}"
+        page_ctx["page_desc"] = _meta_excerpt(
+            m["bio"] or f"{m['name']}, {m['role']}, {ctx['site']['lab_full_name']}.", 160)
+        page_ctx["page_url"] = site_url + output
+        page_ctx["site_url"] = site_url
+        page_ctx["nav"] = [dict(n, active=(n["id"] == "team")) for n in ctx["nav"]]
+        target = out_dir / output
+        target.write_text(render("member.html", page_ctx), encoding="utf-8")
         written.append(target)
     # sitemap + robots
     _write_sitemap(ctx, out_dir)
@@ -501,6 +528,7 @@ def _write_sitemap(ctx, out_dir):
     base = ctx["site"]["site_url"]
     paths = ["" if p["output"] == "index.html" else p["output"] for p in ctx["pages"]]
     paths += [a["url"] for a in ctx["research"]]
+    paths += [m["url"] for m in ctx["members"]["all"]]
     urls = "".join(f"  <url><loc>{base}{p}</loc></url>\n" for p in paths)
     (out_dir / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'

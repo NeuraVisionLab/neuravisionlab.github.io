@@ -14,11 +14,11 @@
     {% for m in members.pi_list %}
     <article class="pi-card" data-reveal>
       <div class="pi-photo">
-        {% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="640">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}
+        <a href="{{ m.url }}">{% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="640">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}</a>
       </div>
       <div class="pi-info">
         <p class="fig-eyebrow" style="margin-bottom:var(--s3)">Principal Investigator</p>
-        <h2 id="pi-h">{{ m.name }}</h2>
+        <h2 id="pi-h"><a href="{{ m.url }}">{{ m.name }}</a></h2>
         <p class="role">{{ m.degree }} · {{ site.department }}</p>
         <p>{{ m.bio }}</p>
         <div class="pi-facts">
@@ -43,10 +43,10 @@
       {% for m in members.students %}
       <article class="member-card" data-reveal style="--i:{{ loop.index0 }}">
         <div class="member-photo">
-          {% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="600" loading="lazy">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}
+          <a href="{{ m.url }}">{% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="600" loading="lazy">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}</a>
         </div>
         <div class="member-info">
-          <h3 class="name">{{ m.name }}</h3>
+          <h3 class="name"><a href="{{ m.url }}">{{ m.name }}</a></h3>
           <span class="role">{{ m.role }}</span>
           {% if m.tag %}<span class="mtag">{{ m.tag }}</span>{% endif %}
           <span class="member-links">{% include "_socials.html" %}</span>

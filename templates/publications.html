@@ -23,18 +23,7 @@
       <div data-year-group>
         <h2 class="pub-year tnum">{{ group.year }}</h2>
         {% for p in group.items %}
-        <article class="pub-row" data-type="{{ p.venue_type }}" data-year="{{ p.year }}">
-          <div class="pub-main">
-            {% if p.url %}<a class="pub-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
-            <p class="pub-authors">{{ p.authors_html|raw }}</p>
-          </div>
-          <div class="pub-extra">
-            <span class="venue-badge">{{ p.badge_label }} · {{ p.year }}</span>
-            <div class="pub-links">
-              {% for link in p.links %}<a class="chip chip-icon" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}" title="{{ link.label }}">{% include "_link_icon.html" %}</a>{% endfor %}{% if p.bibtex %}<button class="chip chip-icon" type="button" data-cite aria-label="Cite {{ p.title }}" title="Cite (BibTeX)">{% include "_icon_cite.html" %}</button><template data-bibtex>{{ p.bibtex }}</template>{% endif %}
-            </div>
-          </div>
-        </article>
+        {% include "_pub_row.html" %}
         {% endfor %}
       </div>
       {% endfor %}

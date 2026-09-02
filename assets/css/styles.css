@@ -518,6 +518,10 @@ button.chip { cursor: pointer; }
 .member-card:hover .member-photo img { transform: scale(1.045); filter: grayscale(0) saturate(1.06) contrast(1.02); }
 .member-card:hover .member-photo::after { box-shadow: inset 0 0 0 2px var(--brand); }
 .member-card:hover .member-photo { box-shadow: var(--shadow-2); }
+/* names link to the profile page but must still read as headings */
+.member-card .name a, .pi-info h2 a { color: var(--text); }
+.member-card .name a:hover, .pi-info h2 a:hover { color: var(--accent-strong); text-decoration: none; }
+.member-photo a, .pi-photo a { display: block; height: 100%; }
 .member-idx { position: absolute; top: 8px; left: 8px; z-index: 2; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.06em; color: #fff; background: rgba(28,28,28,.45); padding: 2px 7px; border-radius: var(--r-sm); backdrop-filter: blur(4px); }
 .member-info { margin-top: var(--s4); }
 .member-info .name { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); color: var(--text); line-height: 1.2; }

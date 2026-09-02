@@ -1,0 +1,50 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">{{ m.role }}</p>
+    <h1>{{ m.name }}</h1>
+  </div>
+</section>
+
+<section class="section" aria-label="{{ m.name }}">
+  <div class="container">
+    <article class="pi-card" data-reveal>
+      <div class="pi-photo">
+        {% if m.has_photo %}<img src="assets/img/people/{{ m.photo }}" alt="Portrait of {{ m.name }}" width="480" height="640">{% else %}<div class="avatar-fallback">{{ m.initials }}</div>{% endif %}
+      </div>
+      <div class="pi-info">
+        {% if m.bio %}<p>{{ m.bio }}</p>{% endif %}
+        <div class="pi-facts">
+          <div class="row"><span class="k">Role</span><span class="v">{{ m.role }}</span></div>
+          {% if m.degree %}<div class="row"><span class="k">Degree</span><span class="v">{{ m.degree }}</span></div>{% endif %}
+          {% if m.interests_str %}<div class="row"><span class="k">Areas</span><span class="v">{{ m.interests_str }}</span></div>{% endif %}
+          {% if m.email %}<div class="row"><span class="k">Email</span><span class="v"><a href="mailto:{{ m.email }}">{{ m.email }}</a></span></div>{% endif %}
+          {% if m.orcid %}<div class="row"><span class="k">ORCID</span><span class="v"><a href="https://orcid.org/{{ m.orcid }}" target="_blank" rel="noopener">https://orcid.org/{{ m.orcid }}</a></span></div>{% endif %}
+        </div>
+        <div class="social-row">{% include "_socials.html" %}</div>
+        <p style="margin-top:var(--s6)"><a class="btn-link" href="team.html">{{ site.team_page_heading }} <span class="arr">→</span></a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% if m.publications %}
+<section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="mp-h">
+  <div class="container">
+    <div class="fig-head" data-reveal>
+      <h2 id="mp-h">{{ site.member_publications_heading }}</h2>
+    </div>
+    <div>
+      {% for p in m.publications %}
+        {% include "_pub_row.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% include "_cite_dialog.html" %}
+
+{% include "_footer.html" %}
