@@ -8,8 +8,9 @@ hero_subhead,"The Neuravision lab led by Doruk Oner specializes in computer visi
 meta_description,"NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis."
 university,Bilkent University
 department,Department of Computer Engineering
-faculty,Faculty of Engineering
 city,"Ankara, Türkiye"
+address_locality,Ankara
+address_country,TR
 office,"EA Building, Room 521"
 phone,+90 (312) 290 1981
 email,doruk.oner@bilkent.edu.tr

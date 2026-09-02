@@ -41,10 +41,23 @@ def _read_rows(name: str) -> list[dict]:
         return [ {k: (v or "").strip() for k, v in row.items()} for row in csv.DictReader(f) ]
 
 
+def _int_column(rows: list[dict], column: str, csv_name: str) -> None:
+    """Parse an integer column in place, naming the row when a value is not a number.
+
+    Row numbers count data rows, not file lines, because a quoted field may
+    span several lines (publications.csv carries multi-line BibTeX).
+    """
+    for i, r in enumerate(rows, 1):
+        try:
+            r[column] = int(r[column])
+        except ValueError:
+            raise SystemExit(f"data/{csv_name}: row {i} has {column}={r[column]!r}, "
+                             f"which is not a whole number")
+
+
 def load_pages() -> list[dict]:
     rows = _read_rows("pages.csv")
-    for r in rows:
-        r["nav_order"] = int(r["nav_order"])
+    _int_column(rows, "nav_order", "pages.csv")
     rows.sort(key=lambda r: r["nav_order"])
     return rows
 
@@ -68,20 +81,17 @@ def _split_list(value: str) -> list[str]:
 
 def load_members() -> dict:
     rows = _read_rows("members.csv")
+    _int_column(rows, "order", "members.csv")
     for r in rows:
-        try:
-            r["order"] = int(r.get("order") or 0)
-        except ValueError:
-            r["order"] = 0
-        r["interests_list"] = _split_list(r.get("interests", ""))
+        r["interests_list"] = _split_list(r["interests"])
         r["tag"] = r["interests_list"][0] if r["interests_list"] else ""
         r["interests_str"] = " · ".join(r["interests_list"])
-        r["has_photo"] = bool(r.get("photo"))
+        r["has_photo"] = bool(r["photo"])
         r["initials"] = "".join(w[0] for w in r["name"].split()[:2]).upper()
         r["url"] = f"{r['slug']}.html"
     rows.sort(key=lambda r: r["order"])
-    pi = [r for r in rows if r.get("group") == "pi"]
-    students = [r for r in rows if r.get("group") != "pi"]
+    pi = [r for r in rows if r["group"] == "pi"]
+    students = [r for r in rows if r["group"] != "pi"]
     pi0 = pi[0] if pi else None
     return {"all": rows, "pi": pi0, "pi_list": ([pi0] if pi0 else []),
             "students": students, "student_count": len(students)}
@@ -119,15 +129,15 @@ def _format_authors(authors: str, pi_surnames: set, lab_surnames: set) -> str:
 def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
-        r["authors_html"] = _format_authors(r.get("authors", ""), pi_surnames, lab_surnames)
-        r["badge_label"] = r.get("venue_short") or r.get("venue_type", "").title()
+        r["authors_html"] = _format_authors(r["authors"], pi_surnames, lab_surnames)
+        r["badge_label"] = r["venue_short"]
         # Link buttons — only those filled in the CSV are emitted.
         # project page -> project/publisher page, arxiv -> arXiv, code -> GitHub.
         links = []
         for key, label, icon in (("project page", "Project Page", "globe"),
                                  ("arxiv", "arXiv", "arxiv"),
                                  ("code", "Code", "github")):
-            val = r.get(key)
+            val = r[key]
             if not val:
                 continue
             if key == "arxiv" and not val.startswith("http"):
@@ -140,15 +150,16 @@ def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) ->
         r["url"] = r["venue_url"]
     # Newest year first, then the order column within each year — so the
     # sequence is stated in the CSV rather than inherited from row order.
-    rows.sort(key=lambda r: (-(int(r["year"]) if r["year"].isdigit() else 0),
-                             int(r["order"])))
+    _int_column(rows, "year", "publications.csv")
+    _int_column(rows, "order", "publications.csv")
+    rows.sort(key=lambda r: (-r["year"], r["order"]))
     years = sorted({r["year"] for r in rows if r["year"]}, reverse=True)
     by_year = [{"year": y, "items": [r for r in rows if r["year"] == y]} for y in years]
-    types = sorted({r["venue_type"] for r in rows if r.get("venue_type")})
+    types = sorted({r["venue_type"] for r in rows if r["venue_type"]})
     span = (f"{years[-1]}–{years[0]}" if len(years) > 1 else (years[0] if years else ""))
     return {"all": rows, "by_year": by_year, "years": years, "types": types,
             "recent": rows[:recent_count],
-            "count": len(rows), "year_span": span, "venue_count": len({r["venue_short"] for r in rows if r.get("venue_short")})}
+            "count": len(rows), "year_span": span, "venue_count": len({r["venue_short"] for r in rows if r["venue_short"]})}
 
 
 def _meta_excerpt(text: str, limit: int) -> str:
@@ -161,11 +172,8 @@ def _meta_excerpt(text: str, limit: int) -> str:
 
 def load_research() -> list[dict]:
     rows = _read_rows("research.csv")
+    _int_column(rows, "order", "research.csv")
     for r in rows:
-        try:
-            r["order"] = int(r.get("order") or 0)
-        except ValueError:
-            r["order"] = 0
         r["num"] = ""  # filled below
     rows.sort(key=lambda r: r["order"])
     for i, r in enumerate(rows, 1):
@@ -176,14 +184,16 @@ def load_research() -> list[dict]:
 
 def load_join_criteria() -> list[dict]:
     rows = _read_rows("join_criteria.csv")
-    rows.sort(key=lambda r: int(r["order"]))
+    _int_column(rows, "order", "join_criteria.csv")
+    rows.sort(key=lambda r: r["order"])
     return rows
 
 
 def load_join_steps() -> list[dict]:
     """`html` may carry inline links, so join.html renders it raw."""
     rows = _read_rows("join_steps.csv")
-    rows.sort(key=lambda r: int(r["order"]))
+    _int_column(rows, "order", "join_steps.csv")
+    rows.sort(key=lambda r: r["order"])
     return rows
 
 
@@ -197,14 +207,14 @@ def load_news() -> list[dict]:
                 continue
         return date(1900, 1, 1)
     for r in rows:
-        d = parse(r.get("date", ""))
+        d = parse(r["date"])
         r["_date"] = d
-        r["date_display"] = d.strftime("%b %Y") if d.year > 1900 else r.get("date", "")
+        r["date_display"] = d.strftime("%b %Y") if d.year > 1900 else r["date"]
         r["date_iso"] = d.isoformat() if d.year > 1900 else ""
-        tag = r.get("tag", "")
+        tag = r["tag"]
         r["glyph"] = {"publication": "PUB", "lab": "LAB", "award": "AWD",
                       "talk": "TLK", "join": "JOB"}.get(tag.lower(),
-                      (tag[:3] or "•").upper())
+                      tag[:3].upper())
     rows.sort(key=lambda r: r["_date"], reverse=True)
     return rows
 
@@ -235,6 +245,9 @@ class _Var(_Node):
         self.filters = parts[1:]
     def render(self, ctx, env):
         val = _lookup(self.path, ctx)
+        if val is _MISSING:
+            raise SystemExit(f"templates/{env['template']}: {{{{ {self.path} }}}} is not "
+                             f"defined — check the spelling, or add the column/key in data/")
         out = "" if val is None else str(val)
         raw = False
         for f in self.filters:
@@ -259,7 +272,12 @@ class _For(_Node):
     def __init__(self, var, coll, body):
         self.var, self.coll, self.body = var, coll, body
     def render(self, ctx, env):
-        items = _lookup(self.coll, ctx) or []
+        items = _lookup(self.coll, ctx)
+        if items is _MISSING:
+            raise SystemExit(f"templates/{env['template']}: {{% for {self.var} in "
+                             f"{self.coll} %}} is not defined — check the spelling, "
+                             f"or add the column/key in data/")
+        items = items or []
         out = []
         n = len(items)
         for i, item in enumerate(items):
@@ -287,7 +305,12 @@ class _Include(_Node):
     def __init__(self, name): self.name = name.strip().strip("'\"")
     def render(self, ctx, env):
         tpl = env["loader"](self.name)
-        return _render_nodes(tpl, ctx, env)
+        return _render_nodes(tpl, ctx, {**env, "template": self.name})
+
+
+# A name the data never defines is a typo or a deleted CSV column; an empty
+# cell is a legitimately blank optional value. Only the first is an error.
+_MISSING = object()
 
 
 def _lookup(path, ctx):
@@ -296,9 +319,13 @@ def _lookup(path, ctx):
     cur = ctx
     for part in path.split("."):
         if isinstance(cur, dict):
-            cur = cur.get(part)
+            if part not in cur:
+                return _MISSING
+            cur = cur[part]
         else:
-            cur = getattr(cur, part, None)
+            cur = getattr(cur, part, _MISSING)
+        if cur is _MISSING:
+            return _MISSING
         if cur is None:
             return None
     return cur
@@ -313,8 +340,12 @@ def _truthy(expr, ctx):
             l, r = expr.split(op, 1)
             lv = _lookup(l.strip(), ctx)
             rv = _lookup(r.strip(), ctx)
+            lv = "" if lv is _MISSING else lv
+            rv = "" if rv is _MISSING else rv
             return (str(lv) == str(rv)) if op == "==" else (str(lv) != str(rv))
     val = _lookup(expr, ctx)
+    if val is _MISSING:
+        return False
     if isinstance(val, (list, dict, str)):
         return len(val) > 0
     return bool(val)
@@ -387,7 +418,7 @@ def _compile(name: str) -> list:
 
 
 def render(name: str, ctx: dict) -> str:
-    env = {"loader": _compile}
+    env = {"loader": _compile, "template": name}
     return _render_nodes(_compile(name), ctx, env)
 
 
@@ -399,28 +430,33 @@ def _build_jsonld(site: dict, pi: dict) -> str:
     data = {
         "@context": "https://schema.org",
         "@type": "ResearchOrganization",
-        "name": site.get("lab_full_name", "NeuraVision Research Lab"),
-        "alternateName": site.get("lab_name", "NeuraVision"),
+        "name": site["lab_full_name"],
+        "alternateName": site["lab_name"],
         "url": site["site_url"],
         "logo": site["site_url"] + "assets/img/brand/icon-512.png",
         "image": site["site_url"] + "assets/img/brand/og-image.png",
         "description": site["meta_description"],
-        "email": site.get("email", ""),
+        "email": site["email"],
         "parentOrganization": {"@type": "CollegeOrUniversity",
-                               "name": site.get("university", "Bilkent University")},
+                               "name": site["university"]},
         "address": {"@type": "PostalAddress",
-                    "streetAddress": site.get("office", ""),
-                    "addressLocality": "Ankara", "addressCountry": "TR"},
+                    "streetAddress": site["office"],
+                    "addressLocality": site["address_locality"],
+                    "addressCountry": site["address_country"]},
     }
     if pi:
-        founder = {"@type": "Person", "name": pi.get("name", ""),
-                   "jobTitle": "Assistant Professor",
-                   "url": pi.get("scholar") or site["site_url"] + "team.html"}
+        # url is the PI's page on this site; external profiles go in sameAs.
+        founder = {"@type": "Person", "name": pi["name"],
+                   "jobTitle": pi["role"],
+                   "url": site["site_url"] + pi["url"]}
         if pi["orcid"]:
             # ORCID is the canonical identifier for a researcher, so expose it
             # next to the name rather than only on the page.
             founder["identifier"] = "https://orcid.org/" + pi["orcid"]
-            founder["sameAs"] = ["https://orcid.org/" + pi["orcid"]]
+        same_as = [u for u in ("https://orcid.org/" + pi["orcid"] if pi["orcid"] else "",
+                               pi["scholar"], pi["website"]) if u]
+        if same_as:
+            founder["sameAs"] = same_as
         data["founder"] = founder
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
@@ -452,7 +488,7 @@ def base_context() -> dict:
         "pages": pages,
         "join_criteria": join_criteria,
         "join_steps": join_steps,
-        "jsonld": _build_jsonld(site, members.get("pi")),
+        "jsonld": _build_jsonld(site, members["pi"]),
         "site": site,
         "members": members,
         "publications": publications,
