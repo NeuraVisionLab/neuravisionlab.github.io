@@ -1,0 +1,34 @@
+{% include "_head.html" %}
+
+<section class="subhero is-dark">
+  <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
+  <div class="container">
+    <p class="fig-eyebrow">{{ area.tag }}</p>
+    <h1>{{ area.title }}</h1>
+  </div>
+</section>
+
+<section class="section" aria-label="{{ area.title }}">
+  <div class="container">
+    <article class="research-block" data-reveal>
+      <div class="rb-text">
+        <p class="lead">{{ area.description }}</p>
+        <p style="margin-top:var(--s6)"><a class="btn btn-primary" href="publications.html">{{ site.research_related_link_label }}</a> <a class="btn btn-ghost" href="research.html">{{ site.research_page_heading }} <span aria-hidden="true">→</span></a></p>
+      </div>
+      <div class="rb-visual" aria-hidden="true">{% if area.image %}<img src="assets/img/research/{{ area.image }}" alt="" loading="lazy" width="627" height="627">{% else %}{% include "_constellation.html" %}{% endif %}</div>
+    </article>
+  </div>
+</section>
+
+<section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="more-h">
+  <div class="container">
+    <div class="fig-head" data-reveal>
+      <h2 id="more-h">{{ site.research_more_heading }}</h2>
+    </div>
+    <div class="area-grid area-grid--more">
+      {% for r in research %}{% if r.slug != area.slug %}{% include "_area_card.html" %}{% endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "_footer.html" %}

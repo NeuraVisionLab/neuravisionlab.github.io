@@ -17,7 +17,7 @@ You never need to touch HTML, CSS, or run anything.
 | Add a paper | `data/publications.csv` |
 | Add or update a person | `data/members.csv` |
 | Post lab news | `data/news.csv` |
-| Change a research area | `data/research.csv` |
+| Change or add a research area (each gets its own page) | `data/research.csv` |
 | Open or close a position | `data/positions.csv` |
 | Change any heading, button or paragraph | `data/site.csv` |
 | Change page titles, nav or SEO text | `data/pages.csv` |
@@ -70,9 +70,12 @@ then add a row to `data/members.csv`:
 
 ## The other files
 
-- **`research.csv`** — one row per area. `image` names a file in
-  `assets/img/research/` (square; the card crops it). Blank falls back to the
-  node graphic. `summary` shows on the home page, `description` on the research page.
+- **`research.csv`** — one row per area, and **each row becomes its own page**
+  at `<slug>.html`, linked from the home page, the research page and the footer.
+  `description` is the text shown everywhere — home card, research page and the
+  area's own page. `image` names a file in `assets/img/research/` (square; the
+  card crops it); blank falls back to the node graphic. Add a row and you get a
+  new page with no other change.
 - **`news.csv`** — `date, title, body, tag, link`. Sorted newest first
   automatically; the newest gets a **New** badge. `tag` is e.g. `Publication` or `Lab`.
 - **`positions.csv`** and **`join_criteria.csv` / `join_steps.csv`** — the Join page.

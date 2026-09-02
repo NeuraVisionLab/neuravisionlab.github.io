@@ -150,6 +150,14 @@ def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) ->
             "count": len(rows), "year_span": span, "venue_count": len({r["venue_short"] for r in rows if r.get("venue_short")})}
 
 
+def _meta_excerpt(text: str, limit: int) -> str:
+    """The opening of `text`, cut at a word boundary, for a meta description."""
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(" ", 1)[0].rstrip(",;:.\u2014- ") + "\u2026"
+
+
 def load_research() -> list[dict]:
     rows = _read_rows("research.csv")
     for r in rows:
@@ -161,6 +169,7 @@ def load_research() -> list[dict]:
     rows.sort(key=lambda r: r["order"])
     for i, r in enumerate(rows, 1):
         r["num"] = f"{i:02d}"
+        r["url"] = f"{r['slug']}.html"
     return rows
 
 
@@ -465,6 +474,24 @@ def build(out_dir: Path = OUT) -> list[Path]:
         target = out_dir / output
         target.write_text(html_out, encoding="utf-8")
         written.append(target)
+    # One page per research area, generated from research.csv rather than listed
+    # in pages.csv, so adding an area stays a one-row change.
+    taken = {p["output"] for p in ctx["pages"]}
+    for area in ctx["research"]:
+        output = area["url"]
+        if output in taken:
+            raise ValueError(f"research slug {area['slug']!r} would overwrite {output}")
+        page_ctx = dict(ctx)
+        page_ctx["page"] = "research"
+        page_ctx["area"] = area
+        page_ctx["page_title"] = f"{area['title']} \u2014 {ctx['site']['lab_full_name']}"
+        page_ctx["page_desc"] = _meta_excerpt(area["description"], 160)
+        page_ctx["page_url"] = site_url + output
+        page_ctx["site_url"] = site_url
+        page_ctx["nav"] = [dict(n, active=(n["id"] == "research")) for n in ctx["nav"]]
+        target = out_dir / output
+        target.write_text(render("research-area.html", page_ctx), encoding="utf-8")
+        written.append(target)
     # sitemap + robots
     _write_sitemap(ctx, out_dir)
     return written
@@ -472,10 +499,9 @@ def build(out_dir: Path = OUT) -> list[Path]:
 
 def _write_sitemap(ctx, out_dir):
     base = ctx["site"]["site_url"]
-    urls = "".join(
-        f"  <url><loc>{base}{'' if p['output'] == 'index.html' else p['output']}</loc></url>\n"
-        for p in ctx["pages"]
-    )
+    paths = ["" if p["output"] == "index.html" else p["output"] for p in ctx["pages"]]
+    paths += [a["url"] for a in ctx["research"]]
+    urls = "".join(f"  <url><loc>{base}{p}</loc></url>\n" for p in paths)
     (out_dir / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

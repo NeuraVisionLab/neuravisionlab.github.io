@@ -13,8 +13,7 @@
     {% for r in research %}
     <article class="research-block" id="{{ r.slug }}" data-reveal>
       <div class="rb-text">
-        <h2>{{ r.title }}</h2>
-        <p class="lead">{{ r.summary }}</p>
+        <h2><a href="{{ r.url }}">{{ r.title }}</a></h2>
         <p>{{ r.description }}</p>
         <p style="margin-top:var(--s5)"><a class="btn-link" href="publications.html">{{ site.research_related_link_label }} <span class="arr">→</span></a></p>
       </div>
