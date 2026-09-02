@@ -21,7 +21,6 @@
           {% if m.degree %}<div class="row"><span class="k">Degree</span><span class="v">{{ m.degree }}</span></div>{% endif %}
           {% if m.interests_str %}<div class="row"><span class="k">Areas</span><span class="v">{{ m.interests_str }}</span></div>{% endif %}
           {% if m.email %}<div class="row"><span class="k">Email</span><span class="v"><a href="mailto:{{ m.email }}">{{ m.email }}</a></span></div>{% endif %}
-          {% if m.orcid %}<div class="row"><span class="k">ORCID</span><span class="v"><a href="https://orcid.org/{{ m.orcid }}" target="_blank" rel="noopener">https://orcid.org/{{ m.orcid }}</a></span></div>{% endif %}
         </div>
         <div class="social-row">{% include "_socials.html" %}</div>
         <p style="margin-top:var(--s6)"><a class="btn-link" href="team.html">{{ site.team_page_heading }} <span class="arr">→</span></a></p>

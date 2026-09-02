@@ -62,7 +62,8 @@ then add a row to `data/members.csv`:
 - `surname` — how papers credit them. This is what bolds their name in the
   publication list, so it must match the author string (`Fallah`, not `Ardalani`).
 - `interests` — `;`-separated; the first one becomes the card's tag.
-- `orcid` — bare iD (`0000-0002-…`). Currently shown for the PI.
+- `orcid` — bare iD (`0000-0002-…`). Fill it and the ORCID icon appears in that
+  member’s links, on the team page and their profile. Blank hides it.
 - `group` — `pi` for the principal investigator, anything else for researchers.
 - `order` — position in the grid.
 - `bio` — free text; it becomes the opening paragraph of their profile page.
