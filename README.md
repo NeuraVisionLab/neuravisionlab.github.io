@@ -28,6 +28,11 @@ A field you leave blank is simply not shown — a member with no GitHub link
 just doesn't get one. Commas inside a value are fine if you wrap it in
 `"double quotes"`; every spreadsheet does this automatically.
 
+If an edit is something the site can't use — a letter in a number column,
+a renamed heading — the rebuild stops and tells you which file and row to
+fix. The live site stays exactly as it was until you do, so a bad edit
+can't break anything in public.
+
 ---
 
 ## Adding a paper
