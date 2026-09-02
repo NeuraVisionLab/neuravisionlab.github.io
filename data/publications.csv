@@ -24,7 +24,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   number    = {2},
   pages     = {46},
   year      = {2025},
-  publisher = {Springer Science and Business Media LLC},
   doi       = {10.1007/s00138-025-01664-1}
 }"
 4,2025,Harnessing deep learning to detect bronchiolitis obliterans syndrome from chest CT,"M Koziński, D Oner, J Gwizdała, C Beigelman-Aubry, P Fua, A Koutsokera, ...","Communications medicine 5 (1), 18, 2025",journal,Comms. Medicine,https://www.nature.com/articles/s43856-025-00732-x,https://www.nature.com/articles/s43856-025-00732-x,,,"@article{kozinski2025harnessing,
@@ -35,7 +34,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   number    = {1},
   pages     = {18},
   year      = {2025},
-  publisher = {Springer Science and Business Media LLC},
   doi       = {10.1038/s43856-025-00732-x}
 }"
 5,2025,"Dataset for ""PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization""","N Talabot, O Clerc, AC Demirtas, A Goujon, D Oner, MH Lê, P Fua","Zenodo, 2025",dataset,Dataset,https://zenodo.org/records/17466765,https://zenodo.org/records/17466765,https://arxiv.org/abs/2502.12985,https://github.com/cvlab-epfl/PartSDF,"@misc{talabot2025dataset,
@@ -76,7 +74,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   number    = {8},
   pages     = {10588--10595},
   year      = {2023},
-  publisher = {Institute of Electrical and Electronics Engineers (IEEE)},
   doi       = {10.1109/TPAMI.2023.3246921}
 }"
 9,2023,Topologically Better Delineation of Curvilinear Structures,D Oner,"EPFL, 2023",thesis,Ph.D. Thesis,,,,,"@phdthesis{oner2023topologically,
@@ -93,7 +90,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   volume    = {344},
   pages     = {128264},
   year      = {2022},
-  publisher = {Elsevier BV},
   doi       = {10.1016/j.conbuildmat.2022.128264}
 }"
 11,2022,Enforcing connectivity of 3d linear structures using their 2d projections,"D Oner, H Osman, M Koziński, P Fua","MICCAI - International Conference on Medical Image Computing and Computer …, 2022",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-031-16443-9_57,,https://arxiv.org/abs/2207.06832,https://github.com/doruk-oner/ConnectivityOnProjections,"@inproceedings{oner2022enforcing,
@@ -113,7 +109,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   number    = {12},
   pages     = {3675--3685},
   year      = {2022},
-  publisher = {Institute of Electrical and Electronics Engineers (IEEE)},
   doi       = {10.1109/TMI.2022.3193072}
 }"
 13,2022,Promoting connectivity of network-like structures by enforcing region separation,"D Oner, M Koziński, L Citraro, NC Dadap, AG Konings, P Fua","TPAMI - IEEE Transactions on Pattern Analysis and Machine Intelligence 44 (9) …, 2022",journal,TPAMI,https://ieeexplore.ieee.org/document/9409952,,https://arxiv.org/abs/2009.07011,https://github.com/doruk-oner/TOPO-Windowed-Loss,"@article{oner2022promoting,
@@ -124,7 +119,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   number    = {9},
   pages     = {5401--5413},
   year      = {2022},
-  publisher = {Institute of Electrical and Electronics Engineers (IEEE)},
   doi       = {10.1109/TPAMI.2021.3074366}
 }"
 14,2021,Drainage canals in Southeast Asian peatlands increase carbon emissions,"NC Dadap, AM Hoyt, AR Cobb, D Oner, M Kozinski, PV Fua, K Rao, ...","Agu Advances 2 (1), e2020AV000321, 2021",journal,AGU Advances,https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2020AV000321,https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2020AV000321,,,"@article{dadap2021drainage,
@@ -135,7 +129,6 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   number    = {1},
   pages     = {e2020AV000321},
   year      = {2021},
-  publisher = {American Geophysical Union (AGU)},
   doi       = {10.1029/2020AV000321}
 }"
 15,2018,Multi-objective contextual bandit problem with similarity information,"E Turgay, D Oner, C Tekin","AISTATS - International Conference on Artificial Intelligence and Statistics …, 2018",conference,AISTATS,https://proceedings.mlr.press/v84/turgay18a.html,,https://arxiv.org/abs/1803.04015,,"@inproceedings{turgay2018multi,
