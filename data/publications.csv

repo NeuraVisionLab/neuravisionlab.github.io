@@ -1,0 +1,21 @@
+order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,code,bibtex
+1,2026,Track-Aligned Interaction Modeling for Group Activity Recognition,"Amirreza M. Shebly and Doruk Öner","Signal Processing and Communications Applications Conference (SIU), 2026",conference,SIU,,,,
+2,2026,Stochastic Nonlinearities Improve Uncertainty Estimation,"Mohammad Sarhangzadeh, Amirreza M. Shebly, and Doruk Öner","British Machine Vision Conference (BMVC), 2026",conference,BMVC,,,,
+3,2026,Direction-Aware Kinematics-Conditioned Graph Hypernetwork for Human Trajectory Prediction,"Amirreza M. Shebly, Mohammad Sarhangzadeh, and Doruk Öner","Asian Conference on Computer Vision (ACCV), 2026",conference,ACCV,,,,
+1,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Öner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
+  title     = {{CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation}},
+  author    = {Esmaeilzadeh, Elyar and Garaaghaji, Ehsan and Hallaji Azad, Farzad and {\""{O}}ner, Doruk},
+  booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2025},
+  pages     = {183--193},
+  year      = {2025},
+  publisher = {Springer Nature Switzerland},
+  doi       = {10.1007/978-3-032-05162-2_18}
+}"
+2,2025,PartSDF: Part-based implicit neural representation for composite 3D shape parametrization and optimization,"N Talabot, O Clerc, AC Demirtas, A Goujon, H Le, D Öner, P Fua","Transactions on Machine Learning Research (TMLR), 2025",journal,TMLR,https://openreview.net/forum?id=zl43C1yBKv,,https://arxiv.org/abs/2502.12985,https://github.com/cvlab-epfl/PartSDF,"@article{talabot2025partsdf,
+  title   = {{PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization}},
+  author  = {Talabot, Nicolas and Clerc, Olivier and Demirtas, Arda Cinar and Goujon, Alexis and Le, Hieu and {\""{O}}ner, Doruk and Fua, Pascal},
+  journal = {Transactions on Machine Learning Research},
+  issn    = {2835-8856},
+  year    = {2025},
+  url     = {https://openreview.net/forum?id=zl43C1yBKv}
+}"
