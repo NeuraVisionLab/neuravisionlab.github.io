@@ -1,8 +1,8 @@
 order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,code,bibtex
-1,2026,Track-Aligned Interaction Modeling for Group Activity Recognition,"Amirreza M. Shebly and Doruk Öner","Signal Processing and Communications Applications Conference (SIU), 2026",conference,SIU,,,,
+1,2026,Direction-Aware Kinematics-Conditioned Graph Hypernetwork for Human Trajectory Prediction,"Amirreza M. Shebly, Mohammad Sarhangzadeh, and Doruk Öner","Asian Conference on Computer Vision (ACCV), 2026",conference,ACCV,,,,
 2,2026,Stochastic Nonlinearities Improve Uncertainty Estimation,"Mohammad Sarhangzadeh, Amirreza M. Shebly, and Doruk Öner","British Machine Vision Conference (BMVC), 2026",conference,BMVC,,,,
-3,2026,Direction-Aware Kinematics-Conditioned Graph Hypernetwork for Human Trajectory Prediction,"Amirreza M. Shebly, Mohammad Sarhangzadeh, and Doruk Öner","Asian Conference on Computer Vision (ACCV), 2026",conference,ACCV,,,,
-1,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Öner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
+3,2026,Track-Aligned Interaction Modeling for Group Activity Recognition,"Amirreza M. Shebly and Doruk Öner","Signal Processing and Communications Applications Conference (SIU), 2026",conference,SIU,,,,
+4,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Öner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
   title     = {{CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation}},
   author    = {Esmaeilzadeh, Elyar and Garaaghaji, Ehsan and Hallaji Azad, Farzad and {\""{O}}ner, Doruk},
   booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2025},
@@ -11,7 +11,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   publisher = {Springer Nature Switzerland},
   doi       = {10.1007/978-3-032-05162-2_18}
 }"
-2,2025,PartSDF: Part-based implicit neural representation for composite 3D shape parametrization and optimization,"N Talabot, O Clerc, AC Demirtas, A Goujon, H Le, D Öner, P Fua","Transactions on Machine Learning Research (TMLR), 2025",journal,TMLR,https://openreview.net/forum?id=zl43C1yBKv,,https://arxiv.org/abs/2502.12985,https://github.com/cvlab-epfl/PartSDF,"@article{talabot2025partsdf,
+5,2025,PartSDF: Part-based implicit neural representation for composite 3D shape parametrization and optimization,"N Talabot, O Clerc, AC Demirtas, A Goujon, H Le, D Öner, P Fua","Transactions on Machine Learning Research (TMLR), 2025",journal,TMLR,https://openreview.net/forum?id=zl43C1yBKv,,https://arxiv.org/abs/2502.12985,https://github.com/cvlab-epfl/PartSDF,"@article{talabot2025partsdf,
   title   = {{PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization}},
   author  = {Talabot, Nicolas and Clerc, Olivier and Demirtas, Arda Cinar and Goujon, Alexis and Le, Hieu and {\""{O}}ner, Doruk and Fua, Pascal},
   journal = {Transactions on Machine Learning Research},
@@ -19,7 +19,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year    = {2025},
   url     = {https://openreview.net/forum?id=zl43C1yBKv}
 }"
-3,2025,Vision-based power line cables and pylons detection for low flying aircraft,"J Gwizdała, D Öner, SK Roy, MA Shah, A Eberhard, I Egorov, P Krüsi, ...","Machine Vision and Applications 36 (2), 2025",journal,MVA,https://doi.org/10.1007/s00138-025-01664-1,,https://arxiv.org/abs/2407.03671,,"@article{gwizdala2025vision,
+6,2025,Vision-based power line cables and pylons detection for low flying aircraft,"J Gwizdała, D Öner, SK Roy, MA Shah, A Eberhard, I Egorov, P Krüsi, ...","Machine Vision and Applications 36 (2), 2025",journal,MVA,https://doi.org/10.1007/s00138-025-01664-1,,https://arxiv.org/abs/2407.03671,,"@article{gwizdala2025vision,
   title     = {{Vision-based power line cables and pylons detection for low flying aircraft}},
   author    = {Gwizda{\l}a, Jakub and {\""{O}}ner, Doruk and Roy, Soumava Kumar and Shah, Mian Akbar and Eberhard, Ad and Egorov, Ivan and Kr{\""{u}}si, Philipp and Yakushev, Grigory and Fua, Pascal},
   journal   = {Machine Vision and Applications},
@@ -29,7 +29,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2025},
   doi       = {10.1007/s00138-025-01664-1}
 }"
-4,2025,Harnessing deep learning to detect bronchiolitis obliterans syndrome from chest CT,"M Koziński, D Öner, J Gwizdała, C Beigelman-Aubry, P Fua, A Koutsokera, ...","Communications Medicine 5 (1), 2025",journal,ComMed,,,,,"@article{kozinski2025harnessing,
+7,2025,Harnessing deep learning to detect bronchiolitis obliterans syndrome from chest CT,"M Koziński, D Öner, J Gwizdała, C Beigelman-Aubry, P Fua, A Koutsokera, ...","Communications Medicine 5 (1), 2025",journal,ComMed,,,,,"@article{kozinski2025harnessing,
   title     = {{Harnessing deep learning to detect bronchiolitis obliterans syndrome from chest CT}},
   author    = {Kozi{\'{n}}ski, Mateusz and {\""{O}}ner, Doruk and Gwizda{\l}a, Jakub and Beigelman-Aubry, Catherine and Fua, Pascal and Koutsokera, Angela and Casutt, Alessio and Vraka, Argyro and De Marchi, Florent and Prella, Marco and Clarenbach, Christian F. and Darbellay Sagnard, Mylène and Thabut, Géraud and Eichenberger-Roth, Sylvia and Lovis, Christian and Guibert-Lafaye, Elsa},
   journal   = {Communications Medicine},
@@ -39,7 +39,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2025},
   doi       = {10.1038/s43856-025-00732-x}
 }"
-5,2025,"Dataset for ""PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization""","N Talabot, O Clerc, AC Demirtas, A Goujon, H Le, D Öner, P Fua","Zenodo, 2025",dataset,Zenodo,https://zenodo.org/doi/10.5281/zenodo.17466765,,,,"@dataset{talabot2025partsdf,
+8,2025,"Dataset for ""PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization""","N Talabot, O Clerc, AC Demirtas, A Goujon, H Le, D Öner, P Fua","Zenodo, 2025",dataset,Zenodo,https://zenodo.org/doi/10.5281/zenodo.17466765,,,,"@dataset{talabot2025partsdf,
   title        = {{Dataset for ``PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization''}},
   author       = {Talabot, Nicolas and Clerc, Olivier and Demirtas, Arda Cinar and Goujon, Alexis and Le, Hieu and {\""{O}}ner, Doruk and Fua, Pascal},
   year         = {2025},
@@ -47,7 +47,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   doi          = {10.5281/zenodo.17466765},
   url          = {https://zenodo.org/doi/10.5281/zenodo.17466765}
 }"
-6,2025,IT³: Idempotent Test-Time Training,"N Durasov, A Shocher, D Öner, G Chechik, AA Efros, P Fua","ICML - International Conference on Machine Learning, 2025",conference,ICML,https://proceedings.mlr.press/v267/durasov25a.html,,https://arxiv.org/abs/2411.17608,https://github.com/cvlab-epfl/IT3,"@inproceedings{durasov2025it3,
+9,2025,IT³: Idempotent Test-Time Training,"N Durasov, A Shocher, D Öner, G Chechik, AA Efros, P Fua","ICML - International Conference on Machine Learning, 2025",conference,ICML,https://proceedings.mlr.press/v267/durasov25a.html,,https://arxiv.org/abs/2411.17608,https://github.com/cvlab-epfl/IT3,"@inproceedings{durasov2025it3,
   title     = {{{IT}$^3$: Idempotent Test-Time Training}},
   author    = {Durasov, Nikita and Shocher, Assaf and {\""{O}}ner, Doruk and Chechik, Gal and Efros, Alexei A and Fua, Pascal},
   booktitle = {Proceedings of the 42nd International Conference on Machine Learning},
@@ -58,7 +58,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   publisher = {PMLR},
   url       = {https://proceedings.mlr.press/v267/durasov25a.html}
 }"
-7,2024,Enabling uncertainty estimation in iterative neural networks,"N Durasov, D Öner, J Donier, H Le, P Fua","ICML - International Conference on Machine Learning, 2024",conference,ICML,https://proceedings.mlr.press/v235/durasov24a.html,,https://arxiv.org/abs/2406.18944,https://github.com/cvlab-epfl/uncertainty-iterative-networks,"@inproceedings{durasov2024enabling,
+10,2024,Enabling uncertainty estimation in iterative neural networks,"N Durasov, D Öner, J Donier, H Le, P Fua","ICML - International Conference on Machine Learning, 2024",conference,ICML,https://proceedings.mlr.press/v235/durasov24a.html,,https://arxiv.org/abs/2406.18944,https://github.com/cvlab-epfl/uncertainty-iterative-networks,"@inproceedings{durasov2024enabling,
   title     = {{Enabling Uncertainty Estimation in Iterative Neural Networks}},
   author    = {Durasov, Nikita and {\""{O}}ner, Doruk and Donier, Jonathan and Le, Hieu and Fua, Pascal},
   booktitle = {Proceedings of the 41st International Conference on Machine Learning},
@@ -69,7 +69,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   publisher = {PMLR},
   url       = {https://proceedings.mlr.press/v235/durasov24a.html}
 }"
-8,2023,Persistent homology with improved locality information for more effective delineation,"D Öner, A Garin, M Koziński, K Hess, P Fua","TPAMI - IEEE Transactions on Pattern Analysis and Machine Intelligence 45 (8), 2023",journal,TPAMI,https://doi.org/10.1109/TPAMI.2023.3246921,,https://arxiv.org/abs/2303.16050,,"@article{oner2023persistent,
+11,2023,Persistent homology with improved locality information for more effective delineation,"D Öner, A Garin, M Koziński, K Hess, P Fua","TPAMI - IEEE Transactions on Pattern Analysis and Machine Intelligence 45 (8), 2023",journal,TPAMI,https://doi.org/10.1109/TPAMI.2023.3246921,,https://arxiv.org/abs/2303.16050,,"@article{oner2023persistent,
   title     = {{Persistent Homology With Improved Locality Information for More Effective Delineation}},
   author    = {{\""{O}}ner, Doruk and Garin, Ad{\'{e}}lie and Kozi{\'{n}}ski, Mateusz and Hess, Kathryn and Fua, Pascal},
   journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
@@ -79,14 +79,14 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2023},
   doi       = {10.1109/TPAMI.2023.3246921}
 }"
-9,2023,Topologically Better Delineation of Curvilinear Structures,D Öner,"EPFL, 2023",thesis,Ph.D. Thesis,https://doi.org/10.5075/epfl-thesis-9749,,https://infoscience.epfl.ch/record/304906,,"@phdthesis{oner2023topologically,
+12,2023,Topologically Better Delineation of Curvilinear Structures,D Öner,"EPFL, 2023",thesis,Ph.D. Thesis,https://doi.org/10.5075/epfl-thesis-9749,,https://infoscience.epfl.ch/record/304906,,"@phdthesis{oner2023topologically,
   title  = {{Topologically Better Delineation of Curvilinear Structures}},
   author = {{\""{O}}ner, Doruk},
   school = {EPFL},
   year   = {2023},
   doi    = {10.5075/epfl-thesis-9749}
 }"
-10,2022,TOPO-Loss for continuity-preserving crack detection using deep learning,"BG Pantoja-Rosero, D Öner, M Koziński, R Achanta, P Fua, F Pérez-Cruz, ...","Construction and Building Materials 344, 2022",journal,CBM,https://doi.org/10.1016/j.conbuildmat.2022.128264,,https://arxiv.org/abs/2201.01735,,"@article{pantoja2022topo,
+13,2022,TOPO-Loss for continuity-preserving crack detection using deep learning,"BG Pantoja-Rosero, D Öner, M Koziński, R Achanta, P Fua, F Pérez-Cruz, ...","Construction and Building Materials 344, 2022",journal,CBM,https://doi.org/10.1016/j.conbuildmat.2022.128264,,https://arxiv.org/abs/2201.01735,,"@article{pantoja2022topo,
   title     = {{TOPO-Loss for continuity-preserving crack detection using deep learning}},
   author    = {Pantoja-Rosero, B.G. and {\""{O}}ner, D. and Kozi{\'{n}}ski, M. and Achanta, R. and Fua, P. and P{\'{e}}rez-Cruz, F. and Beyer, K.},
   journal   = {Construction and Building Materials},
@@ -95,7 +95,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2022},
   doi       = {10.1016/j.conbuildmat.2022.128264}
 }"
-11,2022,Enforcing connectivity of 3D linear structures using their 2D projections,"D Öner, H Osman, M Koziński, P Fua","MICCAI - International Conference on Medical Image Computing and Computer Assisted Intervention, 2022",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-031-16443-9_57,,https://arxiv.org/abs/2206.12023,,"@inproceedings{oner2022enforcing,
+14,2022,Enforcing connectivity of 3D linear structures using their 2D projections,"D Öner, H Osman, M Koziński, P Fua","MICCAI - International Conference on Medical Image Computing and Computer Assisted Intervention, 2022",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-031-16443-9_57,,https://arxiv.org/abs/2206.12023,,"@inproceedings{oner2022enforcing,
   title     = {{Enforcing Connectivity of 3D Linear Structures Using Their 2D Projections}},
   author    = {{\""{O}}ner, Doruk and Osman, Hussein and Kozi{\'{n}}ski, Mateusz and Fua, Pascal},
   booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2022},
@@ -104,7 +104,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   publisher = {Springer Nature Switzerland},
   doi       = {10.1007/978-3-031-16443-9_57}
 }"
-12,2022,Adjusting the ground truth annotations for connectivity-based learning to delineate,"D Öner, M Koziński, L Citraro, P Fua","TMI - IEEE Transactions on Medical Imaging 41 (12), 2022",journal,TMI,https://doi.org/10.1109/TMI.2022.3193072,,https://arxiv.org/abs/2205.02321,,"@article{oner2022adjusting,
+15,2022,Adjusting the ground truth annotations for connectivity-based learning to delineate,"D Öner, M Koziński, L Citraro, P Fua","TMI - IEEE Transactions on Medical Imaging 41 (12), 2022",journal,TMI,https://doi.org/10.1109/TMI.2022.3193072,,https://arxiv.org/abs/2205.02321,,"@article{oner2022adjusting,
   title     = {{Adjusting the Ground Truth Annotations for Connectivity-Based Learning to Delineate}},
   author    = {{\""{O}}ner, Doruk and Kozi{\'{n}}ski, Mateusz and Citraro, Leonardo and Fua, Pascal},
   journal   = {IEEE Transactions on Medical Imaging},
@@ -114,7 +114,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2022},
   doi       = {10.1109/TMI.2022.3193072}
 }"
-13,2022,Promoting connectivity of network-like structures by enforcing region separation,"D Öner, M Koziński, L Citraro, NC Dadap, AG Konings, P Fua","TPAMI - IEEE Transactions on Pattern Analysis and Machine Intelligence 44 (9), 2022",journal,TPAMI,https://doi.org/10.1109/TPAMI.2021.3074366,,https://arxiv.org/abs/2104.14294,https://github.com/cvlab-epfl/rvs,"@article{oner2022promoting,
+16,2022,Promoting connectivity of network-like structures by enforcing region separation,"D Öner, M Koziński, L Citraro, NC Dadap, AG Konings, P Fua","TPAMI - IEEE Transactions on Pattern Analysis and Machine Intelligence 44 (9), 2022",journal,TPAMI,https://doi.org/10.1109/TPAMI.2021.3074366,,https://arxiv.org/abs/2104.14294,https://github.com/cvlab-epfl/rvs,"@article{oner2022promoting,
   title     = {{Promoting Connectivity of Network-Like Structures by Enforcing Region Separation}},
   author    = {{\""{O}}ner, Doruk and Kozi{\'{n}}ski, Mateusz and Citraro, Leonardo and Dadap, Nathan C. and Konings, Alexandra G. and Fua, Pascal},
   journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
@@ -124,7 +124,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2022},
   doi       = {10.1109/TPAMI.2021.3074366}
 }"
-14,2021,Drainage canals in Southeast Asian peatlands increase carbon emissions,"NC Dadap, AM Hoyt, AR Cobb, D Öner, M Koziński, PV Fua, K Rao, CF Harvey, AG Konings","AGU Advances 2 (1), 2021",journal,AGU,https://doi.org/10.1029/2020AV000321,,https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2020AV000321,,"@article{dadap2021drainage,
+17,2021,Drainage canals in Southeast Asian peatlands increase carbon emissions,"NC Dadap, AM Hoyt, AR Cobb, D Öner, M Koziński, PV Fua, K Rao, CF Harvey, AG Konings","AGU Advances 2 (1), 2021",journal,AGU,https://doi.org/10.1029/2020AV000321,,https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2020AV000321,,"@article{dadap2021drainage,
   title     = {{Drainage Canals in Southeast Asian Peatlands Increase Carbon Emissions}},
   author    = {Dadap, Nathan C. and Hoyt, Alison M. and Cobb, Alexander R. and {\""{O}}ner, Doruk and Kozi{\'{n}}ski, Mateusz and Fua, Pascal V. and Rao, Krishna and Harvey, Charles F. and Konings, Alexandra G.},
   journal   = {AGU Advances},
@@ -134,7 +134,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   year      = {2021},
   doi       = {10.1029/2020AV000321}
 }"
-15,2018,Multi-objective contextual bandit problem with similarity information,"E Turgay, D Öner, C Tekin","AISTATS - International Conference on Artificial Intelligence and Statistics, 2018",conference,AISTATS,https://proceedings.mlr.press/v84/turgay18a.html,,https://arxiv.org/abs/1708.01784,,"@inproceedings{turgay2018multiobjective,
+18,2018,Multi-objective contextual bandit problem with similarity information,"E Turgay, D Öner, C Tekin","AISTATS - International Conference on Artificial Intelligence and Statistics, 2018",conference,AISTATS,https://proceedings.mlr.press/v84/turgay18a.html,,https://arxiv.org/abs/1708.01784,,"@inproceedings{turgay2018multiobjective,
   title     = {{Multi-objective Contextual Bandit Problem with Similarity Information}},
   author    = {Tur{\u{g}}ay, Eralp and {\""{O}}ner, Doruk and Tekin, Cem},
   booktitle = {Proceedings of the Twenty-First International Conference on Artificial Intelligence and Statistics},
@@ -145,7 +145,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   publisher = {PMLR},
   url       = {https://proceedings.mlr.press/v84/turgay18a.html}
 }"
-16,2018,Combinatorial multi-objective multi-armed bandit problem,"D Öner, A Karakurt, A Eryılmaz, C Tekin","arXiv preprint arXiv:1803.04039, 2018",preprint,arXiv,https://arxiv.org/abs/1803.04039,,https://arxiv.org/abs/1803.04039,,"@article{oner2018combinatorial,
+19,2018,Combinatorial multi-objective multi-armed bandit problem,"D Öner, A Karakurt, A Eryılmaz, C Tekin","arXiv preprint arXiv:1803.04039, 2018",preprint,arXiv,https://arxiv.org/abs/1803.04039,,https://arxiv.org/abs/1803.04039,,"@article{oner2018combinatorial,
   title         = {{Combinatorial Multi-Objective Multi-Armed Bandit Problem}},
   author        = {{\""{O}}ner, Doruk and Karakurt, Altu{\u{g}} and Ery{\i}lmaz, Atilla and Tekin, Cem},
   journal       = {arXiv preprint arXiv:1803.04039},
