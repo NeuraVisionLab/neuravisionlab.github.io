@@ -1,7 +1,7 @@
 order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,code,bibtex
 1,2026,Direction-Aware Kinematics-Conditioned Graph Hypernetwork for Human Trajectory Prediction,"Amirreza M. Shebly, Mohammad Sarhangzadeh, and Doruk Öner","Asian Conference on Computer Vision (ACCV), 2026",conference,ACCV,,,,
 2,2026,Stochastic Nonlinearities Improve Uncertainty Estimation,"Mohammad Sarhangzadeh, Amirreza M. Shebly, and Doruk Öner","British Machine Vision Conference (BMVC), 2026",conference,BMVC,,,,
-3,2026,Track-Aligned Interaction Modeling for Group Activity Recognition,"Amirreza M. Shebly, Doruk Öner","Signal Processing and Communications Applications Conference (SIU), 2026",conference,SIU,,,,
+3,2026,Track-Aligned Interaction Modeling for Group Activity Recognition,"Amirreza M. Shebly, Doruk Öner","Signal Processing and Communications Applications Conference (SIU), 2026",conference,SIU,https://ieeexplore.ieee.org/abstract/document/11636666,,,,
 4,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Öner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
   title     = {{CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation}},
   author    = {Esmaeilzadeh, Elyar and Garaaghaji, Ehsan and Hallaji Azad, Farzad and {\""{O}}ner, Doruk},
