@@ -86,7 +86,7 @@
         <span class="news-glyph" aria-hidden="true" title="{{ item.tag }}">{{ item.glyph }}</span>
         <span class="news-body">
           <span class="nh">{% if item.link %}<a href="{{ item.link }}">{{ item.title|raw }}</a>{% else %}{{ item.title|raw }}{% endif %}</span>{% if loop.first %}<span class="status-badge">New</span>{% endif %}
-          <span class="ns">{{ item.body }}</span>
+          <span class="ns">{{ item.body|raw }}</span>
         </span>
       </li>
       {% endfor %}
