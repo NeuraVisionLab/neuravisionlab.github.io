@@ -1,6 +1,9 @@
 <article class="pub-row" data-type="{{ p.venue_type }}" data-year="{{ p.year }}">
           <div class="pub-main">
-            {% if p.url %}<a class="pub-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
+            <div class="pub-title-line">
+  {% if p.url %}<a class="pub-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
+  {% if p.status %}<span class="status-badge pub-status">{{ p.status }}</span>{% endif %}
+</div>
             <p class="pub-authors">{{ p.authors_html|raw }}</p>
           </div>
           <div class="pub-extra">
