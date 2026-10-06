@@ -110,26 +110,40 @@ def _fold(s: str) -> str:
                    if not unicodedata.combining(c)).lower()
 
 
-def _format_authors(authors: str, pi_surnames: set, lab_surnames: set) -> str:
+def _format_authors(authors: str, members: list[dict]) -> str:
     out = []
+
     for tok in [t.strip() for t in authors.split(",")]:
         if not tok:
             continue
+
         folded = _fold(tok)
-        cls = None
-        if any(s in folded for s in pi_surnames):
-            cls = "pi"
-        elif any(s in folded for s in lab_surnames):
-            cls = "lab"
+        matched_member = None
+
+        for m in members:
+            surname = _fold(m["surname"])
+            if surname and surname in folded:
+                matched_member = m
+                break
+
         esc = html.escape(tok)
-        out.append(f'<span class="{cls}">{esc}</span>' if cls else esc)
+
+        if matched_member:
+            cls = "pi" if matched_member["group"] == "pi" else "lab"
+            url = html.escape(matched_member["url"], quote=True)
+            out.append(
+                f'<a class="{cls} author-link" href="{url}">{esc}</a>'
+            )
+        else:
+            out.append(esc)
+
     return ", ".join(out)
 
 
-def load_publications(recent_count: int, pi_surnames: set, lab_surnames: set) -> dict:
+def load_publications(recent_count: int, members: list[dict]) -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
-        r["authors_html"] = _format_authors(r["authors"], pi_surnames, lab_surnames)
+        r["authors_html"] = _format_authors(r["authors"], members)
         r["badge_label"] = r["venue_short"]
         # Link buttons — only those filled in the CSV are emitted.
         # project page -> project/publisher page, arxiv -> arXiv, code -> GitHub.
@@ -467,11 +481,10 @@ def base_context() -> dict:
     members = load_members()
     # Author highlighting reads its surnames from members.csv, so a rename
     # there can never leave a stale name behind in this file.
-    pi_surnames = {_fold(members["pi"]["surname"])} if members["pi"] else set()
-    lab_surnames = {_fold(m["surname"]) for m in members["all"]
-                    if m["surname"] and m is not members["pi"]}
-    publications = load_publications(int(site["home_publications_count"]),
-                                     pi_surnames, lab_surnames)
+    publications = load_publications(
+    int(site["home_publications_count"]),
+    members["all"]
+)
     # A member's papers are matched exactly the way author highlighting is, so a
     # profile can never claim a paper its author list does not support.
     for m in members["all"]:
