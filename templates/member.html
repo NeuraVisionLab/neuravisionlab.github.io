@@ -20,6 +20,15 @@
           <div class="row"><span class="k">Role</span><span class="v">{{ m.role }}</span></div>
           {% if m.degree %}<div class="row"><span class="k">Degree</span><span class="v">{{ m.degree }}</span></div>{% endif %}
           {% if m.interests_str %}<div class="row"><span class="k">Areas</span><span class="v">{{ m.interests_str }}</span></div>{% endif %}
+          {% if m.funded_project %}
+          <div class="row">
+            <span class="k">Funded Project</span>
+            <span class="v">
+              <strong>{{ m.funded_project }}</strong>
+              {% if m.funded_project_meta %}<br>{{ m.funded_project_meta }}{% endif %}
+            </span>
+          </div>
+          {% endif %}
           {% if m.email %}<div class="row"><span class="k">Email</span><span class="v"><a href="mailto:{{ m.email }}">{{ m.email }}</a></span></div>{% endif %}
         </div>
         <div class="social-row">{% include "_socials.html" %}</div>
