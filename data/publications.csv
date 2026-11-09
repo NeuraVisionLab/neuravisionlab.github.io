@@ -1,10 +1,30 @@
 order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arxiv,code,bibtex,status
 1,2027,PAMR: Precedence-Aware Mode Repair for Multimodal Trajectory Forecasting,"Amirreza M. Shebly, Ehsan Garaaghaji, and Doruk Öner","IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2027",conference,WACV,,,,,,
 2,2026,Direction-Aware Kinematics-Conditioned Graph Hypernetwork for Human Trajectory Prediction,"Amirreza M. Shebly, Mohammad Sarhangzadeh, Doruk Öner","Asian Conference on Computer Vision (ACCV), 2026",conference,ACCV,,,,,,ORAL
-3,2026,Stochastic Nonlinearities Improve Uncertainty Estimation,"Mohammad Sarhangzadeh, Amirreza M. Shebly, and Doruk Öner","British Machine Vision Conference (BMVC), 2026",conference,BMVC,,https://neuravisionlab.com/Stochastic-Activations-BMVC/,https://arxiv.org/abs/2610.29875,https://github.com/NeuraVisionLab/Stochastic-Activations-BMVC,,
+3,2026,Stochastic Nonlinearities Improve Uncertainty Estimation,"Mohammad Sarhangzadeh, Amirreza M. Shebly, and Doruk Öner","British Machine Vision Conference (BMVC), 2026",conference,BMVC,,https://neuravisionlab.com/Stochastic-Activations-BMVC/,https://arxiv.org/abs/2610.29875,https://github.com/NeuraVisionLab/Stochastic-Activations-BMVC,"@article{sarhangzadeh2026stochastic,
+  title={Stochastic Nonlinearities Improve Uncertainty Estimation},
+  author={Sarhangzadeh, Mohammad and Shebly, Amirreza M and Oner, Doruk},
+  journal={arXiv preprint arXiv:2610.29875},
+  year={2026}
+}",
 4,2026,Track-Aligned Interaction Modeling for Group Activity Recognition,"Amirreza M. Shebly, Doruk Öner","Signal Processing and Communications Applications Conference (SIU), 2026",conference,SIU,https://ieeexplore.ieee.org/abstract/document/11636666,,,,,
-5,2026,DINO-Nucleus: Multi-Level Self-Supervised Features for Nucleus Instance Segmentation,"Mohammad Sarhangzadeh, Elyar Esmaeilzadeh, and Doruk Öner","International Conference on Medical Imaging and Computer-Aided Diagnosis (MICAD), 2026",conference,MICAD,,https://neuravisionlab.com/DINO-Nucleus/,,https://github.com/NeuraVisionLab/DINO-Nucleus,,
-6,2026,OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution,"Mohammad Sarhangzadeh, Shahryar Rahnamayan, and Doruk Öner","IEEE World Congress on Computational Intelligence (WCCI), 2026",conference,WCCI,,,,https://github.com/MSarhangzadeh/OMCDE-Optimization,,
+5,2026,DINO-Nucleus: Multi-Level Self-Supervised Features for Nucleus Instance Segmentation,"Mohammad Sarhangzadeh, Elyar Esmaeilzadeh, and Doruk Öner","International Conference on Medical Imaging and Computer-Aided Diagnosis (MICAD), 2026",conference,MICAD,,https://neuravisionlab.com/DINO-Nucleus/,https://arxiv.org/abs/2611.09133,https://github.com/NeuraVisionLab/DINO-Nucleus,"@misc{sarhangzadeh2026dinonucleus,
+  title={DINO-Nucleus: Multi-Level Self-Supervised Features for Nucleus Instance Segmentation},
+  author={Sarhangzadeh, Mohammad and Esmaeilzadeh, Elyar and Oner, Doruk},
+  year={2026},
+  eprint={2611.09133},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2611.09133}
+}",
+6,2026,OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution,"Mohammad Sarhangzadeh, Shahryar Rahnamayan, and Doruk Öner","IEEE World Congress on Computational Intelligence (WCCI), 2026",conference,WCCI,,,,https://github.com/MSarhangzadeh/OMCDE-Optimization,"@inproceedings{sarhangzadeh2026omcde,
+  title={OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution},
+  author={Sarhangzadeh, Mohammad and Rahnamayan, Shahryar and Oner, Doruk},
+  booktitle={2026 IEEE Congress on Evolutionary Computation (CEC)},
+  pages={1--7},
+  year={2026},
+  organization={IEEE}
+}",
 7,2025,CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation,"E Esmaeilzadeh, E Garaaghaji, FH Azad, D Öner","MICCAI - International Conference on Medical Image Computing and Computer …, 2025",conference,MICCAI,https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18,https://neuravisionlab.com/CAPE/,https://arxiv.org/abs/2504.00753,https://github.com/NeuraVisionLab/CAPE,"@inproceedings{esmaeilzadeh2025cape,
   title     = {{CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation}},
   author    = {Esmaeilzadeh, Elyar and Garaaghaji, Ehsan and Hallaji Azad, Farzad and {\""{O}}ner, Doruk},
