@@ -17,7 +17,7 @@ order,year,title,authors,venue,venue_type,venue_short,venue_url,project page,arx
   primaryClass={cs.CV},
   url={https://arxiv.org/abs/2611.09133}
 }",
-6,2026,OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution,"Mohammad Sarhangzadeh, Shahryar Rahnamayan, and Doruk Öner","IEEE World Congress on Computational Intelligence (WCCI), 2026",conference,WCCI,,,,https://github.com/MSarhangzadeh/OMCDE-Optimization,"@inproceedings{sarhangzadeh2026omcde,
+6,2026,OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution,"Mohammad Sarhangzadeh, Shahryar Rahnamayan, and Doruk Öner","IEEE World Congress on Computational Intelligence (WCCI), 2026",conference,WCCI,,,https://arxiv.org/abs/2611.09167,https://github.com/MSarhangzadeh/OMCDE-Optimization,"@inproceedings{sarhangzadeh2026omcde,
   title={OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution},
   author={Sarhangzadeh, Mohammad and Rahnamayan, Shahryar and Oner, Doruk},
   booktitle={2026 IEEE Congress on Evolutionary Computation (CEC)},
