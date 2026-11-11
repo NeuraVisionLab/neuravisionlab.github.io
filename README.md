@@ -111,6 +111,9 @@ provide useful alt text, and link each caption to its source.
 
 Run `python3 -m unittest discover -s tests -v` for the tag and build checks and
 `python3 build.py --check` to validate the complete build.
+Open `tests/hero-canvas.html` through the local preview server to check particle
+geometry and cursor alignment after the hero changes size without a window
+resize. The page reports pass/fail results using the real animation script.
 
 ## Adding a person
 

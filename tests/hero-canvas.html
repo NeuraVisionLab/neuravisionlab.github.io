@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Hero canvas regression checks</title>
+<style>
+  body { margin: 20px; font: 16px system-ui; }
+  .hero { position: relative; width: 400px; height: 300px; margin: 40px; }
+  .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #results { white-space: pre-wrap; }
+</style>
+<h1>Hero canvas regression checks</h1>
+<p>Resizes the hero without resizing the window, as delayed fonts do.</p>
+<section class="hero"><canvas class="hero-canvas"></canvas></section>
+<pre id="results">Running…</pre>
+<script>
+  // Observe the actual drawing commands without reading canvas pixels.
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const nativeLineTo = ctx.lineTo.bind(ctx);
+  const nativeClearRect = ctx.clearRect.bind(ctx);
+  const nativeArc = ctx.arc.bind(ctx);
+  let endpoints = [];
+  let firstPoint;
+  ctx.clearRect = function (...args) { endpoints = []; firstPoint = null; nativeClearRect(...args); };
+  ctx.arc = function (x, y, ...args) {
+    if (!firstPoint) firstPoint = {x, y};
+    nativeArc(x, y, ...args);
+  };
+  ctx.lineTo = function (x, y) {
+    endpoints.push({ x, y, transform: ctx.getTransform() });
+    nativeLineTo(x, y);
+  };
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', async function () {
+    const output = document.querySelector('#results');
+    // Test the current source, even when a previous site visit cached main.js.
+    try {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = '../assets/js/main.js?regression=' + Date.now();
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    } catch (error) {
+      output.textContent = 'FAIL: could not load the animation script.';
+      output.dataset.status = 'failed';
+      return;
+    }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      output.textContent = 'SKIP: reduced motion intentionally disables particles.';
+      return;
+    }
+    const hero = document.querySelector('.hero');
+    const failures = [];
+    const checks = [];
+    function check(name, ok, detail) {
+      checks.push((ok ? 'PASS: ' : 'FAIL: ') + name + (detail ? ' — ' + detail : ''));
+      if (!ok) failures.push(name);
+    }
+    function paint() { return new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); }
+    function geometry(name) {
+      const rect = canvas.getBoundingClientRect();
+      const scale = ctx.getTransform();
+      const x = scale.a * rect.width / canvas.width;
+      const y = scale.d * rect.height / canvas.height;
+      check(name, Math.abs(x - 1) < .005 && Math.abs(y - 1) < .005,
+        'rendered scale ' + x.toFixed(3) + ' × ' + y.toFixed(3));
+    }
+    await paint();
+    geometry('initial dots keep their circular shape');
+    hero.style.height = '440px';
+    await paint();
+    geometry('dots stay circular after late content increases hero height');
+    const rect = canvas.getBoundingClientRect();
+    // Follow an existing point so at least one cursor connection is guaranteed.
+    const point = firstPoint;
+    const clientX = rect.left + point.x;
+    const clientY = rect.top + point.y;
+    hero.dispatchEvent(new PointerEvent('pointermove', {clientX, clientY}));
+    await paint();
+    const connections = endpoints.filter(p => Math.abs(p.x - point.x) < .01 && Math.abs(p.y - point.y) < .01);
+    check('particle connections meet the cursor after the layout change', connections.some(p => {
+      const drawnX = rect.left + (p.transform.a * p.x + p.transform.e) * rect.width / canvas.width;
+      const drawnY = rect.top + (p.transform.d * p.y + p.transform.f) * rect.height / canvas.height;
+      return Math.abs(drawnX - clientX) < 1 && Math.abs(drawnY - clientY) < 1;
+    }));
+    hero.style.width = '320px';
+    hero.style.height = '260px';
+    await paint();
+    geometry('dots stay circular after the hero shrinks');
+    output.textContent = checks.join('\n') + '\n\n' + failures.length + ' failures';
+    output.dataset.status = failures.length ? 'failed' : 'passed';
+  });
+</script>
+</html>

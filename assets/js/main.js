@@ -185,7 +185,7 @@
   if (heroCanvas && heroCanvas.getContext && !reduceMotion) {
     var hctx = heroCanvas.getContext("2d");
     var heroEl = heroCanvas.closest(".hero");
-    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var DPR = 1;
     var cw = 0, ch = 0, count = 0, maxDist = 150, infl = 220;
     var pts = [], mx = -9999, my = -9999, hover = false, hraf = null;
     var rnd = function (a, b) { return a + Math.random() * (b - a); };
@@ -197,7 +197,8 @@
       }
     }
     function sizeCanvas() {
-      var r = heroEl.getBoundingClientRect();
+      var r = heroCanvas.getBoundingClientRect();
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
       cw = Math.max(1, r.width); ch = Math.max(1, r.height);
       heroCanvas.width = Math.round(cw * DPR); heroCanvas.height = Math.round(ch * DPR);
       hctx.setTransform(DPR, 0, 0, DPR, 0, 0);
@@ -252,10 +253,19 @@
       hraf = requestAnimationFrame(frame);
     }
     heroEl.addEventListener("pointermove", function (e) {
-      var r = heroEl.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; hover = true;
+      var r = heroCanvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; hover = true;
     });
     heroEl.addEventListener("pointerleave", function () { hover = false; mx = my = -9999; });
     var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(sizeCanvas, 150); });
+    // Fonts and other late content can change the hero without a window resize.
+    // Keep the drawing buffer in sync with its displayed size so circles and
+    // pointer coordinates use the same scale from the first visit onward.
+    if ("ResizeObserver" in window) {
+      var canvasResize = new ResizeObserver(sizeCanvas);
+      canvasResize.observe(heroCanvas);
+    } else if (document.fonts) {
+      document.fonts.ready.then(sizeCanvas);
+    }
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) { if (hraf) { cancelAnimationFrame(hraf); hraf = null; } }
       else if (!hraf) { hraf = requestAnimationFrame(frame); }
