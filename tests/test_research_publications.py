@@ -2,10 +2,26 @@ import csv
 import shutil
 import tempfile
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 from unittest.mock import patch
 
 import build
+
+
+class PublicationMarkup(HTMLParser):
+    def __init__(self, source):
+        super().__init__()
+        self.rows = []
+        self.filters = []
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "article" and "pub-row" in attrs.get("class", "").split():
+            self.rows.append(attrs)
+        if tag == "button" and "data-filter" in attrs:
+            self.filters.append(attrs)
 
 
 class ResearchPublicationsTests(unittest.TestCase):
@@ -69,7 +85,7 @@ class ResearchPublicationsTests(unittest.TestCase):
             if "tags" not in fields:
                 fields.append("tags")
             new = dict.fromkeys(fields, "")
-            new.update(title="Brand-new tagged paper", order="1", year="2030", tags="topology; uncertainty; 3d; motion")
+            new.update(title="Brand-new tagged paper", order="1", year="2030", tags=" TOPOLOGY ; uncertainty; 3d; Motion; topology ")
             rows.append(new)
             with path.open("w", newline="", encoding="utf-8") as f:
                 writer = csv.DictWriter(f, fieldnames=fields)
@@ -79,6 +95,15 @@ class ResearchPublicationsTests(unittest.TestCase):
             out.mkdir()
             with patch.object(build, "DATA", data):
                 build.build(out)
+            # The browser receives normalized tokens, so the same multi-tag
+            # paper is discoverable through every relevant topic filter.
+            markup = PublicationMarkup((out / "publications.html").read_text())
+            self.assertEqual(markup.rows[0].get("data-tags", "").split(),
+                             ["3d", "motion", "topology", "uncertainty"])
+            self.assertEqual([f.get("data-value") for f in markup.filters
+                              if f["data-filter"] == "tags"],
+                             ["topology", "uncertainty", "3d", "motion"])
+            self.assertFalse(any(f["data-filter"] == "year" for f in markup.filters))
             topology = (out / "topology-aware-computer-vision.html").read_text()
             bibliography = topology.split('id="related-publications"', 1)[1].split('</section>', 1)[0]
             self.assertIn("Brand-new tagged paper", bibliography)

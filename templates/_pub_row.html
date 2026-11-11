@@ -1,4 +1,4 @@
-<article class="pub-row" data-type="{{ p.venue_type }}" data-year="{{ p.year }}">
+<article class="pub-row" data-type="{{ p.venue_type }}" data-year="{{ p.year }}" data-tags="{{ p.filter_tags }}">
           <div class="pub-main">
             <div class="pub-title-line">
   {% if p.url %}<a class="pub-title" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}

@@ -85,6 +85,10 @@ The matching tag for each topic is `publication_tag` in `data/research.csv`:
 | 3D Shape & Implicit Representations | `3d` |
 | Trajectory & Motion Forecasting | `motion` |
 
+The Publications page uses these same tags for its topic filters, alongside
+publication-type filters. Filter labels come from `tag` in `data/research.csv`;
+papers with no topic tag remain visible under All and their publication type.
+
 All four topic pages display their tagged related publications. The trajectory
 page currently has the shared hero, illustrated introduction and bibliography;
 extend `templates/_motion_story.html` with detailed paper sections when the
