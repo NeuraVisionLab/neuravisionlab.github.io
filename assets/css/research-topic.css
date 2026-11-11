@@ -1,0 +1,60 @@
+/* Topic article: shared palette, original scientific figures. */
+.topic-hero-lead { max-width: 48ch; }
+.topic-page h2 { font-size: var(--step-3); line-height: 1.16; }
+.topic-page h3 { font-size: var(--step-2); line-height: 1.22; }
+.topic-intro { padding-top: clamp(32px, 5vw, 64px); }
+.topic-overview { overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--border); }
+.topic-overview img { width: 100%; }
+.topic-intro-copy { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 6vw, 88px); margin-block: clamp(32px, 5vw, 64px); }
+.topic-intro-copy h2 { max-width: 15ch; }
+.topic-intro-copy p + p { margin-top: var(--s5); color: var(--muted); }
+.topic-contents { display: flex; flex-wrap: wrap; gap: 12px 32px; border-block: 1px solid var(--border); padding-block: 20px; font-size: var(--step--1); }
+.topic-contents a { display: inline-flex; gap: 12px; align-items: center; }
+.topic-contents span { color: var(--orange); }
+.topic-chapter, .topic-bibliography { padding-block: clamp(56px, 7vw, 100px); }
+.topic-chapter--tinted { background: var(--surface-alt); border-block: 1px solid var(--border); }
+.topic-chapter-head { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+.topic-chapter-head h2 { max-width: 23ch; }
+.topic-chapter-head > p { color: var(--muted); max-width: 52ch; }
+.topic-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.topic-feature + .topic-feature { margin-top: clamp(48px, 7vw, 96px); padding-top: clamp(40px, 6vw, 80px); border-top: 1px solid var(--border); }
+.topic-feature--reverse { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+.topic-feature--reverse .topic-copy { order: 2; }
+.topic-copy h3 { margin-bottom: var(--s5); }
+.topic-copy p:not(.topic-paper-meta) { color: var(--muted); }
+.topic-copy p + p { margin-top: var(--s4); }
+.topic-paper-meta { font-family: var(--font-mono); font-size: var(--label); color: var(--accent-strong); letter-spacing: .05em; margin-bottom: var(--s3); }
+.topic-paper-link { display: inline-block; font-size: var(--step--1); font-weight: 500; margin-top: var(--s5); }
+.topic-paper-link span { color: var(--orange); margin-left: 4px; }
+.topic-figure { min-width: 0; }
+.topic-figure-image { display: block; background: #fff; border-radius: var(--r-md); padding: clamp(12px, 2vw, 24px); border: 1px solid var(--border); }
+.topic-figure-image img { width: 100%; height: auto; }
+.topic-figure figcaption { font-size: var(--step--1); line-height: 1.65; color: var(--muted); margin-top: var(--s4); }
+.topic-figure figcaption a { text-decoration: underline; text-underline-offset: 3px; }
+.topic-figure--diagram { width: min(100%, 400px); justify-self: center; }
+.topic-applications { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s6); margin-top: clamp(48px, 7vw, 96px); }
+.topic-applications article { border-top: 2px solid var(--brand); padding-top: var(--s5); display: flex; flex-direction: column; }
+.topic-applications h3 { font-size: var(--step-1); margin-bottom: var(--s4); }
+.topic-applications p { font-size: var(--step--1); color: var(--muted); flex: 1; }
+.topic-applications .topic-paper-link { font-size: .78rem; }
+.topic-bibliography { background: var(--surface); border-top: 1px solid var(--border); }
+.topic-further-reading { display: flex; gap: var(--s6); justify-content: space-between; align-items: center; padding-top: var(--s6); }
+.topic-further-reading p { max-width: 75ch; color: var(--muted); font-size: var(--step--1); }
+.topic-further-reading p a { text-decoration: underline; text-underline-offset: 3px; }
+.topic-further-reading > a { flex-shrink: 0; }
+@media (max-width: 1100px) {
+  .topic-intro-copy, .topic-chapter-head { grid-template-columns: 1fr; gap: var(--s5); }
+  .topic-intro-copy h2, .topic-chapter-head h2 { max-width: 26ch; }
+  .topic-chapter-head > p { max-width: 65ch; }
+  .topic-feature, .topic-feature--reverse { grid-template-columns: 1fr; }
+  .topic-feature--reverse .topic-copy { order: 0; }
+  .topic-copy { max-width: 70ch; }
+  .topic-figure { width: min(100%, 900px); justify-self: center; }
+  .topic-figure--diagram { width: min(100%, 400px); }
+  .topic-further-reading { align-items: start; flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .topic-applications { grid-template-columns: 1fr; gap: var(--s7); }
+  .topic-contents { gap: 16px 24px; }
+  .topic-figure-image { padding: 10px; }
+}

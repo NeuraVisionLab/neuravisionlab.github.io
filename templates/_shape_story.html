@@ -1,0 +1,98 @@
+<div class="topic-page">
+  <section class="topic-intro" aria-labelledby="shape-intro-h">
+    <div class="container">
+      <figure class="topic-overview">
+        <img src="assets/img/home/shape.webp" width="1983" height="793" alt="Conceptual illustration of a neural shape representation with editable car components and an aerodynamic optimization loop." fetchpriority="high">
+      </figure>
+      <div class="topic-intro-copy">
+        <h2 id="shape-intro-h">Geometry we can understand and change.</h2>
+        <div>
+          <p class="lead">Reconstructing a shape is only the beginning. We want to change a component, transfer fine detail or improve a design’s performance while preserving the properties that matter.</p>
+          <p>We study implicit representations that describe geometry through a continuous function. In a signed distance field, each spatial point is assigned a signed distance to the surface, and the surface lies where that value is zero. Our work with EPFL and other collaborators asks how to make these representations controllable—by part and by geometric scale.</p>
+        </div>
+      </div>
+      <nav class="topic-contents" aria-label="On this page">
+        <a href="#part-based-control">Control by part <span aria-hidden="true">↓</span></a>
+        <a href="#coarse-to-fine">Control by scale <span aria-hidden="true">↓</span></a>
+        <a href="#shape-optimization">Design optimization <span aria-hidden="true">↓</span></a>
+        <a href="#related-publications">Publications <span aria-hidden="true">↓</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="part-based-control" class="topic-chapter" aria-labelledby="parts-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="parts-h">Keep the parts. Learn the whole.</h2>
+        <p>A chair has legs, a seat and a back. A car has a body and wheels. A useful representation should expose those components while keeping their geometry compatible.</p>
+      </div>
+      <article class="topic-feature" aria-labelledby="partsdf-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">TMLR · 2025</p>
+          <h3 id="partsdf-h">PartSDF: a representation with components</h3>
+          <p>PartSDF assigns each component its own shape code and pose, including position, rotation and scale. A shared decoder turns these into signed distance fields for the parts, which combine into the complete object.</p>
+          <p>The decoder alternates between processing parts independently and exchanging information across them. This lets a component respond to its neighbors instead of behaving like an isolated shape pasted into an assembly.</p>
+          <p>Using supervised part annotations, the method supports reconstruction, generation and controlled editing on cars, chairs and mixers. Its supervision can work with surface part labels without requiring every part to be a watertight mesh. Code and the associated dataset are publicly available.</p>
+          <a class="topic-paper-link" href="https://ntalabot.github.io/partsdf/" target="_blank" rel="noopener">Explore PartSDF <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/shape/partsdf-control.webp" target="_blank" rel="noopener" aria-label="Open the PartSDF generation, manipulation and optimization figure at full size">
+            <img src="assets/img/research/shape/partsdf-control.webp" width="2600" height="533" loading="lazy" alt="PartSDF examples: generating cars and chairs from part layouts, changing a chair component, and optimizing a car body while keeping its wheels fixed.">
+          </a>
+          <figcaption>One representation supports (a) generation, (b) part manipulation and (c) part-aware optimization. In the car example, the body changes while the wheels stay fixed. <a href="https://arxiv.org/abs/2502.12985" target="_blank" rel="noopener">PartSDF, Fig. 1</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section id="coarse-to-fine" class="topic-chapter topic-chapter--tinted" aria-labelledby="scale-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="scale-h">Separate the silhouette from the details</h2>
+        <p>Part boundaries are one way to organize a shape. Another is by scale: the overall form, the intermediate structure and the finer surface details.</p>
+      </div>
+      <article class="topic-feature topic-feature--reverse" aria-labelledby="stylefields-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">ARXIV PREPRINT · 2026</p>
+          <h3 id="stylefields-h">StyleFields: coarse-to-fine shape control</h3>
+          <p>A single shape code tends to entangle global form and local detail. StyleFields introduces several style codes at different depths of an implicit decoder, using adaptive normalization to modulate its features.</p>
+          <p>The training process gives these codes different responsibilities. The network grows progressively, and intermediate outputs learn smoothed versions of the target distance field. Earlier stages focus on broad structure; later stages refine detail.</p>
+          <p>This allows geometry at selected scales to be exchanged between objects: for example, retaining the coarse form of one car while borrowing finer features from another. Unlike explicit part control, this approach needs no part annotations. The public preprint evaluates reconstruction and editing on cars, chairs and airplanes.</p>
+          <a class="topic-paper-link" href="https://arxiv.org/abs/2610.09200" target="_blank" rel="noopener">Read the StyleFields preprint <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/shape/stylefields-mixing.webp" target="_blank" rel="noopener" aria-label="Open the StyleFields cross-instance mixing figure at full size">
+            <img src="assets/img/research/shape/stylefields-mixing.webp" width="1544" height="488" loading="lazy" alt="Two car shapes at the left and right, with three intermediate hybrids A, B and C that exchange different combinations of coarse, middle and fine style codes.">
+          </a>
+          <figcaption>Columns A–C exchange different groups of style codes between the two endpoint shapes, giving control over which geometric scales are transferred. <a href="https://arxiv.org/abs/2610.09200" target="_blank" rel="noopener">StyleFields, Fig. 4</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section id="shape-optimization" class="topic-chapter" aria-labelledby="optimization-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="optimization-h">Improve performance. Preserve design intent.</h2>
+        <p>Optimization becomes more useful when we can say what may change—and what should stay fixed.</p>
+      </div>
+      <article class="topic-feature" aria-labelledby="controlled-design-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">PARTSDF · 2025 &amp; STYLEFIELDS · 2026 PREPRINT</p>
+          <h3 id="controlled-design-h">Choosing the freedom to optimize</h3>
+          <p>Both representations connect shape control to aerodynamic design. PartSDF can optimize a car’s body while fixing the shape and placement of its wheels. StyleFields can update coarse or fine style codes while holding the other scales constant.</p>
+          <p>A differentiable surrogate predicts aerodynamic performance and supplies gradients for changing the representation. The choice of editable variables matters: unconstrained changes to a global code may alter the entire vehicle, while part- or scale-specific updates preserve more of the intended design.</p>
+          <p>These are studies of learned design optimization. A lower surrogate-predicted drag value is not, by itself, a physical validation. Our complementary work on <a href="uncertainty-trustworthy-ai.html#iterative-uncertainty">uncertainty in iterative networks</a> explores how uncertainty can help choose designs for further simulation.</p>
+          <a class="topic-paper-link" href="https://arxiv.org/abs/2610.09200" target="_blank" rel="noopener">See the optimization study <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/shape/stylefields-optimization.webp" target="_blank" rel="noopener" aria-label="Open the StyleFields drag-optimization figure at full size">
+            <img src="assets/img/research/shape/stylefields-optimization.webp" width="1927" height="650" loading="lazy" alt="Two car examples comparing initial reconstruction with optimization of the global latent code, coarse style codes and fine style codes. Surface colors show predicted air pressure.">
+          </a>
+          <figcaption>From left: initial shape, global-code optimization, coarse-style optimization and fine-style optimization. Blue-to-red colors represent predicted air pressure. <a href="https://arxiv.org/abs/2610.09200" target="_blank" rel="noopener">StyleFields, Fig. 5</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+  {% include "_research_publications.html" %}
+</div>

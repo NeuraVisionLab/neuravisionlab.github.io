@@ -1,0 +1,167 @@
+<div class="topic-page">
+  <section class="topic-intro" aria-labelledby="topology-intro-h">
+    <div class="container">
+      <figure class="topic-overview">
+        <img src="assets/img/home/topology.webp" width="1983" height="793" alt="Conceptual illustration of learning connected branching structures from volumetric image data, with a magnified view of a recovered connection." fetchpriority="high">
+      </figure>
+      <div class="topic-intro-copy">
+        <h2 id="topology-intro-h">A small gap can change the whole network.</h2>
+        <div>
+          <p class="lead">A road map can look accurate yet contain an unusable route. A reconstructed neuron can follow almost every visible branch yet break at a crucial connection. Pixel accuracy alone does not capture these errors.</p>
+          <p>Our research develops learning objectives that account for connectivity, geometry and the reliability of annotations. The work below connects current NeuraVision research with earlier work by Doruk Öner and collaborators at EPFL and other institutions.</p>
+        </div>
+      </div>
+      <nav class="topic-contents" aria-label="On this page">
+        <a href="#connectivity">Learning connectivity <span aria-hidden="true">↓</span></a>
+        <a href="#spatial-supervision">Geometry &amp; supervision <span aria-hidden="true">↓</span></a>
+        <a href="#beyond-2d">3D &amp; applications <span aria-hidden="true">↓</span></a>
+        <a href="#related-publications">Publications <span aria-hidden="true">↓</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="connectivity" class="topic-chapter" aria-labelledby="connectivity-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="connectivity-h">Teaching networks what a connection means</h2>
+        <p>Connectivity can be learned through the paths we want to preserve—and the background regions those paths should keep apart.</p>
+      </div>
+
+      <article class="topic-feature" aria-labelledby="cape-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">MICCAI · 2025</p>
+          <h3 id="cape-h">CAPE: learning through paths</h3>
+          <p>CAPE makes a simple question part of training: can two points that should be connected still reach each other along the intended structure?</p>
+          <p>The method samples pairs of nodes on an annotated skeleton and finds paths in the predicted distance map. A path that crosses a gap incurs a penalty. Restricting the search to a neighborhood of the annotated path stops the model from hiding a break by taking a long detour around a loop.</p>
+          <p>Combined with a pixelwise regression loss, this gives the network both local image supervision and a connectivity objective. The paper evaluates the approach on 2D membranes and retinal vessels, as well as 3D mouse-brain microscopy.</p>
+          <a class="topic-paper-link" href="https://neuravisionlab.com/CAPE/" target="_blank" rel="noopener">Explore CAPE <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/topology/cape-path-masking.webp" target="_blank" rel="noopener" aria-label="Open the CAPE path-masking figure at full size">
+            <img src="assets/img/research/topology/cape-path-masking.webp" width="1800" height="1113" loading="lazy" alt="Three columns compare an annotated graph, an unrestricted predicted path that takes a detour, and a masked prediction that exposes the missing connection.">
+          </a>
+          <figcaption>A detour can conceal a broken connection. CAPE’s path mask keeps the search near the intended route. <a href="https://arxiv.org/abs/2504.00753" target="_blank" rel="noopener">CAPE, Fig. 2</a>.</figcaption>
+        </figure>
+      </article>
+
+      <article class="topic-feature topic-feature--reverse" aria-labelledby="region-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">TPAMI · 2022</p>
+          <h3 id="region-h">Preserving a network by separating its surroundings</h3>
+          <p>In a 2D image, roads and canals often form boundaries between background regions. When a predicted line breaks, regions that should remain separate become connected.</p>
+          <p>This earlier work turns that observation into a training loss. It searches for connections between background regions and penalizes the weak points that let them pass through the predicted structure. Working with distance maps and dilated annotations makes the objective less sensitive to small errors in centerline placement.</p>
+          <p>The approach was evaluated on road and drainage-canal networks. It also explains a limitation that motivates later work: a curve separates a plane, but does not generally separate a 3D volume.</p>
+          <a class="topic-paper-link" href="https://doi.org/10.1109/TPAMI.2021.3074366" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/topology/region-comparison.webp" target="_blank" rel="noopener" aria-label="Open the region-separation comparison at full size">
+            <img src="assets/img/research/topology/region-comparison.webp" width="1070" height="912" loading="lazy" alt="A road-network example compares the annotation, a prediction with a gap and a long detour, and a connected prediction obtained with the region-separation loss.">
+          </a>
+          <figcaption>The gap in (b) joins background regions A and B and forces a detour between P1 and P2. The prediction in (c) preserves the connection. <a href="https://arxiv.org/abs/2009.07011" target="_blank" rel="noopener">Region separation, Fig. 1</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section id="spatial-supervision" class="topic-chapter topic-chapter--tinted" aria-labelledby="spatial-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="spatial-h">Topology needs geometry—and better supervision</h2>
+        <p>Knowing that a connection exists is only part of the problem. We also need to know where it belongs, and how much to trust its annotation.</p>
+      </div>
+
+      <article class="topic-feature" aria-labelledby="locality-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">TPAMI · 2023</p>
+          <h3 id="locality-h">Giving persistent homology a sense of location</h3>
+          <p>Persistent homology describes features such as connected components and loops across different thresholds. Comparing these summaries can teach a network about topology, but conventional persistence diagrams discard much of the information about where a feature occurs.</p>
+          <p>Our locality-aware formulation combines thresholding with a spatial height function. The resulting diagrams retain additional location information, helping the loss distinguish structures that a purely global description could confuse.</p>
+          <p>The method applies to both 2D and 3D images. Experiments on roads and neuronal structures show improved connectivity compared with the conventional homology-based loss.</p>
+          <a class="topic-paper-link" href="https://doi.org/10.1109/TPAMI.2023.3246921" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/topology/locality-comparison.webp" target="_blank" rel="noopener" aria-label="Open the persistent-homology comparison at full size">
+            <img src="assets/img/research/topology/locality-comparison.webp" width="1408" height="750" loading="lazy" alt="Road and neurite examples in four columns: input image, conventional homology-loss prediction with circled gaps, locality-aware prediction, and ground truth.">
+          </a>
+          <figcaption>From left: input, conventional homology loss, localized loss, and annotation. Red circles mark interruptions in the conventional prediction. <a href="https://arxiv.org/abs/2110.06295" target="_blank" rel="noopener">Improved locality, Fig. 1</a>.</figcaption>
+        </figure>
+      </article>
+
+      <article class="topic-feature topic-feature--reverse" aria-labelledby="annotations-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">TMI · 2022</p>
+          <h3 id="annotations-h">Learning from annotations that are almost right</h3>
+          <p>Manually tracing a neuron through a 3D image stack is difficult. An annotation may capture the correct branching structure while missing the actual centerline by a few voxels.</p>
+          <p>Instead of treating every annotated position as exact, this work models the annotation as a graph of deformable active contours, or “snakes.” Training jointly adjusts the network and the contour positions while preserving the annotation’s connectivity.</p>
+          <p>This improves learning from spatially imprecise labels in microscopy. The distinction matters: the method refines where branches lie; it assumes their annotated topology is reliable rather than repairing arbitrary missing branches.</p>
+          <a class="topic-paper-link" href="https://doi.org/10.1109/TMI.2022.3193072" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/topology/annotation-adjustment.webp" target="_blank" rel="noopener" aria-label="Open the annotation-adjustment example at full size">
+            <img src="assets/img/research/topology/annotation-adjustment.webp" width="1050" height="320" loading="lazy" alt="Four panels show an imprecise neurite annotation, its mismatch with a predicted distance map, and the adjusted annotation on the distance map and microscopy image.">
+          </a>
+          <figcaption>The original annotation in (a–b) is repositioned in (c–d), while keeping its graph structure intact. <a href="https://arxiv.org/abs/2112.02781" target="_blank" rel="noopener">Annotation adjustment, Fig. 2</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section id="beyond-2d" class="topic-chapter" aria-labelledby="beyond-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="beyond-h">From image planes to volumes and real networks</h2>
+        <p>The same concern—recovering thin structures without losing their connections—appears across microscopy, infrastructure and environmental mapping.</p>
+      </div>
+      <article class="topic-feature" aria-labelledby="projections-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">MICCAI · 2022</p>
+          <h3 id="projections-h">Learning 3D connectivity through 2D projections</h3>
+          <p>Our projection-based method brings a 2D connectivity objective into volumetric learning. It applies the loss to three orthogonal minimum-intensity projections of predicted distance maps, alongside a voxelwise objective.</p>
+          <p>A break that is difficult to see from one direction can become visible from another. This also opens the door to training with annotations drawn on 2D projections, reducing the burden of tracing directly in 3D.</p>
+          <p>The paper evaluates neuronal microscopy and magnetic-resonance angiography. Projection consistency is useful supervision, not a guarantee: overlapping structures can hide a disconnection in the projected views.</p>
+          <a class="topic-paper-link" href="https://arxiv.org/abs/2207.06832" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure topic-figure--diagram">
+          <a class="topic-figure-image" href="assets/img/research/topology/projection-diagram.webp" target="_blank" rel="noopener" aria-label="Open the three-dimensional projection diagram at full size">
+            <img src="assets/img/research/topology/projection-diagram.webp" width="450" height="387" loading="lazy" alt="A broken three-dimensional curve is projected onto three orthogonal planes. Two views expose the gap while one view appears continuous.">
+          </a>
+          <figcaption>Different views reveal different aspects of connectivity; a gap can disappear in one projection. <a href="https://arxiv.org/abs/2207.06832" target="_blank" rel="noopener">Connectivity through projections, Fig. 2</a>.</figcaption>
+        </figure>
+      </article>
+
+      <div class="topic-applications" aria-label="Related applications">
+        <article>
+          <h3>Cracks in masonry</h3>
+          <p>TOPO-Loss adapts connectivity-aware distance-map learning to cracks in earthquake-damaged masonry. The aim is to recover continuous crack patterns even when the available annotations are coarse.</p>
+          <a class="topic-paper-link" href="https://doi.org/10.1016/j.conbuildmat.2022.128264" target="_blank" rel="noopener">Construction and Building Materials · 2022 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article>
+          <h3>Cables seen from aircraft</h3>
+          <p>This collaborative work detects power-line cables and pylons from aircraft-mounted cameras. Distance-map regression and a cable-connectivity term help recover thin, low-contrast structures at long viewing distances.</p>
+          <a class="topic-paper-link" href="https://doi.org/10.1007/s00138-025-01664-1" target="_blank" rel="noopener">Machine Vision and Applications · 2025 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article>
+          <h3>Drainage networks in peatlands</h3>
+          <p>In this interdisciplinary study, automated canal mapping from high-resolution satellite imagery supports analysis of drainage across Southeast Asian peatlands, connecting visual network extraction to questions about subsidence and carbon emissions.</p>
+          <a class="topic-paper-link" href="https://doi.org/10.1029/2020AV000321" target="_blank" rel="noopener">AGU Advances · 2021 <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="related-publications" class="topic-bibliography" aria-labelledby="topology-publications-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="topology-publications-h">Related publications</h2>
+        <p>Publications on topic-aware learning and related applications, with links to papers, available code and BibTeX citations.</p>
+      </div>
+      <div class="topic-publications">
+        {% for p in area.publications %}{% include "_pub_row.html" %}{% endfor %}
+      </div>
+      <aside class="topic-further-reading" aria-label="Further reading">
+        <p>For a longer account of the earlier work, see Doruk Öner’s EPFL doctoral thesis, <a href="https://doi.org/10.5075/epfl-thesis-9749" target="_blank" rel="noopener">Topologically Better Delineation of Curvilinear Structures</a> (2023).</p>
+        <a class="btn-link" href="publications.html">All lab publications <span class="arr" aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+  </section>
+</div>

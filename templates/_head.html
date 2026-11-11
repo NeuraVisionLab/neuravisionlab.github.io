@@ -32,7 +32,7 @@
   <meta name="twitter:title" content="{{ page_title }}">
   <meta name="twitter:description" content="{{ page_desc }}">
   <meta name="twitter:image" content="{{ site_url }}assets/img/brand/og-image.png">
-  <meta name="theme-color" content="#1C1C1C">
+  <meta name="theme-color" content="#1d3e30">
 
   <!-- Icons -->
   <link rel="icon" href="assets/img/brand/favicon.ico" sizes="any">
@@ -44,10 +44,12 @@
   <!-- Fonts (self-hosted) -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-brand.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-variable.woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=396e74ca0b">{% if page == 'home' %}
+  <link rel="stylesheet" href="assets/css/home.css?v=e9ab31fa13">{% endif %}{% if area.has_story %}
+  <link rel="stylesheet" href="assets/css/research-topic.css?v=69af787078">{% endif %}
   <script type="application/ld+json">{{ jsonld|raw }}</script>
 </head>
-<body>
+<body{% if page == 'home' %} class="home-preview"{% endif %}>
 
   <header class="site-header on-dark">
     <div class="container">

@@ -3,11 +3,32 @@
 <section class="subhero is-dark">
   <div class="constellation-strip" aria-hidden="true">{% include "_constellation.html" %}</div>
   <div class="container">
-    <p class="fig-eyebrow">{{ area.tag }}</p>
     <h1>{{ area.title }}</h1>
+    {% if area.slug == 'topology-aware-computer-vision' %}
+    <p class="lead topic-hero-lead">Learning to recover connected structures, from roads in aerial images to neurons and vessels in 3D.</p>
+    {% elif area.slug == 'uncertainty-trustworthy-ai' %}
+    <p class="lead topic-hero-lead">Learning when to trust a prediction—and how to adapt when the world changes.</p>
+    {% elif area.slug == '3d-shape-implicit' %}
+    <p class="lead topic-hero-lead">Representing geometry with control over its parts, its details and the way it performs.</p>
+    {% elif area.slug == 'trajectory-motion-forecasting' %}
+    <p class="lead topic-hero-lead">Predicting how people and vehicles move through shared spaces.</p>
+    {% endif %}
   </div>
 </section>
 
+{% if area.slug == 'topology-aware-computer-vision' %}
+{% include "_topology_story.html" %}
+{% include "_cite_dialog.html" %}
+{% elif area.slug == 'uncertainty-trustworthy-ai' %}
+{% include "_uncertainty_story.html" %}
+{% include "_cite_dialog.html" %}
+{% elif area.slug == '3d-shape-implicit' %}
+{% include "_shape_story.html" %}
+{% include "_cite_dialog.html" %}
+{% elif area.slug == 'trajectory-motion-forecasting' %}
+{% include "_motion_story.html" %}
+{% include "_cite_dialog.html" %}
+{% else %}
 <section class="section" aria-label="{{ area.title }}">
   <div class="container">
     <article class="research-block" data-reveal>
@@ -19,7 +40,9 @@
     </article>
   </div>
 </section>
+{% endif %}
 
+{% if not area.has_story %}
 <section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="more-h">
   <div class="container">
     <div class="fig-head" data-reveal>
@@ -30,5 +53,6 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% include "_footer.html" %}

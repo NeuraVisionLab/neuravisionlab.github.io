@@ -189,11 +189,24 @@ def load_research() -> list[dict]:
     _int_column(rows, "order", "research.csv")
     for r in rows:
         r["num"] = ""  # filled below
+        r["has_story"] = r["slug"] in {
+            "topology-aware-computer-vision", "uncertainty-trustworthy-ai", "3d-shape-implicit",
+            "trajectory-motion-forecasting"
+        }
     rows.sort(key=lambda r: r["order"])
     for i, r in enumerate(rows, 1):
         r["num"] = f"{i:02d}"
         r["url"] = f"{r['slug']}.html"
     return rows
+
+
+def attach_research_publications(research: list[dict], publications: list[dict]) -> None:
+    """Match exact, case-insensitive tags, retaining publication order."""
+    tagged = [(paper, {tag.casefold() for tag in _split_list(paper.get("tags", ""))})
+              for paper in publications]
+    for area in research:
+        tag = area.get("publication_tag", "").strip().casefold()
+        area["publications"] = [paper for paper, tags in tagged if tag and tag in tags]
 
 
 def load_join_criteria() -> list[dict]:
@@ -493,6 +506,7 @@ def base_context() -> dict:
                              if key and any(key in _fold(tok)
                                             for tok in p["authors"].split(","))] if key else []
     research = load_research()
+    attach_research_publications(research, publications["all"])
     news = load_news()
     positions = load_positions()
     join_criteria = load_join_criteria()

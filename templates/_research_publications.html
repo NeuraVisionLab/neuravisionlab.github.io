@@ -1,0 +1,14 @@
+<section id="related-publications" class="topic-bibliography" aria-labelledby="topic-publications-h">
+  <div class="container">
+    <div class="topic-chapter-head">
+      <h2 id="topic-publications-h">Related publications</h2>
+      {% if area.slug == 'trajectory-motion-forecasting' %}<p>Publications from this line of research.</p>{% else %}<p>Papers and resources from this line of research, with links to full texts, available code and BibTeX citations.</p>{% endif %}
+    </div>
+    <div class="topic-publications">
+      {% for p in area.publications %}{% include "_pub_row.html" %}{% endfor %}
+    </div>
+    <div class="topic-further-reading">
+      <a class="btn-link" href="publications.html">All lab publications <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
