@@ -143,6 +143,7 @@ def _format_authors(authors: str, members: list[dict]) -> str:
 def load_publications(recent_count: int, members: list[dict]) -> dict:
     rows = _read_rows("publications.csv")
     for r in rows:
+        r["filter_tags"] = " ".join(sorted({tag.casefold() for tag in _split_list(r.get("tags", ""))}))
         r["authors_html"] = _format_authors(r["authors"], members)
         r["badge_label"] = r["venue_short"]
         # Link buttons — only those filled in the CSV are emitted.
@@ -188,6 +189,7 @@ def load_research() -> list[dict]:
     rows = _read_rows("research.csv")
     _int_column(rows, "order", "research.csv")
     for r in rows:
+        r["publication_tag"] = r.get("publication_tag", "").strip().casefold()
         r["num"] = ""  # filled below
         r["has_story"] = r["slug"] in {
             "topology-aware-computer-vision", "uncertainty-trustworthy-ai", "3d-shape-implicit",

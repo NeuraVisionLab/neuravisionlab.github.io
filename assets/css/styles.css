@@ -544,6 +544,9 @@ button.chip { cursor: pointer; }
    RESEARCH (zig-zag blocks)
    ===================================================================== */
 .research-block { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: center; padding-block: clamp(48px, 6vw, 88px); }
+.research-areas { padding-top: clamp(40px, 5vw, 64px); }
+.research-areas .research-block:first-child { padding-top: 0; }
+.research-areas .research-block:first-child h2 { margin-top: 0; }
 .research-block:nth-child(even) .rb-visual { order: -1; }
 .rb-text .num { font-family: var(--font-mono); color: var(--accent-strong); font-size: 0.8rem; letter-spacing: 0.1em; }
 .rb-text h2 { font-size: var(--step-2); font-weight: 600; margin: var(--s2) 0 var(--s4); }
@@ -553,7 +556,16 @@ button.chip { cursor: pointer; }
 .rb-visual svg { width: 60%; opacity: .92; }
 /* the area title links to its own page but should read as a heading */
 .research-block h2 a { color: var(--text); }
-.research-block h2 a:hover { color: var(--accent-strong); text-decoration: none; }
+.research-block h2 a:is(:hover, :focus-visible) {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+:root:not([data-theme="dark"]) .research-block h2 a:is(:hover, :focus-visible) {
+  color: #a45f25;
+  text-decoration-color: var(--orange);
+}
 .rb-visual img { width: 100%; height: 100%; object-fit: cover; }
 .rb-visual--wide { aspect-ratio: 1983 / 793; }
 .research-block + .research-block { border-top: 1px solid var(--border); }
@@ -691,7 +703,7 @@ button.chip { cursor: pointer; }
 /* =====================================================================
    CONTACT
    ===================================================================== */
-.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s8); align-items: start; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s8); align-items: center; }
 .contact-info .data-table { background: var(--surface); }
 .contact-actions { display: flex; flex-wrap: wrap; gap: var(--s4); margin-top: var(--s6); align-items: center; }
 .map-frame { position: relative; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4/3; background: var(--surface-alt); }
@@ -709,6 +721,9 @@ button.chip { cursor: pointer; }
 .cta-band .rule span { color: var(--sage); }
 .cta-band .rule::after { background: var(--d-border); }
 .cta-band .btn-primary { color: var(--forest); background: #dfa360; }
+[data-theme="light"] .cta-band { background: var(--surface-alt); color: var(--text); border-color: var(--border); }
+[data-theme="light"] .cta-band h2 { color: var(--text); }
+[data-theme="light"] .cta-band p { color: var(--muted); }
 
 /* =====================================================================
    FOOTER
