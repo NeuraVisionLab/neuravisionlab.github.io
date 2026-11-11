@@ -8,4 +8,4 @@ order,slug,name,surname,role,group,degree,status,photo,email,orcid,scholar,githu
 6,sepehr-maleki,Sepehr Maleki,Maleki,MSc Student,msc,M.Sc. Student,active,sepehr-maleki.jpg,sepehr.maleki@bilkent.edu.tr,,,,,,Computer Vision; Deep Learning,
 7,amirreza-m-shebly,Amirreza M. Shebly,Shebly,MSc Student,msc,M.Sc. Student,active,amirreza-m-shebly.jpg,amirreza@bilkent.edu.tr,,,,,,Motion Forecasting; Computer Vision,,"BİLGEM National Research Project: Intelligent Video Anomaly Detection System","2026 · USD 40k"
 8,ali-baran-ozaydin,Ali Baran Özaydın,Özaydın,MSc Student,msc,M.Sc. Student,active,ali-baran-ozaydin.jpg,baran.ozaydin@bilkent.edu.tr,,,,,,Computer Vision; Deep Learning,
-9,mohammad-sarhangzadeh,Mohammad Sarhangzadeh,Sarhangzadeh,MSc Student,msc,M.Sc. Student,active,mohammad-sarhangzadeh.jpg,m.sarhangzadeh@bilkent.edu.tr,,,,,,Computer Vision; Deep Learning,
+9,mohammad-sarhangzadeh,Mohammad Sarhangzadeh,Sarhangzadeh,MSc Student,msc,M.Sc. Student,active,mohammad-sarhangzadeh.jpg,m.sarhangzadeh@bilkent.edu.tr,,,,,https://msarhangzadeh.github.io/,Uncertainty Quantification; Deep Learning,
