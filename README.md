@@ -2,11 +2,11 @@
 
 **Live at <https://neuravisionlab.com>**
 
-Everything on the site comes from the CSV files in **`data/`**.
+Most site content comes from the CSV files in **`data/`**.
 Edit a CSV, commit — the site rebuilds and republishes itself in a minute or two.
-You never need to touch HTML, CSS, or run anything.
+Routine paper, team and news updates need no HTML or CSS changes.
 
-> The `.html` files in the root are **generated**. Don't edit them; edit the CSV.
+> The `.html` files in the root are **generated**. Edit the relevant CSV or template, then rebuild.
 
 ---
 
@@ -18,6 +18,11 @@ You never need to touch HTML, CSS, or run anything.
 | Add or update a person | `data/members.csv` |
 | Post lab news | `data/news.csv` |
 | Change or add a research area (each gets its own page) | `data/research.csv` |
+| Tag a paper for a research topic | `tags` in `data/publications.csv` |
+| Edit the topology research story and captions | `templates/_topology_story.html` |
+| Edit the uncertainty research story and captions | `templates/_uncertainty_story.html` |
+| Edit the 3D shape research story and captions | `templates/_shape_story.html` |
+| Edit the trajectory introduction | `templates/_motion_story.html` |
 | Open or close a position | `data/positions.csv` |
 | Change any heading, button or paragraph | `data/site.csv` |
 | Change page titles, nav or SEO text | `data/pages.csv` |
@@ -49,6 +54,7 @@ Add one row to `data/publications.csv`:
 | `venue_url` | **Where it's published** (proceedings / journal / DOI page). The title links here. |
 | `project page`, `arxiv`, `code` | The three icon buttons. Each appears only if you fill it. |
 | `bibtex` | What the **Cite** button copies. |
+| `tags` | Research tags separated by semicolons, e.g. `topology` or `topology; uncertainty`. Blank keeps the paper in the general bibliography only. |
 
 For `bibtex`, paste the publisher's own BibTeX (the "Cite" or "Export citation"
 link on the paper's page). Keep the whole entry in the one cell — multi-line is
@@ -56,6 +62,51 @@ fine. Wrap acronyms in the title in an extra `{ }` so they survive, e.g.
 `title = {{CAPE: Connectivity-Aware …}}`, otherwise some styles print "Cape".
 
 ---
+
+## Topic pages and paper figures
+
+Set a paper's `tags` in `data/publications.csv` to `topology` and it automatically
+appears in the topology page's related publications on the next build. There is
+no separate paper list to maintain. Renaming a paper does not affect membership;
+removing its tag removes it from the topic list. The main publication ordering
+(newest year first, then `order`) is preserved.
+
+Use semicolons for multiple tags, for example `topology; uncertainty`. Matching
+ignores capitalization and surrounding spaces; repeated tags do not duplicate a
+paper. Tags match exactly (`topology-aware` does not match `topology`). Other tags
+are allowed and do not affect this list.
+
+The matching tag for each topic is `publication_tag` in `data/research.csv`:
+
+| Topic | Matching publication tag |
+|---|---|
+| Topology-Aware Computer Vision | `topology` |
+| Uncertainty Estimation & Trustworthy AI | `uncertainty` |
+| 3D Shape & Implicit Representations | `3d` |
+| Trajectory & Motion Forecasting | `motion` |
+
+All four topic pages display their tagged related publications. The trajectory
+page currently has the shared hero, illustrated introduction and bibliography;
+extend `templates/_motion_story.html` with detailed paper sections when the
+material is available. Tag new trajectory papers `motion` to include them
+automatically. Paper links and citation buttons appear when their CSV fields
+are filled in.
+Local edits appear after `python3 build.py`;
+the existing deployment workflow also rebuilds from the CSV when publishing.
+
+The three articles use `templates/_topology_story.html`, `_uncertainty_story.html`
+and `_shape_story.html`, styled by the conditionally loaded
+`assets/css/research-topic.css`. Uncertainty and 3D share the bibliography partial
+`templates/_research_publications.html`; topology retains its thesis note.
+Paper figures live in `assets/img/research/{topology,uncertainty,shape}/`.
+Sources, figure numbers and extraction notes are recorded in
+`docs/topology-sources.md` and `docs/research-topic-sources.md`.
+Update the stylesheet's version hash in
+`templates/_head.html` after changing it. Keep paper colors and labels intact,
+provide useful alt text, and link each caption to its source.
+
+Run `python3 -m unittest discover -s tests -v` for the tag and build checks and
+`python3 build.py --check` to validate the complete build.
 
 ## Adding a person
 

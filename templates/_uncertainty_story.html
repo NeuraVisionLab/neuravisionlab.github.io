@@ -1,0 +1,98 @@
+<div class="topic-page">
+  <section class="topic-intro" aria-labelledby="uncertainty-intro-h">
+    <div class="container">
+      <figure class="topic-overview">
+        <img src="assets/img/home/uncertainty.webp" width="1983" height="793" alt="Conceptual illustration of alternative predictions for road scenes and medical images, highlighting regions where predictions disagree." fetchpriority="high">
+      </figure>
+      <div class="topic-intro-copy">
+        <h2 id="uncertainty-intro-h">A prediction needs a sense of its limits.</h2>
+        <div>
+          <p class="lead">A network can produce a convincing answer even when the input is ambiguous or unlike anything it saw during training. We study how its own behavior can reveal that uncertainty—and help improve its predictions.</p>
+          <p>Our work connects stochastic prediction, iterative refinement and test-time adaptation. The papers below include current NeuraVision research and collaborative work with EPFL and other institutions, across visual recognition, segmentation and engineering prediction.</p>
+        </div>
+      </div>
+      <nav class="topic-contents" aria-label="On this page">
+        <a href="#stochastic-prediction">Stochastic predictions <span aria-hidden="true">↓</span></a>
+        <a href="#iterative-uncertainty">Iterative refinement <span aria-hidden="true">↓</span></a>
+        <a href="#test-time-adaptation">Test-time adaptation <span aria-hidden="true">↓</span></a>
+        <a href="#related-publications">Publications <span aria-hidden="true">↓</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="stochastic-prediction" class="topic-chapter" aria-labelledby="stochastic-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="stochastic-h">Learning from disagreement</h2>
+        <p>Several predictions of the same input can expose ambiguity that a single output hides. The challenge is to obtain useful variation without training an entire collection of models.</p>
+      </div>
+      <article class="topic-feature" aria-labelledby="activations-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">BMVC · 2026</p>
+          <h3 id="activations-h">Stochastic nonlinearities</h3>
+          <p>Instead of always applying the same activation function, individual network units randomly choose between two nonlinearities. Repeating inference with these different choices produces a family of predictions from one trained set of weights.</p>
+          <p>The mean gives the prediction; their variance provides an uncertainty estimate. Unlike dropping features, activation switching changes how information is transformed while keeping the feature pathways active. The same switching mechanism is used during training and inference.</p>
+          <p>We evaluate the approach on classification, segmentation and out-of-distribution detection, using convolutional networks and transformers. It needs no additional trainable uncertainty head, although collecting several predictions still requires multiple forward passes.</p>
+          <a class="topic-paper-link" href="https://neuravisionlab.com/Stochastic-Activations-BMVC/" target="_blank" rel="noopener">Explore stochastic activations <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/uncertainty/stochastic-passes.webp" target="_blank" rel="noopener" aria-label="Open the stochastic-prediction figure at full size">
+            <img src="assets/img/research/uncertainty/stochastic-passes.webp" width="1530" height="826" loading="lazy" alt="Two road scenes pass through a network with switching activations. Similar predictions give low variance above; less consistent predictions give higher uncertainty below.">
+          </a>
+          <figcaption>Repeated stochastic passes reveal where the predictions disagree. The original road examples illustrate low and high uncertainty. <a href="https://arxiv.org/abs/2610.29875" target="_blank" rel="noopener">Stochastic Nonlinearities, Fig. 1</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section id="iterative-uncertainty" class="topic-chapter topic-chapter--tinted" aria-labelledby="iterative-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="iterative-h">Watching a prediction settle</h2>
+        <p>Some networks already revisit their answers. Their sequence of refinements contains information about which parts of the answer are reliable.</p>
+      </div>
+      <article class="topic-feature topic-feature--reverse" aria-labelledby="convergence-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">ICML · 2024</p>
+          <h3 id="convergence-h">Uncertainty from iterative refinement</h3>
+          <p>An iterative network receives both the original input and its previous prediction, then refines that prediction. This work finds that how quickly the outputs stabilize is closely related to prediction accuracy.</p>
+          <p>Measuring variation across successive outputs turns this behavior into a practical uncertainty signal. In road extraction, a visible road can settle quickly while a tree-covered stretch keeps changing. The same idea applies to pressure predictions on airfoils and 3D car surfaces.</p>
+          <p>The method uses an existing iterative model without adding a separate uncertainty estimator. The paper also incorporates its uncertainty into Bayesian shape optimization, helping select promising designs for further physical simulation.</p>
+          <a class="topic-paper-link" href="https://proceedings.mlr.press/v235/durasov24a.html" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/uncertainty/iterative-uncertainty.webp" target="_blank" rel="noopener" aria-label="Open the iterative-uncertainty figure at full size">
+            <img src="assets/img/research/uncertainty/iterative-uncertainty.webp" width="1311" height="838" loading="lazy" alt="Three successive road-distance predictions and their variance. The lower example highlights a tree-covered road that changes between iterations, producing high uncertainty.">
+          </a>
+          <figcaption>The obscured road is eventually recovered, but its changing prediction leaves a high-variance signal. Uncertainty is therefore not simply a map of final errors. <a href="https://proceedings.mlr.press/v235/durasov24a.html" target="_blank" rel="noopener">Iterative uncertainty, Fig. 1</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section id="test-time-adaptation" class="topic-chapter" aria-labelledby="adaptation-h">
+    <div class="container">
+      <div class="topic-chapter-head">
+        <h2 id="adaptation-h">Adapting when the input changes</h2>
+        <p>Recognizing unreliable behavior is one step. A complementary question is whether the model can use that behavior to improve at test time.</p>
+      </div>
+      <article class="topic-feature" aria-labelledby="it3-h">
+        <div class="topic-copy">
+          <p class="topic-paper-meta">ICML · 2025</p>
+          <h3 id="it3-h">IT³: idempotent test-time training</h3>
+          <p>Idempotence means that applying a function again leaves its result unchanged. IT³ uses this idea to adapt a model to a shifted input: its prediction should remain consistent when fed back into the model.</p>
+          <p>The model is first trained with the paper’s prediction-conditioning formulation. At test time, a short optimization reduces the disagreement between successive applications, using the current input without needing its ground-truth label or a separately designed auxiliary task.</p>
+          <p>Experiments cover corrupted images, aerial-road segmentation and aerodynamic prediction. This is adaptation, rather than just an uncertainty score: the model’s parameters change during inference. The reported improvements are empirical; consistency alone cannot guarantee a correct answer on every unfamiliar input.</p>
+          <a class="topic-paper-link" href="https://proceedings.mlr.press/v267/durasov25a.html" target="_blank" rel="noopener">Read IT³ <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="topic-figure">
+          <a class="topic-figure-image" href="assets/img/research/uncertainty/it3-adaptation.webp" target="_blank" rel="noopener" aria-label="Open the IT³ training and adaptation diagram at full size">
+            <img src="assets/img/research/uncertainty/it3-adaptation.webp" width="2433" height="738" loading="lazy" alt="IT³ diagram: supervised training with a label or zero as an extra input, followed by test-time optimization that reduces disagreement between two successive predictions on a corrupted image.">
+          </a>
+          <figcaption>Training establishes the prediction-feedback mechanism; test-time optimization uses its consistency as the adaptation objective. <a href="https://proceedings.mlr.press/v267/durasov25a.html" target="_blank" rel="noopener">IT³, Fig. 1</a>.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+  {% include "_research_publications.html" %}
+</div>

@@ -26,26 +26,42 @@
 </section>
 
 <!-- ===================== FIG.02 — RESEARCH ===================== -->
-<section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="research-h">
+<section class="section home-research" aria-labelledby="research-h">
   <div class="container">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">{{ site.home_research_eyebrow }}</p>
       <h2 id="research-h">{{ site.home_research_heading }}</h2>
-      <p class="lead">{{ site.home_research_lead }}</p>
     </div>
     <div class="area-grid">
       {% for r in research %}
-      {% include "_area_card.html" %}
+      <a class="area-card home-area-card" href="{{ r.url }}" data-reveal style="--i:{{ loop.index0 }}">
+        <span class="area-thumb{% if r.slug == 'topology-aware-computer-vision' %} area-thumb--floating{% elif r.slug == 'uncertainty-trustworthy-ai' %} area-thumb--floating{% elif r.slug == '3d-shape-implicit' %} area-thumb--floating{% elif r.slug == 'trajectory-motion-forecasting' %} area-thumb--floating{% endif %}">
+          {% if r.slug == 'topology-aware-computer-vision' %}
+          <img src="assets/img/home/topology-concept-floating-v2.webp" alt="" loading="lazy" width="1536" height="1024">
+          {% elif r.slug == 'uncertainty-trustworthy-ai' %}
+          <img src="assets/img/home/uncertainty-waves-floating-v3.webp" alt="" loading="lazy" width="1536" height="1024">
+          {% elif r.slug == '3d-shape-implicit' %}
+          <img class="home-shape-illustration" src="assets/img/home/shape-etype-rotated-v4.webp" alt="" loading="lazy" width="1536" height="1024">
+          {% elif r.slug == 'trajectory-motion-forecasting' %}
+          <img class="home-motion-illustration" src="assets/img/home/motion-paths-alternate-dots-v6.webp" alt="" loading="lazy" width="1536" height="1024">
+          {% else %}
+          {% include "_research_illustration.html" %}
+          {% endif %}
+        </span>
+        <span class="home-area-copy">
+          <h3>{{ r.title }}</h3>
+          <span class="tag">{{ r.description }}</span>
+          <span class="btn-link more">{{ site.home_research_card_link_label }} <span class="arr">↗</span></span>
+        </span>
+      </a>
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- ===================== FIG.03 — SELECTED WORK ===================== -->
-<section class="section featured" aria-labelledby="featured-h">
+<section class="section featured home-publications" aria-labelledby="featured-h">
   <div class="container">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">{{ site.home_publications_eyebrow }}</p>
       <h2 id="featured-h">{{ site.home_publications_heading }}</h2>
     </div>
     <div class="strip-wrap" data-reveal>
@@ -73,10 +89,9 @@
 </section>
 
 <!-- ===================== FIG.04 — LATEST ===================== -->
-<section class="section" aria-labelledby="news-h">
-  <div class="container container-prose" style="max-width:880px">
+<section class="section home-news" aria-labelledby="news-h">
+  <div class="container home-news-layout">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">{{ site.home_news_eyebrow }}</p>
       <h2 id="news-h">{{ site.home_news_heading }}</h2>
     </div>
     <ul class="news-list" data-reveal>
@@ -95,10 +110,9 @@
 </section>
 
 <!-- ===================== JOIN CTA ===================== -->
-<section class="section--tight cta-band" aria-label="Join the lab">
+<section class="section--tight cta-band home-join" aria-label="Join the lab">
   <div class="section" style="padding-block:var(--s8)">
     <div class="container">
-      <div class="rule"><span>{{ site.home_cta_eyebrow }}</span></div>
       <div class="inner">
         <div>
           <h2>{{ site.home_cta_heading }}</h2>

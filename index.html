@@ -32,7 +32,7 @@
   <meta name="twitter:title" content="NeuraVision Research Lab — Computer Vision &amp; Deep Learning, Bilkent University">
   <meta name="twitter:description" content="NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis.">
   <meta name="twitter:image" content="https://neuravisionlab.com/assets/img/brand/og-image.png">
-  <meta name="theme-color" content="#1C1C1C">
+  <meta name="theme-color" content="#1d3e30">
 
   <!-- Icons -->
   <link rel="icon" href="assets/img/brand/favicon.ico" sizes="any">
@@ -44,10 +44,11 @@
   <!-- Fonts (self-hosted) -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jura-brand.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-variable.woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=396e74ca0b">
+  <link rel="stylesheet" href="assets/css/home.css?v=e9ab31fa13">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ResearchOrganization","name":"NeuraVision Research Lab","alternateName":"NeuraVision","url":"https://neuravisionlab.com/","logo":"https://neuravisionlab.com/assets/img/brand/icon-512.png","image":"https://neuravisionlab.com/assets/img/brand/og-image.png","description":"NeuraVision is a computer vision and deep learning research lab at Bilkent University, led by Dr. Doruk Öner. We work on topological deep learning, curvilinear structure delineation, uncertainty estimation, trustworthy AI, and medical image analysis.","email":"doruk.oner@bilkent.edu.tr","parentOrganization":{"@type":"CollegeOrUniversity","name":"Bilkent University"},"address":{"@type":"PostalAddress","streetAddress":"EA Building, Room 521","addressLocality":"Ankara","addressCountry":"TR"},"founder":{"@type":"Person","name":"Doruk Öner","jobTitle":"Principal Investigator","url":"https://neuravisionlab.com/doruk-oner.html","identifier":"https://orcid.org/0000-0002-9403-4628","sameAs":["https://orcid.org/0000-0002-9403-4628","https://scholar.google.com/citations?user=ESA2CsAAAAAJ"]}}</script>
 </head>
-<body>
+<body class="home-preview">
 
   <header class="site-header on-dark">
     <div class="container">
@@ -115,60 +116,73 @@
 </section>
 
 <!-- ===================== FIG.02 — RESEARCH ===================== -->
-<section class="section section--tight" style="background:var(--surface-alt);border-block:1px solid var(--border)" aria-labelledby="research-h">
+<section class="section home-research" aria-labelledby="research-h">
   <div class="container">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">Research</p>
       <h2 id="research-h">What we work on</h2>
-      <p class="lead">Several threads, one question: how can deep networks respect the structure, geometry and uncertainty of the visual world?</p>
     </div>
     <div class="area-grid">
       
-      <a class="area-card" href="topology-aware-computer-vision.html" data-reveal style="--i:0">
-        <span class="area-thumb"><img src="assets/img/research/topology-aware-computer-vision.webp" alt="" loading="lazy" width="627" height="627"></span>
-        <span class="idx">01 · Topology</span>
-        <h3>Topology-Aware Computer Vision</h3>
-        <p class="tag">We develop computer vision methods that explicitly account for topological properties such as connectivity, continuity, and the preservation of meaningful structures. Our work focuses on topology-aware learning for curvilinear and network-like structures in both 2D and 3D, with applications including vessels, neuronal structures, road networks, and other connected visual patterns.</p>
-        <span class="btn-link more">Explore <span class="arr">→</span></span>
+      <a class="area-card home-area-card" href="topology-aware-computer-vision.html" data-reveal style="--i:0">
+        <span class="area-thumb area-thumb--floating">
+          
+          <img src="assets/img/home/topology-concept-floating-v2.webp" alt="" loading="lazy" width="1536" height="1024">
+          
+        </span>
+        <span class="home-area-copy">
+          <h3>Topology-Aware Computer Vision</h3>
+          <span class="tag">We develop computer vision methods that explicitly account for topological properties such as connectivity, continuity, and the preservation of meaningful structures. Our work focuses on topology-aware learning for curvilinear and network-like structures in both 2D and 3D, with applications including vessels, neuronal structures, road networks, and other connected visual patterns.</span>
+          <span class="btn-link more">Explore <span class="arr">↗</span></span>
+        </span>
       </a>
-
       
-      <a class="area-card" href="uncertainty-trustworthy-ai.html" data-reveal style="--i:1">
-        <span class="area-thumb"><img src="assets/img/research/uncertainty-trustworthy-ai.webp" alt="" loading="lazy" width="627" height="627"></span>
-        <span class="idx">02 · Trust</span>
-        <h3>Uncertainty Estimation &amp; Trustworthy AI</h3>
-        <p class="tag">We develop methods for estimating predictive uncertainty and improving the reliability and trustworthiness of deep learning models. Our research focuses on calibrated confidence, uncertainty-aware prediction, robustness, and identifying unreliable outputs, particularly in settings where dependable model behavior is critical.</p>
-        <span class="btn-link more">Explore <span class="arr">→</span></span>
+      <a class="area-card home-area-card" href="uncertainty-trustworthy-ai.html" data-reveal style="--i:1">
+        <span class="area-thumb area-thumb--floating">
+          
+          <img src="assets/img/home/uncertainty-waves-floating-v3.webp" alt="" loading="lazy" width="1536" height="1024">
+          
+        </span>
+        <span class="home-area-copy">
+          <h3>Uncertainty Estimation &amp; Trustworthy AI</h3>
+          <span class="tag">We develop methods for estimating predictive uncertainty and improving the reliability and trustworthiness of deep learning models. Our research focuses on calibrated confidence, uncertainty-aware prediction, robustness, and identifying unreliable outputs, particularly in settings where dependable model behavior is critical.</span>
+          <span class="btn-link more">Explore <span class="arr">↗</span></span>
+        </span>
       </a>
-
       
-      <a class="area-card" href="3d-shape-implicit.html" data-reveal style="--i:2">
-        <span class="area-thumb"><img src="assets/img/research/3d-shape-implicit.webp" alt="" loading="lazy" width="627" height="627"></span>
-        <span class="idx">03 · 3D</span>
-        <h3>3D Shape &amp; Implicit Representations</h3>
-        <p class="tag">We study neural representations for modeling, understanding, and manipulating complex 3D shapes. Our work includes implicit representations and part-based approaches for shape reconstruction, generation, parametrization, editing, and optimization, with an emphasis on representing geometry in flexible and controllable ways.</p>
-        <span class="btn-link more">Explore <span class="arr">→</span></span>
+      <a class="area-card home-area-card" href="3d-shape-implicit.html" data-reveal style="--i:2">
+        <span class="area-thumb area-thumb--floating">
+          
+          <img class="home-shape-illustration" src="assets/img/home/shape-etype-rotated-v4.webp" alt="" loading="lazy" width="1536" height="1024">
+          
+        </span>
+        <span class="home-area-copy">
+          <h3>3D Shape &amp; Implicit Representations</h3>
+          <span class="tag">We study neural representations for modeling, understanding, and manipulating complex 3D shapes. Our work includes implicit representations and part-based approaches for shape reconstruction, generation, parametrization, editing, and optimization, with an emphasis on representing geometry in flexible and controllable ways.</span>
+          <span class="btn-link more">Explore <span class="arr">↗</span></span>
+        </span>
       </a>
-
       
-      <a class="area-card" href="trajectory-motion-forecasting.html" data-reveal style="--i:3">
-        <span class="area-thumb"><img src="assets/img/research/trajectory-motion-forecasting.webp" alt="" loading="lazy" width="627" height="627"></span>
-        <span class="idx">04 · Motion Forecasting</span>
-        <h3>Trajectory &amp; Motion Forecasting</h3>
-        <p class="tag">We develop methods for predicting the future trajectories and motion of agents in dynamic environments. Our work spans human trajectory forecasting and autonomous-driving scenarios, with a focus on multimodal prediction, interactions between agents, and modeling plausible future behavior in complex scenes.</p>
-        <span class="btn-link more">Explore <span class="arr">→</span></span>
+      <a class="area-card home-area-card" href="trajectory-motion-forecasting.html" data-reveal style="--i:3">
+        <span class="area-thumb area-thumb--floating">
+          
+          <img class="home-motion-illustration" src="assets/img/home/motion-paths-alternate-dots-v6.webp" alt="" loading="lazy" width="1536" height="1024">
+          
+        </span>
+        <span class="home-area-copy">
+          <h3>Trajectory &amp; Motion Forecasting</h3>
+          <span class="tag">We develop methods for predicting the future trajectories and motion of agents in dynamic environments. Our work spans human trajectory forecasting and autonomous-driving scenarios, with a focus on multimodal prediction, interactions between agents, and modeling plausible future behavior in complex scenes.</span>
+          <span class="btn-link more">Explore <span class="arr">↗</span></span>
+        </span>
       </a>
-
       
     </div>
   </div>
 </section>
 
 <!-- ===================== FIG.03 — SELECTED WORK ===================== -->
-<section class="section featured" aria-labelledby="featured-h">
+<section class="section featured home-publications" aria-labelledby="featured-h">
   <div class="container">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">Selected Work</p>
       <h2 id="featured-h">Latest publications</h2>
     </div>
     <div class="strip-wrap" data-reveal>
@@ -200,7 +214,12 @@
           <h3>Stochastic Nonlinearities Improve Uncertainty Estimation</h3>
           <p class="authors"><a class="lab author-link" href="mohammad-sarhangzadeh.html">Mohammad Sarhangzadeh</a>, <a class="lab author-link" href="amirreza-m-shebly.html">Amirreza M. Shebly</a>, <a class="pi author-link" href="doruk-oner.html">and Doruk Öner</a></p>
           <div class="pub-links">
-            <a class="chip chip-icon" href="https://neuravisionlab.com/Stochastic-Activations-BMVC/" target="_blank" rel="noopener" aria-label="Project Page" title="Project Page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></a>
+            <a class="chip chip-icon" href="https://neuravisionlab.com/Stochastic-Activations-BMVC/" target="_blank" rel="noopener" aria-label="Project Page" title="Project Page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></a><a class="chip chip-icon" href="https://arxiv.org/abs/2610.29875" target="_blank" rel="noopener" aria-label="arXiv" title="arXiv"><img class="icon-arxiv arxiv-light" src="assets/img/brand/arxiv-logo-light.svg" alt="" width="31" height="14"><img class="icon-arxiv arxiv-dark" src="assets/img/brand/arxiv-logo-dark.svg" alt="" width="31" height="14"></a><a class="chip chip-icon" href="https://github.com/NeuraVisionLab/Stochastic-Activations-BMVC" target="_blank" rel="noopener" aria-label="Code" title="Code"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a><button class="chip chip-icon" type="button" data-cite aria-label="Cite Stochastic Nonlinearities Improve Uncertainty Estimation" title="Cite (BibTeX)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.2 5.6 8.9 3.3C6.2 4.6 4 7.5 4 10.8V18h6.6v-7.2H7.9c0-2.1 1-3.6 2.3-4.2Zm9.6 0-1.3-2.3c-2.7 1.3-4.9 4.2-4.9 7.5V18h6.6v-7.2h-2.7c0-2.1 1-3.6 2.3-4.2Z"/></svg></button><template data-bibtex>@inproceedings{sarhangzadeh2026stochastic,
+  title     = {Stochastic Nonlinearities Improve Uncertainty Estimation},
+  author    = {Sarhangzadeh, Mohammad and Shebly, Amirreza M. and Oner, Doruk},
+  booktitle = {British Machine Vision Conference (BMVC)},
+  year      = {2026}
+}</template>
           </div>
         </li>
         
@@ -214,34 +233,31 @@
         </li>
         
         <li class="pub-card">
-          <span class="venue-badge">MICCAI · 2025</span>
-          <h3><a href="https://link.springer.com/chapter/10.1007/978-3-032-05162-2_18" target="_blank" rel="noopener">CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation</a></h3>
-          <p class="authors"><a class="lab author-link" href="elyar-esmaeilzadeh.html">E Esmaeilzadeh</a>, <a class="lab author-link" href="ehsan-garaaghaji.html">E Garaaghaji</a>, <a class="lab author-link" href="farzad-hallaji-azad.html">FH Azad</a>, <a class="pi author-link" href="doruk-oner.html">D Öner</a></p>
+          <span class="venue-badge">MICAD · 2026</span>
+          <h3>DINO-Nucleus: Multi-Level Self-Supervised Features for Nucleus Instance Segmentation</h3>
+          <p class="authors"><a class="lab author-link" href="mohammad-sarhangzadeh.html">Mohammad Sarhangzadeh</a>, <a class="lab author-link" href="elyar-esmaeilzadeh.html">Elyar Esmaeilzadeh</a>, <a class="pi author-link" href="doruk-oner.html">and Doruk Öner</a></p>
           <div class="pub-links">
-            <a class="chip chip-icon" href="https://neuravisionlab.com/CAPE/" target="_blank" rel="noopener" aria-label="Project Page" title="Project Page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></a><a class="chip chip-icon" href="https://arxiv.org/abs/2504.00753" target="_blank" rel="noopener" aria-label="arXiv" title="arXiv"><img class="icon-arxiv arxiv-light" src="assets/img/brand/arxiv-logo-light.svg" alt="" width="31" height="14"><img class="icon-arxiv arxiv-dark" src="assets/img/brand/arxiv-logo-dark.svg" alt="" width="31" height="14"></a><a class="chip chip-icon" href="https://github.com/NeuraVisionLab/CAPE" target="_blank" rel="noopener" aria-label="Code" title="Code"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a><button class="chip chip-icon" type="button" data-cite aria-label="Cite CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation" title="Cite (BibTeX)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.2 5.6 8.9 3.3C6.2 4.6 4 7.5 4 10.8V18h6.6v-7.2H7.9c0-2.1 1-3.6 2.3-4.2Zm9.6 0-1.3-2.3c-2.7 1.3-4.9 4.2-4.9 7.5V18h6.6v-7.2h-2.7c0-2.1 1-3.6 2.3-4.2Z"/></svg></button><template data-bibtex>@inproceedings{esmaeilzadeh2025cape,
-  title     = {{CAPE: Connectivity-Aware Path Enforcement Loss for Curvilinear Structure Delineation}},
-  author    = {Esmaeilzadeh, Elyar and Garaaghaji, Ehsan and Hallaji Azad, Farzad and {\&quot;{O}}ner, Doruk},
-  booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2025},
-  pages     = {183--193},
-  year      = {2025},
-  publisher = {Springer Nature Switzerland},
-  doi       = {10.1007/978-3-032-05162-2_18}
+            <a class="chip chip-icon" href="https://neuravisionlab.com/DINO-Nucleus/" target="_blank" rel="noopener" aria-label="Project Page" title="Project Page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></a><a class="chip chip-icon" href="https://arxiv.org/abs/2611.09133" target="_blank" rel="noopener" aria-label="arXiv" title="arXiv"><img class="icon-arxiv arxiv-light" src="assets/img/brand/arxiv-logo-light.svg" alt="" width="31" height="14"><img class="icon-arxiv arxiv-dark" src="assets/img/brand/arxiv-logo-dark.svg" alt="" width="31" height="14"></a><a class="chip chip-icon" href="https://github.com/NeuraVisionLab/DINO-Nucleus" target="_blank" rel="noopener" aria-label="Code" title="Code"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a><button class="chip chip-icon" type="button" data-cite aria-label="Cite DINO-Nucleus: Multi-Level Self-Supervised Features for Nucleus Instance Segmentation" title="Cite (BibTeX)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.2 5.6 8.9 3.3C6.2 4.6 4 7.5 4 10.8V18h6.6v-7.2H7.9c0-2.1 1-3.6 2.3-4.2Zm9.6 0-1.3-2.3c-2.7 1.3-4.9 4.2-4.9 7.5V18h6.6v-7.2h-2.7c0-2.1 1-3.6 2.3-4.2Z"/></svg></button><template data-bibtex>@inproceedings{sarhangzadeh2026dinonucleus,
+  title     = {DINO-Nucleus: Multi-Level Self-Supervised Features for Nucleus Instance Segmentation},
+  author    = {Sarhangzadeh, Mohammad and Esmaeilzadeh, Elyar and Oner, Doruk},
+  booktitle = {7th International Conference on Medical Imaging and Computer-Aided Diagnosis (MICAD)},
+  year      = {2026}
 }</template>
           </div>
         </li>
         
         <li class="pub-card">
-          <span class="venue-badge">TMLR · 2025</span>
-          <h3><a href="https://openreview.net/forum?id=zl43C1yBKv" target="_blank" rel="noopener">PartSDF: Part-based implicit neural representation for composite 3D shape parametrization and optimization</a></h3>
-          <p class="authors">N Talabot, O Clerc, AC Demirtas, A Goujon, H Le, <a class="pi author-link" href="doruk-oner.html">D Öner</a>, P Fua</p>
+          <span class="venue-badge">WCCI · 2026</span>
+          <h3>OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution</h3>
+          <p class="authors"><a class="lab author-link" href="mohammad-sarhangzadeh.html">Mohammad Sarhangzadeh</a>, Shahryar Rahnamayan, <a class="pi author-link" href="doruk-oner.html">and Doruk Öner</a></p>
           <div class="pub-links">
-            <a class="chip chip-icon" href="https://arxiv.org/abs/2502.12985" target="_blank" rel="noopener" aria-label="arXiv" title="arXiv"><img class="icon-arxiv arxiv-light" src="assets/img/brand/arxiv-logo-light.svg" alt="" width="31" height="14"><img class="icon-arxiv arxiv-dark" src="assets/img/brand/arxiv-logo-dark.svg" alt="" width="31" height="14"></a><a class="chip chip-icon" href="https://github.com/cvlab-epfl/PartSDF" target="_blank" rel="noopener" aria-label="Code" title="Code"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a><button class="chip chip-icon" type="button" data-cite aria-label="Cite PartSDF: Part-based implicit neural representation for composite 3D shape parametrization and optimization" title="Cite (BibTeX)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.2 5.6 8.9 3.3C6.2 4.6 4 7.5 4 10.8V18h6.6v-7.2H7.9c0-2.1 1-3.6 2.3-4.2Zm9.6 0-1.3-2.3c-2.7 1.3-4.9 4.2-4.9 7.5V18h6.6v-7.2h-2.7c0-2.1 1-3.6 2.3-4.2Z"/></svg></button><template data-bibtex>@article{talabot2025partsdf,
-  title   = {{PartSDF: Part-Based Implicit Neural Representation for Composite 3D Shape Parametrization and Optimization}},
-  author  = {Talabot, Nicolas and Clerc, Olivier and Demirtas, Arda Cinar and Goujon, Alexis and Le, Hieu and {\&quot;{O}}ner, Doruk and Fua, Pascal},
-  journal = {Transactions on Machine Learning Research},
-  issn    = {2835-8856},
-  year    = {2025},
-  url     = {https://openreview.net/forum?id=zl43C1yBKv}
+            <a class="chip chip-icon" href="https://arxiv.org/abs/2611.09167" target="_blank" rel="noopener" aria-label="arXiv" title="arXiv"><img class="icon-arxiv arxiv-light" src="assets/img/brand/arxiv-logo-light.svg" alt="" width="31" height="14"><img class="icon-arxiv arxiv-dark" src="assets/img/brand/arxiv-logo-dark.svg" alt="" width="31" height="14"></a><a class="chip chip-icon" href="https://github.com/MSarhangzadeh/OMCDE-Optimization" target="_blank" rel="noopener" aria-label="Code" title="Code"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a><button class="chip chip-icon" type="button" data-cite aria-label="Cite OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution" title="Cite (BibTeX)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.2 5.6 8.9 3.3C6.2 4.6 4 7.5 4 10.8V18h6.6v-7.2H7.9c0-2.1 1-3.6 2.3-4.2Zm9.6 0-1.3-2.3c-2.7 1.3-4.9 4.2-4.9 7.5V18h6.6v-7.2h-2.7c0-2.1 1-3.6 2.3-4.2Z"/></svg></button><template data-bibtex>@inproceedings{sarhangzadeh2026omcde,
+  title={OMCDE: Opposition-based Multi-Stage Matrix-Based Competitive Differential Evolution},
+  author={Sarhangzadeh, Mohammad and Rahnamayan, Shahryar and Oner, Doruk},
+  booktitle={2026 IEEE Congress on Evolutionary Computation (CEC)},
+  pages={1--7},
+  year={2026},
+  organization={IEEE}
 }</template>
           </div>
         </li>
@@ -256,10 +272,9 @@
 </section>
 
 <!-- ===================== FIG.04 — LATEST ===================== -->
-<section class="section" aria-labelledby="news-h">
-  <div class="container container-prose" style="max-width:880px">
+<section class="section home-news" aria-labelledby="news-h">
+  <div class="container home-news-layout">
     <div class="fig-head" data-reveal>
-      <p class="fig-eyebrow">Latest</p>
       <h2 id="news-h">Lab news</h2>
     </div>
     <ul class="news-list" data-reveal>
@@ -314,10 +329,9 @@
 </section>
 
 <!-- ===================== JOIN CTA ===================== -->
-<section class="section--tight cta-band" aria-label="Join the lab">
+<section class="section--tight cta-band home-join" aria-label="Join the lab">
   <div class="section" style="padding-block:var(--s8)">
     <div class="container">
-      <div class="rule"><span>Open positions</span></div>
       <div class="inner">
         <div>
           <h2>Join the lab.</h2>
@@ -428,7 +442,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/img/brand/mark-white.png" alt="NeuraVision Research Lab" width="36" height="36">
+          <img class="footer-mark-light" src="assets/img/brand/mark-gradient.png" alt="NeuraVision Research Lab" width="36" height="36">
+          <img class="footer-mark-dark" src="assets/img/brand/mark-white.png" alt="NeuraVision Research Lab" width="36" height="36">
           <span class="brand-name">NeuraVision</span>
           <p>Topology-aware computer vision &amp; trustworthy deep learning.</p>
           <p class="addr">Department of Computer Engineering<br>Bilkent University</p>
