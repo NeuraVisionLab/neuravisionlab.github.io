@@ -31,9 +31,6 @@
 .home-preview .brand-name { font-size: 1.22rem; }
 .home-preview .nav-links { gap: clamp(20px, 2.3vw, 32px); }
 .home-preview .nav-link::after { height: 2px; background: var(--orange); }
-.home-preview .theme-toggle { border: 1px solid var(--border); border-radius: 50%; }
-.home-preview .theme-toggle:hover,
-.home-preview .site-header.on-dark:not(.is-stuck) .theme-toggle:hover { background: var(--surface-alt); border-color: var(--brand); }
 .home-preview .btn {
   min-height: 46px;
   padding: 13px 21px;

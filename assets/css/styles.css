@@ -289,7 +289,7 @@ button.chip { cursor: pointer; }
 [data-theme="dark"] .brand .mark-dark { display: block; }
 /* theme toggle */
 .theme-toggle { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
-  border-radius: var(--r-md); color: var(--text); border: 1px solid transparent; flex: none;
+  border-radius: 10px; color: var(--text); border: 1px solid transparent; flex: none;
   transition: background .15s, border-color .15s, color .15s; }
 .theme-toggle:hover { background: var(--surface-alt); border-color: var(--border); }
 .theme-toggle svg { width: 19px; height: 19px; }
